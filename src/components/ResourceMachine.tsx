@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 const ResourceMachine = () => {
   return (
@@ -10,14 +10,12 @@ const ResourceMachine = () => {
       <Text>Input:</Text>
       <Text>Output:</Text>
       <TouchableOpacity>
-        <Text>
-          Get 1
-        </Text>
+        <Text>Get 1</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default ResourceMachine
+export default ResourceMachine;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

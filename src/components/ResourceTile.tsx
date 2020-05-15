@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import {View, Text} from 'react-native';
 
 export default () => {
   return (
@@ -9,4 +9,4 @@ export default () => {
       <Text>9/50</Text>
     </View>
   );
-}
+};
