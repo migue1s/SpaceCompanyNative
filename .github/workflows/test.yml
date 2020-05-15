@@ -1,0 +1,30 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: yarn install
+    - run: yarn test
+    - name: Code Climate Coverage Action
+      uses: paambaati/codeclimate-action@v2.6.0
+      with:
+        coverageCommand: yarn coverage
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
