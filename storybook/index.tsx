@@ -1,5 +1,8 @@
+import React from 'react';
+import {View} from 'react-native';
 import {AppRegistry} from 'react-native';
 import {getStorybookUI, configure} from '@storybook/react-native';
+import {addDecorator} from '@storybook/react';
 
 import './rn-addons';
 
@@ -7,6 +10,16 @@ import './rn-addons';
 configure(() => {
   require('../src/components/Resource.stories');
 }, module);
+
+addDecorator((fn) => (
+  <View
+    style={{
+      padding: 20,
+      width: '100%',
+    }}>
+    {fn()}
+  </View>
+));
 
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
 // To find allowed options for getStorybookUI
