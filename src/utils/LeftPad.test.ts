@@ -7,3 +7,7 @@ it('pads correctly', () => {
 it('does not pad when not needed', () => {
   expect(LeftPad('1', 1)).toEqual('1');
 });
+
+it('does not crash', () => {
+  expect(LeftPad('10', 1)).toEqual('10');
+});
