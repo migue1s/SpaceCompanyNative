@@ -5,13 +5,12 @@ name: Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,12 +18,22 @@ jobs:
         node-version: [10.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - run: yarn install
-    - run: yarn test
-    - name: Code Climate Coverage Action
-      uses: paambaati/codeclimate-action@v2.6.0
-      with:
-        coverageCommand: yarn coverage
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
+      - uses: actions/checkout@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn install
+      - run: yarn test
+      - name: Code Climate Coverage Action
+        uses: paambaati/codeclimate-action@v2.6.0
+        with:
+          coverageCommand: yarn coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
