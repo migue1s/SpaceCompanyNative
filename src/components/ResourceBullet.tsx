@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {durationFormatter} from '../utils/TimeFormatter';
 
 interface ResourceCostProps {
   name: string;
@@ -26,7 +27,7 @@ const ResourceCost = ({
   } else {
     const remaining = cost - current;
     const seconds = remaining / dps;
-    info = '' + seconds;
+    info = durationFormatter(seconds);
   }
   return (
     <Text>
