@@ -1,7 +1,6 @@
 import {start, stop} from './TickLoop';
 
 jest.useFakeTimers();
-jest.mock('LayoutAnimation');
 
 it('starts and stops', () => {
   const callback = jest.fn();
