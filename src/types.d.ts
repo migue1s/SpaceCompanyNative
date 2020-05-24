@@ -23,7 +23,7 @@ interface Machine {
   tier: number;
 }
 
-export type ResourceType =
+type ResourceType =
   | 'energy'
   | 'plasma'
   | 'meteorite'
@@ -47,6 +47,7 @@ export type ResourceType =
   | 'rocketFuel'
   | 'rocket'
   | 'antimatter';
+
 interface ResourceData {
   name: string;
   category: string;

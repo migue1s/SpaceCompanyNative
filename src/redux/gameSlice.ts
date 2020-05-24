@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
-import {ResourceType} from '../types';
 
 const gain = 1;
 
@@ -10,11 +9,13 @@ const storageEfficiencyMultiplier = 0;
 // 2 = multiply stoage by 2 when growing
 const storageGrowthMultiplier = 2;
 
+export const initialState = {
+  resources: resourcesData,
+};
+
 const gameSlice = createSlice({
   name: 'game',
-  initialState: {
-    resources: resourcesData,
-  },
+  initialState: initialState,
   reducers: {
     tick: (state, action: PayloadAction<number>) => {
       Object.keys(state.resources).forEach((key: string) => {
@@ -45,4 +46,6 @@ const gameSlice = createSlice({
   },
 });
 
-export default gameSlice;
+export const {tick, manualGain, upgradeStorage} = gameSlice.actions;
+
+export default gameSlice.reducer;
