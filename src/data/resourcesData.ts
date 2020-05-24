@@ -1,4 +1,6 @@
-export const categories = {
+import {ResourceType, ResourceData} from '../types';
+
+export const categoriesData = {
   energy: {
     title: 'Energy',
     category: 'energy',
@@ -64,22 +66,28 @@ export const categories = {
   },
 };
 
-export const resources = {
+const baseResource = {
+  current: 0,
+  perSecond: 0,
+  perSecondDisplay: 0,
+};
+
+export const resourcesData: {[x in ResourceType]: ResourceData} = {
   /*********************
    * Energy Resources  *
    *********************/
 
   energy: {
+    ...baseResource,
     name: 'Energy',
     desc:
       'Energy is created by power sources such as steam engines and solar panels, eventually advancing to fusion and nuclear energy. You can hold a maximum of 100,000 energy, unlocking batteries allows you to increase this.',
-    icon: 'energyIcon',
     category: 'energy',
     page: 'resources',
     baseCapacity: 100000,
-    gainNum: 1,
+    capacity: 100000,
     toggleable: true,
-    manualgain: false,
+    manualGain: false,
     unlocked: false,
   },
 
@@ -88,49 +96,49 @@ export const resources = {
    *********************/
 
   plasma: {
+    ...baseResource,
     name: 'Plasma',
     desc:
       'Plasma is the 4th state of matter and is used by Tier 4 machines and large space structures as an extreme power source for your company.',
-    icon: 'plasmaIcon',
     category: 'fabricated',
     page: 'resources',
-    gainNum: 1,
     gainCost: {energy: 1000, hydrogen: 10},
     baseCapacity: 100000,
+    capacity: 100000,
     toggleable: true,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   meteorite: {
+    ...baseResource,
     name: 'Meteorite',
     desc:
       'Creating Meteorite is only possible from purer forms of energy than those created with earth technology. Therefore, Plasma is necessary to make the strong resource.',
-    icon: 'meteoriteIcon',
     category: 'fabricated',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 3,
-    gainNum: 1,
     gainCost: {plasma: 3},
     toggleable: true,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   carbon: {
+    ...baseResource,
     name: 'Carbon',
     desc:
       'Carbon is a secondary tier resource and is used by Engines to produce power for your company. Carbon is created by burning wood',
-    icon: 'carbonIcon',
     category: 'fabricated',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 2,
-    gainNum: 1,
     gainCost: {wood: 2},
     toggleable: true,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
@@ -139,107 +147,107 @@ export const resources = {
    ********************/
 
   oil: {
+    ...baseResource,
     name: 'Oil',
     desc:
       'Oil is pumped up from the ground and is used to build Tier 2 resource gatherers.',
-    icon: 'oilIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 3,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   metal: {
+    ...baseResource,
     name: 'Metal',
     desc:
       'Metal is one of the primary resources. It is used for many things, including storage upgrades, machinery and most things in space.',
-    icon: 'metalIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 1,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: true,
   },
 
   gem: {
+    ...baseResource,
     name: 'Gem',
     desc:
       'Gems are one of the primary resources. They are used for advanced machines and for powerful tools and components. They are more useful in later game.',
-    icon: 'gemIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 3,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: true,
   },
 
   wood: {
+    ...baseResource,
     name: 'Wood',
     desc:
       'Wood is one of the primary resources. It is used more often in early game for tools and buildings.',
-    icon: 'woodIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 1,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: true,
   },
 
   silicon: {
+    ...baseResource,
     name: 'Silicon',
     desc:
       'Silicon is useful for automatic mining systems of the third tier. These will be very useful in building your first wonder. Despite being a high tier resource, it is found mainly on Earth by heating sand.',
-    icon: 'siliconIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 23,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   uranium: {
+    ...baseResource,
     name: 'Uranium',
     desc:
       'Uranium is used for nuclear power generation because when it is split, it releases huge amounts of Energy. For this reason, it is prominent in many advanced machines and for propulsion technology as it is useful for inter-star-system travel. Unfortunately, it is hard to get and it requires a lot of resources to radiation-proof equipment.',
-    icon: 'uraniumIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 37,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   lava: {
+    ...baseResource,
     name: 'Lava',
     desc:
       'Hard to handle and only found in volcanoes, Lava is one of the hardest resources to get.',
-    icon: 'lavaIcon',
     category: 'earth',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 42,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
@@ -248,76 +256,76 @@ export const resources = {
    ******************************/
 
   lunarite: {
+    ...baseResource,
     name: 'Lunarite',
     desc:
       'Lunarite is found on the Moon and is a rare type of resource not found on Earth. It is much stronger than regular metal but is a lot harder to get.',
-    icon: 'lunariteIcon',
     category: 'innerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 15,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   methane: {
+    ...baseResource,
     name: 'Methane',
     desc:
       'Methane is a gas found in abundance on Venus. It can be used to power your company much more effectively than solid fuel.',
-    icon: 'methaneIcon',
     category: 'innerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 12,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   titanium: {
+    ...baseResource,
     name: 'Titanium',
     desc:
       'Titanium is a metal found mostly on Mars. It is used for building strong machines and methane power plants.',
-    icon: 'titaniumIcon',
     category: 'innerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 17,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   gold: {
+    ...baseResource,
     name: 'Gold',
     desc:
       'Gold is a metal found inside asteroids. It is used to build some Wonders and for complex machinery.',
-    icon: 'goldIcon',
     category: 'innerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 14,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   silver: {
+    ...baseResource,
     name: 'Silver',
     desc: 'Silver is another metal most commonly found in the asteroid belt.',
-    icon: 'silverIcon',
     category: 'innerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 16,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
@@ -326,47 +334,47 @@ export const resources = {
    ******************************/
 
   hydrogen: {
+    ...baseResource,
     name: 'Hydrogen',
     desc:
       'Hydrogen is extremely common on gas giants such as Jupiter and Saturn.',
-    icon: 'hydrogenIcon',
     category: 'outerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 33,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   helium: {
+    ...baseResource,
     name: 'Helium',
     desc:
       'Helium is the second most common element on gas giants such as Jupiter and Saturn.',
-    icon: 'heliumIcon',
     category: 'outerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 39,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
   ice: {
+    ...baseResource,
     name: 'Ice',
     desc:
       'Ice, although it can be collected on Earth, is not nearly as profitable as flying to Pluto and back with space craft full of the stuff. It is mainly used for super-cooling technology necessary for Tier 4 machines.',
-    icon: 'iceIcon',
     category: 'outerSol',
     page: 'resources',
     baseCapacity: 50,
+    capacity: 50,
     emc: 44,
-    gainNum: 1,
     toggleable: false,
-    manualgain: true,
+    manualGain: true,
     unlocked: false,
   },
 
@@ -375,17 +383,16 @@ export const resources = {
    ******************************/
 
   science: {
+    ...baseResource,
     name: 'Science',
     desc:
       'Science is used for researching new technologies to further your progress in the game.',
-    icon: 'scienceIcon',
     category: 'science',
     page: 'tech',
     baseCapacity: -1,
-    hideCapacity: true,
-    gainNum: 1,
+    capacity: -1,
     toggleable: false,
-    manualgain: false,
+    manualGain: false,
     unlocked: false,
   },
 
@@ -394,17 +401,16 @@ export const resources = {
    ********************/
 
   rocketFuel: {
+    ...baseResource,
     name: 'Rocket Fuel',
     desc:
       'Rocket fuel is created in chemical plants and is used to allow rockets to launch off into space and to travel to other planets and star systems.',
-    icon: 'rocketFuelIcon',
     category: 'rocketFuel',
     page: 'solar',
     baseCapacity: -1,
-    hideCapacity: true,
-    gainNum: 1,
+    capacity: -1,
     toggleable: true,
-    manualgain: false,
+    manualGain: false,
     unlocked: true,
   },
 
@@ -413,16 +419,16 @@ export const resources = {
    ********************/
 
   rocket: {
+    ...baseResource,
     name: 'Rocket',
     desc:
       'Building a rocket will allow for exploration around the solar system and will allow you to gather resources in space.',
-    icon: 'rocketIcon',
     category: 'spacecraft',
     page: 'solar',
     baseCapacity: 0, // Important to hide the ps & storage
-    order: 2,
+    capacity: 0, // Important to hide the ps & storage
     toggleable: false,
-    manualgain: false,
+    manualGain: false,
     unlocked: true,
   },
 
@@ -431,20 +437,21 @@ export const resources = {
    *****************************/
 
   antimatter: {
+    ...baseResource,
     name: 'Antimatter',
     desc:
       'Your fuel for interstellar travel is produced here. Unfortunately, you can only handle 100k Antimatter per Star System as it is incredibly volatile.',
     category: 'interstellar',
     baseCapacity: 100000,
+    capacity: 100000,
     page: 'interstellar',
-    order: 3,
     toggleable: true,
-    manualgain: false,
+    manualGain: false,
     unlocked: false,
   },
 };
 
-export const storage = {
+export const storageData = {
   // Storage Upgrades
   // var baseUpgradeData: {
   //     name: 'Storage Upgrade:',
@@ -455,7 +462,6 @@ export const storage = {
   //     resource: undefined,
   //     displayNeedsUpdate: true,
   //     entries: {},
-  //     buttonText: 'Upgrade Storage',
 
   //     apply: function (self) {
   //         if (typeof self.resource === 'undefined') {

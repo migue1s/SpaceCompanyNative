@@ -2,12 +2,12 @@ let action: ((delta: number) => void) | undefined;
 let lastTime: number;
 let timer: number;
 
-export const start = (
+export const startLoop = (
   callback: (delta: number) => void,
   time: number = Date.now(),
   delay?: number,
 ) => {
-  stop();
+  stopLoop();
   lastTime = time;
   action = callback;
   timer = setInterval(onFiredTimer, delay);
@@ -25,7 +25,7 @@ const onFiredTimer = () => {
   action && action(delta);
 };
 
-export const stop = () => {
+export const stopLoop = () => {
   if (timer) {
     clearInterval(timer);
   }

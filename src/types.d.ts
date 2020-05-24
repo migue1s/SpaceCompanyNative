@@ -1,5 +1,3 @@
-type ResourceType = '';
-
 interface Resource {
   name: string;
   category: string;
@@ -25,22 +23,46 @@ interface Machine {
   tier: number;
 }
 
+export type ResourceType =
+  | 'energy'
+  | 'plasma'
+  | 'meteorite'
+  | 'carbon'
+  | 'oil'
+  | 'metal'
+  | 'gem'
+  | 'wood'
+  | 'silicon'
+  | 'uranium'
+  | 'lava'
+  | 'lunarite'
+  | 'methane'
+  | 'titanium'
+  | 'gold'
+  | 'silver'
+  | 'hydrogen'
+  | 'helium'
+  | 'ice'
+  | 'science'
+  | 'rocketFuel'
+  | 'rocket'
+  | 'antimatter';
 interface ResourceData {
-  id: string;
   name: string;
   category: string;
   baseCapacity: number;
+  page: string;
   capacity: number;
   current: number;
   desc: string;
-  emc: number;
-  hidden: boolean;
+  emc?: number;
   // icon: 'gemIcon';
   // iconExtension: 'png';
   // iconPath: 'Icons/';
-  items: {[index: string]: Machine};
+  gainCost?: {[index: string]: number};
   manualGain: boolean;
   perSecond: number;
   perSecondDisplay: number;
   toggleable: boolean;
+  unlocked: boolean;
 }
