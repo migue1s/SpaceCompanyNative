@@ -8,11 +8,9 @@ export const useResourcesByCategory = (category: string) => {
 };
 
 export const useResources = () => {
-  const resources = useSelector(
-    (state: ReduxState) => state.game.resourceCount,
-  );
+  const resources = useSelector((state: ReduxState) => state.game.resources);
 
-  return chain(resources)
+  const resourceGroups = chain(Object.values(resources))
     .pickBy((r) => r.unlocked)
     .filter(
       (r) =>
@@ -23,4 +21,11 @@ export const useResources = () => {
     )
     .groupBy((r) => r && r.category)
     .value();
+
+  return Object.keys(resourceGroups).map((key) => {
+    return {
+      header: key,
+      data: resourceGroups[key],
+    };
+  });
 };
