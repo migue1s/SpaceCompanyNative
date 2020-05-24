@@ -1,19 +1,21 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {startLoop} from '../utils/TickLoop';
-import gameSlice from './gameSlice';
-
+import gameSlice, {tick, GameState} from './gameSlice';
+export interface ReduxState {
+  game: GameState;
+}
 const store = configureStore({
   reducer: {
-    game: gameSlice.reducer,
+    game: gameSlice,
   },
 });
 
 startLoop(
   (delta: number) => {
-    store.dispatch(gameSlice.actions.tick(delta));
+    store.dispatch(tick(delta));
   },
   undefined,
-  1 / 10,
+  10000,
 );
 
 export default store;
