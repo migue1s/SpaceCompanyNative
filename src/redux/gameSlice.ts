@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
+import {ResourceType, ResourceData, ResourceState} from '../types';
 
 const gain = 1;
 
@@ -10,8 +11,26 @@ const storageEfficiencyMultiplier = 0;
 const storageGrowthMultiplier = 2;
 
 export const initialState = {
-  resources: resourcesData,
+  resources: resourcesData as {[x in ResourceType]: ResourceData},
+  resourceCount: Object.keys(ResourceType).reduce((result, current) => {
+    const key = current as ResourceType;
+    const resource = resourcesData[key] as ResourceData;
+
+    result[key] = {
+      perSecond: 0,
+      perSecondDisplay: 0,
+      current: 0,
+      capacity: resource.baseCapacity,
+      unlocked: resource.unlocked,
+      category: resource.category,
+    } as ResourceState;
+    return result;
+  }, {} as any) as {
+    [x in ResourceType]: ResourceState;
+  },
 };
+
+export type GameState = typeof initialState;
 
 const gameSlice = createSlice({
   name: 'game',
@@ -20,27 +39,29 @@ const gameSlice = createSlice({
     tick: (state, action: PayloadAction<number>) => {
       Object.keys(state.resources).forEach((key: string) => {
         const id = key as ResourceType;
-        state.resources[id].current = Math.min(
-          state.resources[id].capacity,
-          state.resources[id].current +
-            state.resources[id].perSecond * action.payload,
+        state.resourceCount[id].current = Math.min(
+          state.resourceCount[id].capacity,
+          state.resourceCount[id].current +
+            state.resourceCount[id].perSecond * action.payload,
         );
       });
       return state;
     },
     manualGain: (state, action: PayloadAction<ResourceType>) => {
-      state.resources[action.payload].current = Math.min(
-        state.resources[action.payload].capacity,
-        state.resources[action.payload].current + gain,
+      state.resourceCount[action.payload].current = Math.min(
+        state.resourceCount[action.payload].capacity,
+        state.resourceCount[action.payload].current + gain,
       );
     },
     upgradeStorage: (state, action: PayloadAction<ResourceType>) => {
       if (
-        state.resources[action.payload].current ===
-        state.resources[action.payload].capacity
+        state.resourceCount[action.payload].current ===
+        state.resourceCount[action.payload].capacity
       ) {
-        state.resources[action.payload].current *= storageEfficiencyMultiplier;
-        state.resources[action.payload].capacity *= storageGrowthMultiplier;
+        state.resourceCount[
+          action.payload
+        ].current *= storageEfficiencyMultiplier;
+        state.resourceCount[action.payload].capacity *= storageGrowthMultiplier;
       }
     },
   },
