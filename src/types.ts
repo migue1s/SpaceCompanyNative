@@ -50,6 +50,7 @@ export enum ResourceType {
 }
 
 export interface ResourceData {
+  id: ResourceType;
   name: string;
   category: string;
   baseCapacity: number;

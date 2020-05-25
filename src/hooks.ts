@@ -1,10 +1,16 @@
 import {useSelector} from 'react-redux';
-import {pickBy, chain} from 'lodash';
+import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
+import {ResourceType} from './types';
 
-export const useResourcesByCategory = (category: string) => {
-  const res = useSelector((state: ReduxState) => state.game.resources);
-  return pickBy(res, (data) => data.unlocked && data.category === category);
+export const useResource = (resourceId: ResourceType) => {
+  return useSelector((state: ReduxState) => state.game.resources[resourceId]);
+};
+
+export const useResourceCount = (resourceId: ResourceType) => {
+  return useSelector(
+    (state: ReduxState) => state.game.resourceCount[resourceId],
+  );
 };
 
 export const useResources = () => {

@@ -1,3 +1,5 @@
+import {ResourceType, ResourceData} from '../types';
+
 export const categoriesData = {
   energy: {
     title: 'Energy',
@@ -64,19 +66,13 @@ export const categoriesData = {
   },
 };
 
-const baseResource = {
-  current: 0,
-  perSecond: 0,
-  perSecondDisplay: 0,
-};
-
 export const resourcesData: {[x in ResourceType]: ResourceData} = {
   /*********************
    * Energy Resources  *
    *********************/
 
   energy: {
-    ...baseResource,
+    id: 'energy',
     name: 'Energy',
     desc:
       'Energy is created by power sources such as steam engines and solar panels, eventually advancing to fusion and nuclear energy. You can hold a maximum of 100,000 energy, unlocking batteries allows you to increase this.',
@@ -93,7 +89,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    *********************/
 
   plasma: {
-    ...baseResource,
+    id: 'plasma',
     name: 'Plasma',
     desc:
       'Plasma is the 4th state of matter and is used by Tier 4 machines and large space structures as an extreme power source for your company.',
@@ -107,7 +103,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   meteorite: {
-    ...baseResource,
+    id: 'meteorite',
     name: 'Meteorite',
     desc:
       'Creating Meteorite is only possible from purer forms of energy than those created with earth technology. Therefore, Plasma is necessary to make the strong resource.',
@@ -122,7 +118,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   carbon: {
-    ...baseResource,
+    id: 'carbon',
     name: 'Carbon',
     desc:
       'Carbon is a secondary tier resource and is used by Engines to produce power for your company. Carbon is created by burning wood',
@@ -141,7 +137,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    ********************/
 
   oil: {
-    ...baseResource,
+    id: 'oil',
     name: 'Oil',
     desc:
       'Oil is pumped up from the ground and is used to build Tier 2 resource gatherers.',
@@ -155,7 +151,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   metal: {
-    ...baseResource,
+    id: 'metal',
     name: 'Metal',
     desc:
       'Metal is one of the primary resources. It is used for many things, including storage upgrades, machinery and most things in space.',
@@ -169,7 +165,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   gem: {
-    ...baseResource,
+    id: 'gem',
     name: 'Gem',
     desc:
       'Gems are one of the primary resources. They are used for advanced machines and for powerful tools and components. They are more useful in later game.',
@@ -183,7 +179,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   wood: {
-    ...baseResource,
+    id: 'wood',
     name: 'Wood',
     desc:
       'Wood is one of the primary resources. It is used more often in early game for tools and buildings.',
@@ -197,7 +193,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   silicon: {
-    ...baseResource,
+    id: 'silicon',
     name: 'Silicon',
     desc:
       'Silicon is useful for automatic mining systems of the third tier. These will be very useful in building your first wonder. Despite being a high tier resource, it is found mainly on Earth by heating sand.',
@@ -211,7 +207,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   uranium: {
-    ...baseResource,
+    id: 'uranium',
     name: 'Uranium',
     desc:
       'Uranium is used for nuclear power generation because when it is split, it releases huge amounts of Energy. For this reason, it is prominent in many advanced machines and for propulsion technology as it is useful for inter-star-system travel. Unfortunately, it is hard to get and it requires a lot of resources to radiation-proof equipment.',
@@ -225,7 +221,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   lava: {
-    ...baseResource,
+    id: 'lava',
     name: 'Lava',
     desc:
       'Hard to handle and only found in volcanoes, Lava is one of the hardest resources to get.',
@@ -243,7 +239,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    ******************************/
 
   lunarite: {
-    ...baseResource,
+    id: 'lunarite',
     name: 'Lunarite',
     desc:
       'Lunarite is found on the Moon and is a rare type of resource not found on Earth. It is much stronger than regular metal but is a lot harder to get.',
@@ -257,7 +253,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   methane: {
-    ...baseResource,
+    id: 'methane',
     name: 'Methane',
     desc:
       'Methane is a gas found in abundance on Venus. It can be used to power your company much more effectively than solid fuel.',
@@ -271,7 +267,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   titanium: {
-    ...baseResource,
+    id: 'titanium',
     name: 'Titanium',
     desc:
       'Titanium is a metal found mostly on Mars. It is used for building strong machines and methane power plants.',
@@ -285,7 +281,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   gold: {
-    ...baseResource,
+    id: 'gold',
     name: 'Gold',
     desc:
       'Gold is a metal found inside asteroids. It is used to build some Wonders and for complex machinery.',
@@ -299,7 +295,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   silver: {
-    ...baseResource,
+    id: 'silver',
     name: 'Silver',
     desc: 'Silver is another metal most commonly found in the asteroid belt.',
     category: 'innerSol',
@@ -316,7 +312,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    ******************************/
 
   hydrogen: {
-    ...baseResource,
+    id: 'hydrogen',
     name: 'Hydrogen',
     desc:
       'Hydrogen is extremely common on gas giants such as Jupiter and Saturn.',
@@ -330,7 +326,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   helium: {
-    ...baseResource,
+    id: 'helium',
     name: 'Helium',
     desc:
       'Helium is the second most common element on gas giants such as Jupiter and Saturn.',
@@ -344,7 +340,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 
   ice: {
-    ...baseResource,
+    id: 'ice',
     name: 'Ice',
     desc:
       'Ice, although it can be collected on Earth, is not nearly as profitable as flying to Pluto and back with space craft full of the stuff. It is mainly used for super-cooling technology necessary for Tier 4 machines.',
@@ -362,7 +358,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    ******************************/
 
   science: {
-    ...baseResource,
+    id: 'science',
     name: 'Science',
     desc:
       'Science is used for researching new technologies to further your progress in the game.',
@@ -379,7 +375,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    ********************/
 
   rocketFuel: {
-    ...baseResource,
+    id: 'rocketFuel',
     name: 'Rocket Fuel',
     desc:
       'Rocket fuel is created in chemical plants and is used to allow rockets to launch off into space and to travel to other planets and star systems.',
@@ -396,7 +392,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    ********************/
 
   rocket: {
-    ...baseResource,
+    id: 'rocket',
     name: 'Rocket',
     desc:
       'Building a rocket will allow for exploration around the solar system and will allow you to gather resources in space.',
@@ -413,7 +409,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
    *****************************/
 
   antimatter: {
-    ...baseResource,
+    id: 'antimatter',
     name: 'Antimatter',
     desc:
       'Your fuel for interstellar travel is produced here. Unfortunately, you can only handle 100k Antimatter per Star System as it is incredibly volatile.',
