@@ -9,10 +9,10 @@ This is a rework from [Space Company](https://sparticle999.github.io/SpaceCompan
 # Monetization policy
 Although things are subject to change we have tentatively decided on the following policies:
 * No ads
-** Ads can leads to a lower user experience, migue1s will be covering any costs instead of relying on them
+  * Ads can leads to a lower user experience, migue1s will be covering any costs instead of relying on them
 * iAP
-** Content progression should not be locked via iAP, for now we plan quality-of-life improvements only.
-** iAP should not make the game feel pay-to-win, everything should be doable without them
+  * Content progression should not be locked via iAP, for now we plan quality-of-life improvements only.
+  * iAP should not make the game feel pay-to-win, everything should be doable without them
 
 Any funds collected through these will be used (in order):
 1. Cover any costs of hosting the apps
