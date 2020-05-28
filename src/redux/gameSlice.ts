@@ -37,14 +37,14 @@ const gameSlice = createSlice({
   initialState: initialState,
   reducers: {
     tick: (state, action: PayloadAction<number>) => {
-      // Object.keys(state.resources).forEach((key: string) => {
-      //   const id = key as ResourceType;
-      //   state.resourceCount[id].current = Math.min(
-      //     state.resourceCount[id].capacity,
-      //     state.resourceCount[id].current +
-      //       state.resourceCount[id].perSecond * action.payload,
-      //   );
-      // });
+      Object.keys(state.resources).forEach((key: string) => {
+        const id = key as ResourceType;
+        state.resourceCount[id].current = Math.min(
+          state.resourceCount[id].capacity,
+          state.resourceCount[id].current +
+            state.resourceCount[id].perSecond * action.payload,
+        );
+      });
       return state;
     },
     manualGain: (state, action: PayloadAction<ResourceType>) => {

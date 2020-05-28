@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 
 const ResourceSummary = () => {
   return (
@@ -19,5 +19,3 @@ const ResourceSummary = () => {
 };
 
 export default ResourceSummary;
-
-const styles = StyleSheet.create({});

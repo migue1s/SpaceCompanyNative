@@ -20,5 +20,3 @@ const ResourceRow = ({type}: {type: ResourceType}) => {
 };
 
 export default ResourceRow;
-
-const styles = StyleSheet.create({});

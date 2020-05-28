@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {durationFormatter} from '../utils/TimeFormatter';
 
 interface ResourceCostProps {
@@ -37,5 +37,3 @@ const ResourceCost = ({
 };
 
 export default ResourceCost;
-
-const styles = StyleSheet.create({});
