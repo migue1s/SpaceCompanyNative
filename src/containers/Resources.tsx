@@ -1,7 +1,8 @@
 import React from 'react';
-import {Text, View, SectionList} from 'react-native';
+import {SectionList} from 'react-native';
 import {useResources} from '../hooks';
 import ResourceRow from '../components/ResourceRow';
+import ListHeading from '../components/ListHeading';
 
 const Resources = () => {
   const data = useResources();
@@ -10,7 +11,9 @@ const Resources = () => {
     <SectionList
       style={{flex: 1}}
       sections={data}
-      renderSectionHeader={({section}) => <Text>{section.header}</Text>}
+      renderSectionHeader={({section}) => (
+        <ListHeading>{section.header}</ListHeading>
+      )}
       renderItem={({item}) => <ResourceRow type={item.id} />}
     />
   );
