@@ -8,9 +8,6 @@ This is a rework from [Space Company](https://sparticle999.github.io/SpaceCompan
 
 # Roadmap
 
-## Immediate
-[Project Roadmap](https://github.com/migue1s/SpaceCompanyNative/projects/1)
-
 ## High level
 
 v1
