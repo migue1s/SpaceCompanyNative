@@ -30,12 +30,15 @@ v1
 - Parity with Space Company v1
 - AppStore release
 
+v0.6
+- Interstellar
+
 v0.5
 - Rebirth
+- Initial beta release
 
 v0.4
 - Sol Station
-- Initial beta release
 
 v0.3
 - Wonders
