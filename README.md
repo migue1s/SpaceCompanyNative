@@ -20,13 +20,13 @@ v0.6
 
 v0.5
 - Rebirth
-- Initial beta release
 
 v0.4
 - Sol Station
 
 v0.3
 - Wonders
+- Initial beta release
 
 v0.2
 - Solar System
