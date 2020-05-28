@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Text} from 'react-native';
 import {durationFormatter} from '../utils/TimeFormatter';
 
 interface ResourceCostProps {
