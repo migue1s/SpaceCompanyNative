@@ -4,7 +4,8 @@ import ResourceBullet from './ResourceBullet';
 import {storiesOf} from '@storybook/react-native';
 import ResourceMachine from './ResourceMachine';
 import ResourceSummary from './ResourceSummary';
-import ResourceTile from './ResourceTile';
+import ResourceRow from './ResourceRow';
+import {ResourceType} from '../types';
 
 storiesOf('Resources', module).add('Bullet', () => (
   <View>
@@ -16,4 +17,6 @@ storiesOf('Resources', module).add('Bullet', () => (
 ));
 storiesOf('Resources', module).add('Machine', () => <ResourceMachine />);
 storiesOf('Resources', module).add('Summary', () => <ResourceSummary />);
-storiesOf('Resources', module).add('Tile', () => <ResourceTile />);
+storiesOf('Resources', module).add('Tile', () => (
+  <ResourceRow type={ResourceType.metal} />
+));
