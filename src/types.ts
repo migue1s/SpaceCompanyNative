@@ -1,3 +1,5 @@
+export type TextVariant = 'heading' | 'title' | 'body' | 'caption';
+export type ThemeVariant = 'dark' | 'light';
 export interface Resource {
   name: string;
   category: string;

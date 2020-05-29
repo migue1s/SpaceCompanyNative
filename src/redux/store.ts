@@ -1,14 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {startLoop} from '../utils/TickLoop';
-import gameSlice, {tick, GameState} from './gameSlice';
+import {GameState, tick} from './gameSlice';
+import {GlobalState} from './globalSlice';
+import rootReducer from './rootReducer';
 export interface ReduxState {
   game: GameState;
+  global: GlobalState;
 }
-const store = configureStore({
-  reducer: {
-    game: gameSlice,
-  },
-});
+
+const store = configureStore(rootReducer);
 
 startLoop(
   (delta: number) => {

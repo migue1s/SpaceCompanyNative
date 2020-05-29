@@ -3,6 +3,10 @@ import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
 import {ResourceType} from './types';
 
+export const useTheme = () => {
+  return useSelector((state: ReduxState) => state.global.theme);
+};
+
 export const useResource = (resourceId: ResourceType) => {
   return useSelector((state: ReduxState) => state.game.resources[resourceId]);
 };
