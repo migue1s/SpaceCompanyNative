@@ -1,21 +1,28 @@
 import React from 'react';
-import {Text, View} from 'react-native';
 import {ResourceType} from '../types';
 import {useResourceCount, useResource} from '../hooks';
+import ThemedText from './ThemedText';
+import ThemedView from './ThemedView';
 
 const ResourceRow = ({type}: {type: ResourceType}) => {
   const data = useResource(type);
   const count = useResourceCount(type);
 
   return (
-    <View style={{flexDirection: 'row', padding: 8}}>
-      <Text style={{flex: 1}}>Icon</Text>
-      <Text style={{flex: 2, textAlign: 'left'}}>{data.name} </Text>
-      <Text style={{flex: 2, textAlign: 'center'}}>{count.perSecond}/Sec</Text>
-      <Text style={{flex: 2, textAlign: 'right'}}>
+    <ThemedView style={{flexDirection: 'row', padding: 8}}>
+      <ThemedText variant="body" style={{flex: 1}}>
+        Icon
+      </ThemedText>
+      <ThemedText variant="body" style={{flex: 2, textAlign: 'left'}}>
+        {data.name}{' '}
+      </ThemedText>
+      <ThemedText variant="body" style={{flex: 2, textAlign: 'center'}}>
+        {count.perSecond}/Sec
+      </ThemedText>
+      <ThemedText variant="body" style={{flex: 2, textAlign: 'right'}}>
         {count.current}/{count.capacity}
-      </Text>
-    </View>
+      </ThemedText>
+    </ThemedView>
   );
 };
 
