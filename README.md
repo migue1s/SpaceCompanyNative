@@ -6,6 +6,10 @@ Space Company is a science-fiction incremental game where you start from humble 
 
 This is a rework from [Space Company](https://sparticle999.github.io/SpaceCompany/)
 
+# How to install
+Follow the guide in the [react native getting started](https://reactnative.dev/docs/environment-setup), be sure to select the "CLI installation". 
+
+
 # High level roadmap
 
 v1.1
