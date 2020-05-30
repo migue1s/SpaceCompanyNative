@@ -19,6 +19,7 @@ import {ResourceType, ThemeVariant} from './types';
 import ThemedText from './components/ThemedText';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from './hooks';
+import {useColorScheme} from 'react-native';
 
 const Drawer = createDrawerNavigator();
 
@@ -36,37 +37,22 @@ export type ResourceDetailScreenRouteProp = RouteProp<
   'ResourceDetail'
 >;
 
-const ResourceWrapper = ({toggleTheme}: {toggleTheme: () => void}) => () => {
+const ResourceWrapper = () => {
   return (
     <ResourceStack.Navigator>
-      <ResourceStack.Screen
-        name="Resources"
-        component={Resources}
-        options={{
-          headerRight: () => {
-            return (
-              <TouchableOpacity onPress={toggleTheme}>
-                <ThemedText variant="body">theme</ThemedText>
-              </TouchableOpacity>
-            );
-          },
-        }}
-      />
+      <ResourceStack.Screen name="Resources" component={Resources} />
       <ResourceStack.Screen name="ResourceDetail" component={ResourceDetail} />
     </ResourceStack.Navigator>
   );
 };
 
-const MainNavigation = ({toggleTheme}: {toggleTheme: () => void}) => {
+const MainNavigation = () => {
   const theme = useTheme();
   return (
     <NavigationContainer theme={theme === 'light' ? DefaultTheme : DarkTheme}>
       <Provider store={store}>
         <Drawer.Navigator initialRouteName="Resources">
-          <Drawer.Screen
-            name="Resources"
-            component={ResourceWrapper({toggleTheme})}
-          />
+          <Drawer.Screen name="Resources" component={ResourceWrapper} />
           <Drawer.Screen name="Research" component={Research} />
           <Drawer.Screen name="Storybooks" component={storybook} />
         </Drawer.Navigator>
@@ -76,18 +62,11 @@ const MainNavigation = ({toggleTheme}: {toggleTheme: () => void}) => {
 };
 
 export default function App() {
-  const [theme, setTheme] = useState<ThemeVariant>('light');
-  const toggleTheme = useCallback(() => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  }, [theme]);
+  const systemTheme = useColorScheme() as ThemeVariant;
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <MainNavigation toggleTheme={toggleTheme} />
+    <ThemeContext.Provider value={systemTheme}>
+      <MainNavigation />
     </ThemeContext.Provider>
   );
 }
