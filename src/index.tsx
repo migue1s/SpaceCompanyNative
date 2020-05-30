@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useState, useCallback} from 'react';
+import React from 'react';
 import {
   NavigationContainer,
   RouteProp,
@@ -16,8 +16,6 @@ import Resources from './containers/Resources';
 import ResourceDetail from './containers/ResourceDetail';
 import Research from './containers/Research';
 import {ResourceType, ThemeVariant} from './types';
-import ThemedText from './components/ThemedText';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from './hooks';
 import {useColorScheme} from 'react-native';
 

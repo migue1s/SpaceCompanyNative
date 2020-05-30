@@ -1,11 +1,8 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {ResourceDetailScreenRouteProp} from '..';
 import {useResource} from '../hooks';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-
-const styles = StyleSheet.create({});
 
 const ResourceDetail = () => {
   const navigation = useNavigation();
