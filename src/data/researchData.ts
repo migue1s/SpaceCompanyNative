@@ -434,6 +434,7 @@ const researchWithDefaults = Object.keys(researchData).reduce(
     result[current] = {
       currentLevel: 0,
       unlocked: false,
+      maxLevel: 1,
       ...researchData[current as ResearchId],
     } as Research;
 

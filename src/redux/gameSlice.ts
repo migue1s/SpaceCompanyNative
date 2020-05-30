@@ -56,6 +56,13 @@ const gameSlice = createSlice({
         state.resourceCount[action.payload].current + gain,
       );
     },
+    developmentSetResource: (
+      state,
+      action: PayloadAction<{resource: ResourceType; amount: number}>,
+    ) => {
+      state.resourceCount[action.payload.resource].current =
+        action.payload.amount;
+    },
     upgradeStorage: (state, action: PayloadAction<ResourceType>) => {
       if (
         state.resourceCount[action.payload].current ===
@@ -69,6 +76,7 @@ const gameSlice = createSlice({
     },
     buyResearch: (state, action: PayloadAction<ResearchId>) => {
       const target = state.research[action.payload];
+
       if (
         state.resourceCount.science.current >= target.science &&
         (target.maxLevel ||
@@ -114,6 +122,12 @@ const gameSlice = createSlice({
   },
 });
 
-export const {tick, manualGain, upgradeStorage} = gameSlice.actions;
+export const {
+  tick,
+  manualGain,
+  upgradeStorage,
+  buyResearch,
+  developmentSetResource,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;
