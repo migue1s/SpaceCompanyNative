@@ -17,6 +17,13 @@ export type ResourceAmount = {
   [x in ResourceType]?: number;
 };
 
+export interface ResourceCategory {
+  title: string;
+  category: string;
+  page: string;
+  order: number;
+}
+
 export interface Machine {
   category: string;
   cost: ResourceAmount;
@@ -55,6 +62,17 @@ export enum ResourceType {
   rocketFuel = 'rocketFuel',
   rocket = 'rocket',
   antimatter = 'antimatter',
+}
+
+export enum ResourceCategoryType {
+  energy = 'energy',
+  fabricated = 'fabricated',
+  earth = 'earth',
+  innerSol = 'innerSol',
+  outerSol = 'outerSol',
+  science = 'science',
+  spacecraft = 'spacecraft',
+  rocketFuel = 'rocketFuel',
 }
 
 export interface ResourceData {

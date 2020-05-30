@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, ViewProps, TextStyle} from 'react-native';
+import {StyleSheet, Text, TextStyle, TextProps} from 'react-native';
 import {TextVariant, ThemeVariant} from '../types';
 import {useTheme} from '../hooks';
 
@@ -32,7 +32,7 @@ const ThemedText = ({
   children,
   variant,
   ...rest
-}: ViewProps & {
+}: TextProps & {
   children: React.ReactNode | React.ReactNode[];
   variant: TextVariant;
 }) => {
