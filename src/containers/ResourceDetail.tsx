@@ -21,12 +21,6 @@ const ResourceDetail = () => {
   return (
     <View>
       <Text>{JSON.stringify(resource, null, 2)}</Text>
-      <TouchableOpacity
-        onPress={() => {
-          throw new Error('My first Sentry error!');
-        }}>
-        <Text>TEST SENTRY</Text>
-      </TouchableOpacity>
     </View>
   );
 };
