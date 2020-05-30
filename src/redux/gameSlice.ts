@@ -103,6 +103,7 @@ const gameSlice = createSlice({
           target.effects.unlock.forEach((unlockId) => {
             if (state.resources[unlockId as ResourceType]) {
               state.resources[unlockId as ResourceType].unlocked = true;
+              state.resourceCount[unlockId as ResourceType].unlocked = true;
             }
             // TODO: handle the generic "resource"
           });

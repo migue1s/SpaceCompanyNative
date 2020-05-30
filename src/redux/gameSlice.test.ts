@@ -7,7 +7,7 @@ import game, {
 } from './gameSlice';
 import {ResourceType} from '../types';
 
-describe('game reducer', () => {
+describe('The game', () => {
   let gameState = game(initialState, {type: 'test'});
 
   beforeEach(() => {
@@ -18,55 +18,73 @@ describe('game reducer', () => {
     expect(initialState).toEqual(initialState);
   });
 
-  it('should increase resources by one', () => {
-    expect(gameState.resourceCount.metal.current).toEqual(0);
-    gameState = game(gameState, manualGain(ResourceType.metal));
-    expect(gameState.resourceCount.metal.current).toEqual(1);
-    gameState = game(gameState, manualGain(ResourceType.metal));
-    expect(gameState.resourceCount.metal.current).toEqual(2);
+  describe('resources', () => {
+    it('should increate by one', () => {
+      expect(gameState.resourceCount.metal.current).toEqual(0);
+      gameState = game(gameState, manualGain(ResourceType.metal));
+      expect(gameState.resourceCount.metal.current).toEqual(1);
+      gameState = game(gameState, manualGain(ResourceType.metal));
+      expect(gameState.resourceCount.metal.current).toEqual(2);
+    });
+
+    it('should get set', () => {
+      expect(gameState.resourceCount.metal.current).toEqual(0);
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.metal, amount: 20}),
+      );
+      expect(gameState.resourceCount.metal.current).toEqual(20);
+    });
   });
 
-  it('should set resource', () => {
-    expect(gameState.resourceCount.metal.current).toEqual(0);
-    gameState = game(
-      gameState,
-      developmentSetResource({resource: ResourceType.metal, amount: 20}),
-    );
-    expect(gameState.resourceCount.metal.current).toEqual(20);
-  });
+  describe('research', () => {
+    it('should be bought', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.science, amount: 20}),
+      );
 
-  it('should buy research', () => {
-    gameState = game(
-      gameState,
-      developmentSetResource({resource: ResourceType.science, amount: 20}),
-    );
+      expect(gameState.resourceCount.science.current).toEqual(20);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
+      expect(gameState.research.unlockOil.unlocked).toEqual(false);
 
-    expect(gameState.resourceCount.science.current).toEqual(20);
-    expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
-    expect(gameState.research.unlockOil.unlocked).toEqual(false);
+      gameState = game(gameState, buyResearch('unlockStorage'));
 
-    gameState = game(gameState, buyResearch('unlockStorage'));
+      expect(gameState.resourceCount.science.current).toEqual(15);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(1);
+      expect(gameState.research.unlockOil.unlocked).toEqual(true);
+    });
 
-    expect(gameState.resourceCount.science.current).toEqual(15);
-    expect(gameState.research.unlockStorage.currentLevel).toEqual(1);
-    expect(gameState.research.unlockOil.unlocked).toEqual(true);
-  });
+    it('should unlock other resources', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.science, amount: 30}),
+      );
 
-  it('should be a noop when buying research and no science', () => {
-    gameState = game(
-      gameState,
-      developmentSetResource({resource: ResourceType.science, amount: 4}),
-    );
+      expect(gameState.resourceCount.oil.unlocked).toEqual(false);
 
-    expect(gameState.resourceCount.science.current).toEqual(4);
-    expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
-    expect(gameState.research.unlockOil.unlocked).toEqual(false);
+      gameState = game(gameState, buyResearch('unlockOil'));
 
-    gameState = game(gameState, buyResearch('unlockStorage'));
+      expect(gameState.research.unlockOil.currentLevel).toEqual(1);
+      expect(gameState.resourceCount.oil.unlocked).toEqual(true);
+    });
 
-    expect(gameState.resourceCount.science.current).toEqual(4);
-    expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
-    expect(gameState.research.unlockOil.unlocked).toEqual(false);
+    it('should be a noop when buying research and no science', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.science, amount: 4}),
+      );
+
+      expect(gameState.resourceCount.science.current).toEqual(4);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
+      expect(gameState.research.unlockOil.unlocked).toEqual(false);
+
+      gameState = game(gameState, buyResearch('unlockStorage'));
+
+      expect(gameState.resourceCount.science.current).toEqual(4);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
+      expect(gameState.research.unlockOil.unlocked).toEqual(false);
+    });
   });
 
   it('should buy storage', () => {
