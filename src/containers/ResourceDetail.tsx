@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {ResourceDetailScreenRouteProp} from '..';
 import {useResource} from '../hooks';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({});
 
@@ -20,6 +21,12 @@ const ResourceDetail = () => {
   return (
     <View>
       <Text>{JSON.stringify(resource, null, 2)}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          throw new Error('My first Sentry error!');
+        }}>
+        <Text>TEST SENTRY</Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -21,6 +21,13 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from './hooks';
 import {useColorScheme} from 'react-native';
 
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn:
+    'https://4878489069e8449ca2f6c0ee6e444f25@o400529.ingest.sentry.io/5259048',
+});
+
 const Drawer = createDrawerNavigator();
 
 export const ThemeContext = React.createContext<ThemeVariant>('light');
