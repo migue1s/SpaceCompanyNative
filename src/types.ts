@@ -1,3 +1,5 @@
+import {ResearchId} from './data/researchData';
+
 export type TextVariant = 'heading' | 'title' | 'body' | 'caption';
 export type ThemeVariant = 'dark' | 'light';
 export interface Resource {
@@ -11,9 +13,13 @@ export interface Resource {
   unlocked: boolean;
 }
 
+export type ResourceAmount = {
+  [x in ResourceType]?: number;
+};
+
 export interface Machine {
   category: string;
-  cost: {[x in ResourceType]?: number};
+  cost: ResourceAmount;
   current: number;
   desc: string;
   destroyable: true;
@@ -62,7 +68,7 @@ export interface ResourceData {
   // icon: 'gemIcon';
   // iconExtension: 'png';
   // iconPath: 'Icons/';
-  gainCost?: {[index: string]: number};
+  gainCost?: ResourceAmount;
   manualGain: boolean;
   toggleable: boolean;
   unlocked: boolean;
@@ -75,4 +81,22 @@ export interface ResourceState {
   capacity: number;
   category: string;
   unlocked: boolean;
+  multiplier: number;
+}
+
+export interface Research {
+  name: string;
+  desc: string;
+  buttonText: string;
+  unlocked: boolean;
+  currentLevel: number;
+  maxLevel: number;
+  science: number;
+  newTechs?: ResearchId[];
+  tabAlerts?: string[];
+  effects: {
+    unlock?: string[];
+    double?: string[];
+    efficiency?: string;
+  };
 }

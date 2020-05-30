@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
 import {ResourceType, ResourceData, ResourceState} from '../types';
+import researchData, {ResearchId} from '../data/researchData';
 
 const gain = 1;
 
@@ -11,6 +12,7 @@ const storageEfficiencyMultiplier = 0;
 const storageGrowthMultiplier = 2;
 
 export const initialState = {
+  research: researchData,
   resources: resourcesData as {[x in ResourceType]: ResourceData},
   resourceCount: Object.keys(ResourceType).reduce((result, current) => {
     const key = current as ResourceType;
@@ -23,6 +25,7 @@ export const initialState = {
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,
       category: resource.category,
+      multiplier: 1,
     } as ResourceState;
     return result;
   }, {} as any) as {
@@ -62,6 +65,50 @@ const gameSlice = createSlice({
           action.payload
         ].current *= storageEfficiencyMultiplier;
         state.resourceCount[action.payload].capacity *= storageGrowthMultiplier;
+      }
+    },
+    buyResearch: (state, action: PayloadAction<ResearchId>) => {
+      const target = state.research[action.payload];
+      if (
+        state.resourceCount.science.current >= target.science &&
+        (target.maxLevel ||
+          target.maxLevel === -1 ||
+          target.currentLevel < target.maxLevel)
+      ) {
+        // Buy it!
+
+        // Set as bought
+        target.currentLevel += 1;
+
+        // Decrease science
+        state.resourceCount.science.current -= target.science;
+
+        // Unlock dependent techs
+        if (target.newTechs) {
+          target.newTechs.forEach((tech) => {
+            state.research[tech].unlocked = true;
+          });
+        }
+
+        // Unlock resources
+        if (target.effects.unlock) {
+          target.effects.unlock.forEach((unlockId) => {
+            if (state.resources[unlockId as ResourceType]) {
+              state.resources[unlockId as ResourceType].unlocked = true;
+            }
+            // TODO: handle the generic "resource"
+          });
+        }
+
+        // Double a resource/machine
+        if (target.effects.double) {
+          target.effects.double.forEach((doubleId) => {
+            if (state.resourceCount[doubleId as ResourceType]) {
+              state.resourceCount[doubleId as ResourceType].multiplier *= 2;
+            }
+            // TODO: handle a machine
+          });
+        }
       }
     },
   },
