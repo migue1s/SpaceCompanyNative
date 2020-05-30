@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {SectionList, StyleSheet, ViewStyle} from 'react-native';
 import {useResources} from '../hooks';
 import ResourceRow from '../components/ResourceRow';
 import ListHeading from '../components/ListHeading';
+import {ResourceType} from '../types';
+import {useNavigation} from '@react-navigation/native';
 
 const styles = StyleSheet.create<{
   list: ViewStyle;
@@ -14,6 +16,13 @@ const styles = StyleSheet.create<{
 
 const Resources = () => {
   const data = useResources();
+  const navigation = useNavigation();
+  const onResourcePress = useCallback(
+    (resource: ResourceType) => {
+      navigation.navigate('ResourceDetail', {resource});
+    },
+    [navigation],
+  );
 
   return (
     <SectionList
@@ -22,7 +31,9 @@ const Resources = () => {
       renderSectionHeader={({section}) => (
         <ListHeading>{section.header}</ListHeading>
       )}
-      renderItem={({item}) => <ResourceRow type={item.id} />}
+      renderItem={({item}) => (
+        <ResourceRow type={item.id} onPress={onResourcePress} />
+      )}
     />
   );
 };

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, RouteProp} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import storybook from '../storybook';
@@ -8,16 +8,28 @@ import {Provider} from 'react-redux';
 import store from './redux/store';
 
 import Resources from './containers/Resources';
+import ResourceDetail from './containers/ResourceDetail';
 import Research from './containers/Research';
+import {ResourceType} from './types';
 
 const Drawer = createDrawerNavigator();
 
-const ResourceStack = createStackNavigator<{Resources: undefined}>();
+export type ResourceProps = {
+  Resources: undefined;
+  ResourceDetail: {
+    resource: ResourceType;
+  };
+};
+const ResourceStack = createStackNavigator<ResourceProps>();
+export type ResourceDetailScreenRouteProp = RouteProp<
+  ResourceProps,
+  'ResourceDetail'
+>;
 
 const ResourceWrapper = () => (
   <ResourceStack.Navigator>
     <ResourceStack.Screen name="Resources" component={Resources} />
-    {/* Place the resource detail here */}
+    <ResourceStack.Screen name="ResourceDetail" component={ResourceDetail} />
   </ResourceStack.Navigator>
 );
 
