@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   NavigationContainer,
   RouteProp,
@@ -15,12 +15,14 @@ import store from './redux/store';
 import Resources from './containers/Resources';
 import ResourceDetail from './containers/ResourceDetail';
 import Research from './containers/Research';
-import {ResourceType} from './types';
+import {ResourceType, ThemeVariant} from './types';
 import ThemedText from './components/ThemedText';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {setTheme} from './redux/globalSlice';
+import {useTheme} from './hooks';
 
 const Drawer = createDrawerNavigator();
+
+export const ThemeContext = React.createContext<ThemeVariant>('light');
 
 export type ResourceProps = {
   Resources: undefined;
@@ -34,44 +36,58 @@ export type ResourceDetailScreenRouteProp = RouteProp<
   'ResourceDetail'
 >;
 
-const ResourceWrapper = () => (
-  <ResourceStack.Navigator>
-    <ResourceStack.Screen
-      name="Resources"
-      component={Resources}
-      options={{
-        headerRight: () => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                if (store.getState().global.theme === 'light') {
-                  store.dispatch(setTheme('dark'));
-                } else {
-                  store.dispatch(setTheme('light'));
-                }
-              }}>
-              <ThemedText variant="body">toggle theme</ThemedText>
-            </TouchableOpacity>
-          );
-        },
-      }}
-    />
-    <ResourceStack.Screen name="ResourceDetail" component={ResourceDetail} />
-  </ResourceStack.Navigator>
-);
-
-export default function App() {
-  const currentTheme = store.getState().global.theme;
+const ResourceWrapper = ({toggleTheme}: {toggleTheme: () => void}) => () => {
   return (
-    <NavigationContainer
-      theme={currentTheme === 'light' ? DefaultTheme : DarkTheme}>
+    <ResourceStack.Navigator>
+      <ResourceStack.Screen
+        name="Resources"
+        component={Resources}
+        options={{
+          headerRight: () => {
+            return (
+              <TouchableOpacity onPress={toggleTheme}>
+                <ThemedText variant="body">theme</ThemedText>
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
+      <ResourceStack.Screen name="ResourceDetail" component={ResourceDetail} />
+    </ResourceStack.Navigator>
+  );
+};
+
+const MainNavigation = ({toggleTheme}: {toggleTheme: () => void}) => {
+  const theme = useTheme();
+  return (
+    <NavigationContainer theme={theme === 'light' ? DefaultTheme : DarkTheme}>
       <Provider store={store}>
         <Drawer.Navigator initialRouteName="Resources">
-          <Drawer.Screen name="Resources" component={ResourceWrapper} />
+          <Drawer.Screen
+            name="Resources"
+            component={ResourceWrapper({toggleTheme})}
+          />
           <Drawer.Screen name="Research" component={Research} />
           <Drawer.Screen name="Storybooks" component={storybook} />
         </Drawer.Navigator>
       </Provider>
     </NavigationContainer>
+  );
+};
+
+export default function App() {
+  const [theme, setTheme] = useState<ThemeVariant>('light');
+  const toggleTheme = useCallback(() => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }, [theme]);
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <MainNavigation toggleTheme={toggleTheme} />
+    </ThemeContext.Provider>
   );
 }
