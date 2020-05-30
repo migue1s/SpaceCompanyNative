@@ -1,15 +1,13 @@
 import {Research} from '../types';
 
-export default {
+const researchData = {
   unlockStorage: {
     name: 'Storage Upgrades',
     desc:
       'This will allow you to build storage upgrades to increase the maximum on the amount of resource you can have at once.',
     buttonText: 'Unlock Storage',
     unlocked: true,
-    cost: {
-      science: 5,
-    },
+    science: 5,
     newTechs: ['unlockOil'],
     tabAlerts: ['resources'],
     effects: {
@@ -23,9 +21,7 @@ export default {
       'You will be able to produce power from steam engines using Carbon made from wood in a furnace.',
     buttonText: 'Unlock Basic Energy Production',
     unlocked: true,
-    cost: {
-      science: 20,
-    },
+    science: 20,
     newTechs: ['unlockSolar', 'unlockMachines', 'upgradeEngineTech'],
     tabAlerts: ['resources'],
     effects: {
@@ -38,9 +34,7 @@ export default {
     desc:
       'Oil used to fuel more advanced machines that gather resources and also to produce more power than basic means. Unlocking Oil Processing allows you to extract it from the ground.',
     buttonText: 'Unlock Oil',
-    cost: {
-      science: 30,
-    },
+    science: 30,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['oil', 'oilT1'],
@@ -52,9 +46,7 @@ export default {
     desc:
       'Solar Panels produce Energy without the need for fuel, but they do it slower than other forms of Energy production.',
     buttonText: 'Unlock Solar Panels',
-    cost: {
-      science: 50,
-    },
+    science: 50,
     newTechs: ['upgradeSolarTech'],
     tabAlerts: ['resources'],
     effects: {
@@ -67,9 +59,7 @@ export default {
     desc:
       'Resource Machines produce more resources than simple methods but require a constant supply of power to work.',
     buttonText: 'Unlock Resource Machines',
-    cost: {
-      science: 100,
-    },
+    science: 100,
     newTechs: ['unlockSolarSystem', 'upgradeResourceTech', 'unlockDestruction'],
     tabAlerts: ['resources'],
     effects: {
@@ -82,9 +72,7 @@ export default {
     desc:
       "This allows you to destroy machines you have already created. It can be useful when there are more efficient methods of gaining resources, or if you don't have enough energy to support your machines.",
     buttonText: 'Unlock Destruction',
-    cost: {
-      science: 500,
-    },
+    science: 500,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['destroy'],
@@ -98,9 +86,7 @@ export default {
     buttonText: 'Unlock Space Travel',
     notifyTitle: 'new Tab!',
     notifyText: "You've unlocked the Solar System Tab!",
-    cost: {
-      science: 500,
-    },
+    science: 500,
     newTechs: ['unlockLabT2', 'unlockRocketFuelT2'],
     tabAlerts: ['solar'],
     effects: {
@@ -112,9 +98,7 @@ export default {
     name: 'Oxidisation',
     desc: 'Oxidisation is a more efficient process of creating Rocket Fuel.',
     buttonText: 'Unlock Oxidisation',
-    cost: {
-      science: 450000,
-    },
+    science: 450000,
     newTechs: ['unlockRocketFuelT3'],
     tabAlerts: ['solar'],
     effects: {
@@ -127,9 +111,7 @@ export default {
     desc:
       'Hydrazine is a compound created by Methane that increases the speed at which rocket fuel can be produced in a Hydrazine Catalyst Machine.',
     buttonText: 'Unlock Hydrazine',
-    cost: {
-      science: 3200000,
-    },
+    science: 3200000,
     tabAlerts: ['solar'],
     effects: {
       unlock: ['rocketFuelT3'],
@@ -141,9 +123,7 @@ export default {
     desc:
       'Researching this will allow you to increase your science production drastically.',
     buttonText: 'Unlock Tier 2 Science',
-    cost: {
-      science: 500,
-    },
+    science: 500,
     newTechs: ['unlockLabT3'],
     tabAlerts: ['tech'],
     effects: {
@@ -156,9 +136,7 @@ export default {
     desc:
       'Researching this will allow you to access the third tier of science production, creating much more science than the previous tiers.',
     buttonText: 'Unlock Tier 3 Science',
-    cost: {
-      science: 3000,
-    },
+    science: 3000,
     newTechs: ['unlockLabT4'],
     tabAlerts: ['tech'],
     effects: {
@@ -171,9 +149,7 @@ export default {
     desc:
       'Researching this will allow you to access the fourth tier of science production, creating 10 times as much science as the previous tier.',
     buttonText: 'Unlock Tier 4 Science',
-    cost: {
-      science: 50000000,
-    },
+    science: 50000000,
     tabAlerts: ['tech'],
     effects: {
       unlock: ['scienceT4'],
@@ -185,9 +161,7 @@ export default {
     desc:
       'Tier 1 Batteries improve the amount of energy you can store at once.',
     buttonText: 'Unlock Batteries',
-    cost: {
-      science: 15000,
-    },
+    science: 15000,
     newTechs: ['unlockBatteriesT2'],
     tabAlerts: ['resources'],
     effects: {
@@ -199,9 +173,7 @@ export default {
     name: 'Tier 2 Batteries',
     desc: 'Tier 2 Batteries improve the amount of energy you can store at once',
     buttonText: 'Unlock T2 Batteries',
-    cost: {
-      science: 300000,
-    },
+    science: 300000,
     newTechs: ['unlockBatteriesT3'],
     tabAlerts: ['resources'],
     effects: {
@@ -213,9 +185,7 @@ export default {
     name: 'Tier 3 Batteries',
     desc: 'Tier 3 Batteries improve the amount of energy you can store at once',
     buttonText: 'Unlock T3 Batteries',
-    cost: {
-      science: 3000000,
-    },
+    science: 3000000,
     newTechs: ['unlockBatteriesT4'],
     tabAlerts: ['resources'],
     effects: {
@@ -227,9 +197,7 @@ export default {
     name: 'Tier 4 Batteries',
     desc: 'Tier 4 Batteries improve the amount of energy you can store at once',
     buttonText: 'Unlock T4 Batteries',
-    cost: {
-      science: 30000000,
-    },
+    science: 30000000,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['energyStorageT4'],
@@ -240,9 +208,7 @@ export default {
     name: 'Plasma Tier 1 Technology',
     desc: 'This allows you to turn your energy and hydrogen into Plasma',
     buttonText: 'Unlock Plasma',
-    cost: {
-      science: 40000,
-    },
+    science: 40000,
     newTechs: ['unlockPlasmaTier2', 'unlockPSU'],
     tabAlerts: ['resources'],
     effects: {
@@ -255,9 +221,7 @@ export default {
     desc:
       'This research unlocks the second tier of Plasma production, the Plasmatic Pit',
     buttonText: 'Unlock Plasma Tier 2',
-    cost: {
-      science: 60000,
-    },
+    science: 60000,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['plasmaT2'],
@@ -268,9 +232,7 @@ export default {
     name: 'Plasma Storage Units',
     desc: 'PSUs increase the limit on plasma you can store at once.',
     buttonText: 'Unlock PSUs',
-    cost: {
-      science: 9500000,
-    },
+    science: 9500000,
     newTechs: ['unlockPSUT2'],
     tabAlerts: ['resources'],
     effects: {
@@ -283,9 +245,7 @@ export default {
     desc:
       'Tier 2 PSUs are more efficient at storing plasma but they are significantly larger and require more resources to make.',
     buttonText: 'Unlock T2 PSUs',
-    cost: {
-      science: 37000000,
-    },
+    science: 37000000,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['plasmaStorageT2'],
@@ -297,9 +257,7 @@ export default {
     desc:
       'This power technology not only lets you create existing resources, but allows you to make new, and only creatable elements, such as meteorite.',
     buttonText: 'Unlock EMC',
-    cost: {
-      science: 60000,
-    },
+    science: 60000,
     newTechs: ['unlockMeteorite'],
     tabAlerts: ['solCenter'],
     effects: {
@@ -312,9 +270,7 @@ export default {
     desc:
       'Meteorite is one of the rare resources in the Galaxy as it is an artificial one. All of the pre-existing Meteorite that once was in the Kuiper Belt, and similar asteroid fields in other solar systems, has all been mined away. Now, the only way to get is to make it in machines from energy.',
     buttonText: 'Unlock Meteorite',
-    cost: {
-      science: 100000,
-    },
+    science: 100000,
     newTechs: ['unlockMeteoriteTier1'],
     tabAlerts: ['resources', 'wonder'],
     effects: {
@@ -327,9 +283,7 @@ export default {
     desc:
       "Research an automated way to gather Meteorite so that you don't have to worry about losing out when you're not around.",
     buttonText: 'Unlock Meteorite Tier 1',
-    cost: {
-      science: 75000,
-    },
+    science: 75000,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['meteoriteT1'],
@@ -341,9 +295,7 @@ export default {
     desc:
       'Research a more efficient method of getting meteorite than creating it artificially.',
     buttonText: 'Unlock Meteorite Tier 2',
-    cost: {
-      science: 100000,
-    },
+    science: 100000,
     tabAlerts: ['resources'],
     effects: {
       unlock: ['meteoriteT2'],
@@ -355,9 +307,7 @@ export default {
     desc:
       'Dyson Rings produce huge amounts of energy by surrounding the sun in solar stations.',
     buttonText: 'Unlock Dyson Rings',
-    cost: {
-      science: 100000,
-    },
+    science: 100000,
     newTechs: ['unlockDysonSphere'],
     tabAlerts: ['solCenter'],
     effects: {
@@ -370,9 +320,7 @@ export default {
     desc:
       'The Dyson Swarms encapsulate the sun in rings of solar stations, whereas Spheres completely encompasses it to allows you to harness enough energy to go interstellar.',
     buttonText: 'Unlock Dyson Swarms/Spheres',
-    cost: {
-      science: 500000,
-    },
+    science: 500000,
     tabAlerts: ['solCenter'],
     effects: {
       unlock: ['swarm', 'sphere'],
@@ -384,9 +332,7 @@ export default {
     desc:
       "The nanoswarm is an interesting creation, capable of copying other machines' forms and taking up their role in resource production. Each boosts a single resource but can change at the flick of a button.",
     buttonText: 'Unlock Nanoswarms',
-    cost: {
-      science: 1.5e7,
-    },
+    science: 1.5e7,
     tabAlerts: ['solCenter'],
     effects: {
       unlock: ['nanoswarm'],
@@ -400,9 +346,7 @@ export default {
     desc:
       'Make your resource machines produce even more resources than before. This upgrade doubles the amount they produce for each unit of Energy.',
     buttonText: 'Upgrade Resource Tech',
-    cost: {
-      science: 300,
-    },
+    science: 300,
     tabAlerts: ['resources'],
     effects: {
       double: ['oilT2', 'metalT2', 'gemT2', 'carbonT2', 'woodT2'],
@@ -414,9 +358,7 @@ export default {
     desc:
       'Upgrading Engine Technology will make Carbon engines produce 4 Energy per second instead of 2.',
     buttonText: 'Upgrade Carbon Engines',
-    cost: {
-      science: 1000,
-    },
+    science: 1000,
     tabAlerts: ['resources'],
     effects: {
       double: ['energyT1'],
@@ -428,9 +370,7 @@ export default {
     desc:
       'Upgrading Solar Technology will make solar panels produce 3 Energy per second instead of 1.5.',
     buttonText: 'Upgrade Solar Panels',
-    cost: {
-      science: 5000,
-    },
+    science: 5000,
     newTechs: ['unlockBatteries'],
     tabAlerts: ['resources'],
     effects: {
@@ -444,9 +384,7 @@ export default {
       'Resource Efficiency increases the income of resources by 1%/s per purchase.',
     buttonText: 'Upgrade Resource Efficiency',
     maxLevel: -1,
-    cost: {
-      science: 100000,
-    },
+    science: 100000,
     effects: {
       efficiency: 'resource',
     },
@@ -458,9 +396,7 @@ export default {
       'Science Efficiency increases the science production by 2% per purchase.',
     buttonText: 'Upgrade Science Efficiency',
     maxLevel: -1,
-    cost: {
-      science: 10000000,
-    },
+    science: 10000000,
     effects: {
       efficiency: 'science',
     },
@@ -472,9 +408,7 @@ export default {
       'Energy Efficiency decreases the energy consumption of all machines by 1%/s per purchase.',
     buttonText: 'Upgrade Energy Efficiency',
     maxLevel: 25,
-    cost: {
-      science: 10000000,
-    },
+    science: 10000000,
     effects: {
       efficiency: 'energy',
     },
@@ -486,11 +420,26 @@ export default {
       'Battery Efficiency improves the storage capabilities of your batteries by 1% per upgrade.',
     buttonText: 'Upgrade Battery Efficiency',
     maxLevel: 200,
-    cost: {
-      science: 100000000,
-    },
+    science: 100000000,
     effects: {
       efficiency: 'battery',
     },
   },
-} as {[index: string]: Research};
+};
+
+export type ResearchId = keyof typeof researchData;
+
+const researchWithDefaults = Object.keys(researchData).reduce(
+  (result, current) => {
+    result[current] = {
+      currentLevel: 0,
+      unlocked: false,
+      ...researchData[current as ResearchId],
+    } as Research;
+
+    return result;
+  },
+  {} as {[index: string]: Research},
+);
+
+export default researchWithDefaults as {[x in ResearchId]: Research};

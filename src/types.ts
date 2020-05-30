@@ -1,3 +1,5 @@
+import {ResearchId} from './data/researchData';
+
 export type TextVariant = 'heading' | 'title' | 'body' | 'caption';
 export type ThemeVariant = 'dark' | 'light';
 export interface Resource {
@@ -79,16 +81,18 @@ export interface ResourceState {
   capacity: number;
   category: string;
   unlocked: boolean;
+  multiplier: number;
 }
 
 export interface Research {
   name: string;
   desc: string;
   buttonText: string;
-  unlocked?: boolean;
-  maxLevel?: number;
-  cost: ResourceAmount;
-  newTechs?: string[];
+  unlocked: boolean;
+  currentLevel: number;
+  maxLevel: number;
+  science: number;
+  newTechs?: ResearchId[];
   tabAlerts?: string[];
   effects: {
     unlock?: string[];
