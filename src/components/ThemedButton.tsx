@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
   TouchableOpacityProps,
@@ -40,16 +40,13 @@ const ThemedButton = ({
   onPress: () => void;
 }) => {
   const theme = useTheme();
-  const onButtonPress = useCallback(() => {
-    onPress;
-  }, [onPress]);
 
   return (
     <TouchableOpacity
       style={[style, styles.button, themeStyles[theme]]}
-      onPress={onButtonPress}
+      onPress={onPress}
       {...rest}>
-      <ThemedText variant={'caption'}>{children}</ThemedText>
+      <ThemedText variant="caption">{children}</ThemedText>
     </TouchableOpacity>
   );
 };

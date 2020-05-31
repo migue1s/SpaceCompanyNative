@@ -49,12 +49,12 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
   return (
     <ThemedView style={styles.machineCard}>
       <ThemedView>
-        <ThemedText variant={'heading'}>{machine.name}</ThemedText>
-        <ThemedText variant={'body'}>{machine.desc}</ThemedText>
+        <ThemedText variant="heading">{machine.name}</ThemedText>
+        <ThemedText variant="body">{machine.desc}</ThemedText>
       </ThemedView>
       <ThemedView style={styles.valueContainer}>
         <ThemedView style={styles.valueBox}>
-          <ThemedText variant={'title'}>Cost:</ThemedText>
+          <ThemedText variant="title">Cost:</ThemedText>
           {Object.keys(machine.cost).map((resourceCost) => (
             <Cost
               cost={machine.cost[resourceCost as ResourceType]}
@@ -63,8 +63,8 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
           ))}
         </ThemedView>
         <ThemedView style={styles.valueBox}>
-          <ThemedText variant={'title'}>Input:</ThemedText>
-          <ThemedText variant={'title'}>Output:</ThemedText>
+          <ThemedText variant="title">Input:</ThemedText>
+          <ThemedText variant="title">Output:</ThemedText>
         </ThemedView>
       </ThemedView>
       <ThemedView>
