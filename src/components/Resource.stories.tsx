@@ -16,7 +16,9 @@ storiesOf('Resources', module).add('Bullet', () => (
   </View>
 ));
 storiesOf('Resources', module).add('Machine', () => <ResourceMachine />);
-storiesOf('Resources', module).add('Summary', () => <ResourceSummary />);
+storiesOf('Resources', module).add('Summary', () => (
+  <ResourceSummary type={ResourceType.metal} />
+));
 storiesOf('Resources', module).add('Tile', () => (
   <ResourceRow type={ResourceType.metal} />
 ));

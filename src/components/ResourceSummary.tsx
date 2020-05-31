@@ -1,20 +1,29 @@
-import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import React, {useCallback} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {ResourceType} from '../types';
+import {useResource} from '../hooks';
+import ThemedView from './ThemedView';
+import ThemedText from './ThemedText';
+import {useDispatch} from 'react-redux';
+import {manualGain} from '../redux/gameSlice';
 
-const ResourceSummary = () => {
+const ResourceSummary = ({type}: {type: ResourceType}) => {
+  const dispatch = useDispatch();
+  const resource = useResource(type);
+  const onGainPress = useCallback(() => {
+    dispatch(manualGain(type));
+  }, [dispatch, type]);
+
   return (
-    <View>
-      <Text>Metal</Text>
-      <Text>
-        Metal is one of the primary resources. It is used for many things,
-        including storage upgrades, machinery and most things in space.
-      </Text>
-      <Text>Time until full</Text>
-      <Text>SOME RADIO BUTTON HERE</Text>
-      <TouchableOpacity>
-        <Text>Gain 1</Text>
+    <ThemedView>
+      <ThemedText variant="body">{resource.desc}</ThemedText>
+      <ThemedText variant="body" style={{paddingVertical: 20}}>
+        Time remaining until full storage:{' '}
+      </ThemedText>
+      <TouchableOpacity onPress={onGainPress}>
+        <ThemedText variant="body">Gain 1</ThemedText>
       </TouchableOpacity>
-    </View>
+    </ThemedView>
   );
 };
 
