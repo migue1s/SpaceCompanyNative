@@ -30,12 +30,14 @@ export interface Machine {
   current: number;
   desc: string;
   destroyable: true;
-  // iconExtension: "png"
-  // iconPath: "Icons/"
   id: string;
   name: string;
   resource: string;
   tier: number;
+}
+
+export enum MachineType {
+  miner = 'miner',
 }
 
 export enum ResourceType {

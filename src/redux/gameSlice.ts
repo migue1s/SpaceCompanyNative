@@ -1,7 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
-import {ResourceType, ResourceData, ResourceState} from '../types';
 import researchData, {ResearchId} from '../data/researchData';
+import {machinesData} from '../data/machinesData';
+import {ResourceType, ResourceData, ResourceState, MachineType} from '../types';
 
 const gain = 1;
 
@@ -31,6 +32,7 @@ export const initialState = {
   }, {} as any) as {
     [x in ResourceType]: ResourceState;
   },
+  machines: machinesData,
 };
 
 export type GameState = typeof initialState;
@@ -118,6 +120,27 @@ const gameSlice = createSlice({
             // TODO: handle a machine
           });
         }
+      }
+    },
+    buildMachine: (state, action: PayloadAction<MachineType>) => {
+      const target = state.machines[action.payload];
+
+      if (
+        Object.keys(target.cost).map((type) => {
+          return (
+            target.cost[type as ResourceType]! >=
+            state.resourceCount[type as ResourceType].current
+          );
+        })
+      ) {
+        // Pay all costs
+        Object.keys(target.cost).map((type) => {
+          state.resourceCount[type as ResourceType].current -= target.cost[
+            type as ResourceType
+          ]!;
+        });
+        // Add a machine
+        target.current += 1;
       }
     },
   },
