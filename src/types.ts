@@ -37,10 +37,6 @@ export interface MachineState {
   unlocked: boolean;
 }
 
-export enum MachineType {
-  miner = 'miner',
-}
-
 export enum ResourceType {
   energy = 'energy',
   plasma = 'plasma',

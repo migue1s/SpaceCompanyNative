@@ -1,14 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
 import researchData, {ResearchId} from '../data/researchData';
-import {
-  ResourceType,
-  ResourceState,
-  MachineType,
-  MachineState,
-  Machine,
-} from '../types';
-import {machinesData} from '../data/machinesData';
+import {ResourceType, ResourceState, MachineState} from '../types';
+import {machinesData, MachineType} from '../data/machinesData';
 
 const gain = 1;
 
@@ -42,7 +36,7 @@ export const initialState = {
     const key = current as MachineType;
     result[key] = {
       current: 0,
-      unlocked: ((machinesData as any)[key] as Machine).unlocked || false,
+      unlocked: machinesData[key].unlocked || false,
     };
     return result;
   }, {} as any) as {
@@ -134,27 +128,27 @@ const gameSlice = createSlice({
         }
       }
     },
-    // buildMachine: (state, action: PayloadAction<MachineType>) => {
-    //   const machineMeta = machinesData[action.payload];
-    //   const target = state.machines[action.payload];
-    //   if (
-    //     Object.keys(target.cost).map((type) => {
-    //       return (
-    //         target.cost[type as ResourceType]! >=
-    //         state.resources[type as ResourceType].current
-    //       );
-    //     })
-    //   ) {
-    //     // Pay all costs
-    //     Object.keys(target.cost).map((type) => {
-    //       state.resources[type as ResourceType].current -= target.cost[
-    //         type as ResourceType
-    //       ]!;
-    //     });
-    //     // Add a machine
-    //     target.current += 1;
-    //   }
-    // },
+    buildMachine: (state, action: PayloadAction<MachineType>) => {
+      const machineMeta = machinesData[action.payload];
+      const target = state.machines[action.payload];
+      if (
+        Object.keys(target.cost).map((type) => {
+          return (
+            target.cost[type as ResourceType]! >=
+            state.resources[type as ResourceType].current
+          );
+        })
+      ) {
+        // Pay all costs
+        Object.keys(target.cost).map((type) => {
+          state.resources[type as ResourceType].current -= target.cost[
+            type as ResourceType
+          ]!;
+        });
+        // Add a machine
+        target.current += 1;
+      }
+    },
   },
 });
 
