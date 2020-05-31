@@ -28,7 +28,6 @@ export const initialState = {
       perSecond: 0,
       perSecondDisplay: 0,
       current: 0,
-      multiplier: 1,
       id: resource.id,
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,
@@ -42,6 +41,8 @@ export const initialState = {
     const key = current as MachineType;
     result[key] = {
       current: 0,
+      multiplier: 1,
+      id: machinesData[key].id,
       unlocked: machinesData[key].unlocked || false,
     };
     return result;
@@ -170,6 +171,7 @@ export const {
   upgradeStorage,
   buyResearch,
   developmentSetResource,
+  buildMachine,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

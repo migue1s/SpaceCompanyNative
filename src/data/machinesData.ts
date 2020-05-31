@@ -10,6 +10,8 @@ import {Machine} from '../types';
 
 export const machinesData: {[x in MachineType]: Machine} = {
   energyT1: {
+    id: 'energyT1',
+    tier: 1,
     name: 'Carbon Engine',
     desc: 'Burns Carbon to produce a steady source of Energy.',
     resource: 'energy',
@@ -24,6 +26,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   energyT2: {
+    id: 'energyT2',
+    tier: 2,
     name: 'Solar Panel',
     desc: 'Gains Energy slowly from the sun without using any resources.',
     resource: 'energy',
@@ -37,6 +41,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   energyT3: {
+    id: 'energyT3',
+    tier: 3,
     name: 'Methane Power Station',
     desc: 'Burn powerful methane from Venus to satisfy all your power needs.',
     resource: 'energy',
@@ -51,6 +57,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   energyT4: {
+    id: 'energyT4',
+    tier: 4,
     name: 'Nuclear Power Station',
     desc: 'Uses fission to create large amounts of power.',
     resource: 'energy',
@@ -65,6 +73,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   energyT5: {
+    id: 'energyT5',
+    tier: 5,
     name: 'Magmatic Dynamo',
     desc:
       'The Magmatic Dynamo is a method of producing power by using lava as a fuel. Because of the extreme temperature of lava, a lot of Energy can be produced at once.',
@@ -81,6 +91,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   energyT6: {
+    id: 'energyT6',
+    tier: 6,
     name: 'Fusion Reactor',
     desc:
       'In a fusion reaction, Energy is released when two light atomic nuclei are fused together to form one heavier atom. This is the same reaction that occurs in stars and produces a lot of power.',
@@ -101,6 +113,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Plasma //
   ////////////
   plasmaT1: {
+    id: 'plasmaT1',
+    tier: 1,
     name: 'Super-Heater',
     desc:
       'The Super-Heater throws electricity at Hydrogen to turn it into a plasmatic substance.',
@@ -118,6 +132,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   plasmaT2: {
+    id: 'plasmaT2',
+    tier: 2,
     name: 'Plasmatic Pit',
     desc:
       'This contraption converts Helium into Plasma by firing intensive energy bolts at the gas cloud.',
@@ -135,6 +151,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   plasmaT3: {
+    id: 'plasmaT3',
+    tier: 3,
     name: 'Electron Bath',
     desc: 'Bathing in Electrons. What could go wrong?',
     resource: 'plasma',
@@ -152,6 +170,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   plasmaT4: {
+    id: 'plasmaT4',
+    tier: 4,
     name: 'Q.R.S',
     desc:
       'The Quasar Redirection System is a colossal space station built from graphene, used to redirect quasar activity towards gas giants, to instantaneously convert the gases into plasma for collection.',
@@ -173,6 +193,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Uranium //
   /////////////
   uraniumT1: {
+    id: 'uraniumT1',
+    tier: 1,
     name: 'Grinder',
     desc: 'Pulverizes Uranium for easy transportation out of deep mineshafts.',
     resource: 'uranium',
@@ -187,6 +209,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   uraniumT2: {
+    id: 'uraniumT2',
+    tier: 2,
     name: 'Cubic Teleposer',
     desc:
       'This teleposes blocks of rock from far underground to the surface so that Uranium can be mined more easily.',
@@ -203,6 +227,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   uraniumT3: {
+    id: 'uraniumT3',
+    tier: 3,
     name: 'Uranium Enricher',
     desc:
       'The Enricher increases the quality of uranium mined and thus allows more of the uranium in rocks to be used in your company.',
@@ -219,6 +245,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   uraniumT4: {
+    id: 'uraniumT4',
+    tier: 4,
     name: 'Yellowcake Recycler',
     desc:
       'Recycles used-up Uranium to provide the resources with a second use. This greatly increases the amount of Uranium you can use per second.',
@@ -235,6 +263,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   uraniumT5: {
+    id: 'uraniumT5',
+    tier: 5,
     name: 'Planetary Nuclear Plant',
     desc:
       'This huge factory is as large as a planet, fusing together Uranium from common elements.',
@@ -254,6 +284,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Lava //
   //////////
   lavaT1: {
+    id: 'lavaT1',
+    tier: 1,
     name: 'Heat Resistant Crucible',
     desc:
       'You can use a modified crucible to pick up lava and to store it for later use.',
@@ -268,6 +300,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lavaT2: {
+    id: 'lavaT2',
+    tier: 2,
     name: 'Lava Extractor',
     desc: 'This extracts lava from volcanoes automatically and quickly.',
     resource: 'lava',
@@ -283,6 +317,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lavaT3: {
+    id: 'lavaT3',
+    tier: 3,
     name: 'Igneous Extruder',
     desc:
       'Instead of going out and finding lava, it can be more convenient to make it yourself with heat and pressure.',
@@ -299,6 +335,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lavaT4: {
+    id: 'lavaT4',
+    tier: 4,
     name: 'Volcanic Veluptuator',
     desc: 'A melting pot of misery, pouring lava out from mined rock.',
     resource: 'lava',
@@ -314,6 +352,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lavaT5: {
+    id: 'lavaT5',
+    tier: 5,
     name: 'Jupitonian Condensator',
     desc: 'Condenses gases from the heart of Jupiter into liquid magma.',
     resource: 'lava',
@@ -336,6 +376,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Oil //
   /////////
   oilT1: {
+    id: 'oilT1',
+    tier: 1,
     name: 'Small Pump',
     desc: 'Build a small pump to extract Oil from the ground.',
     resource: 'oil',
@@ -349,6 +391,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   oilT2: {
+    id: 'oilT2',
+    tier: 2,
     name: 'Pumpjack',
     desc:
       'Pumpjacks are much bigger than small pumps and produce Oil on an industrial scale but they require a lot of Energy.',
@@ -365,6 +409,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   oilT3: {
+    id: 'oilT3',
+    tier: 3,
     name: 'Oil Field',
     desc:
       'Oil Fields are large open spaces, usually found in deserts where vast oil wells can be found under the ground.',
@@ -381,6 +427,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   oilT4: {
+    id: 'oilT4',
+    tier: 4,
     name: 'Offshore Rig',
     desc:
       'Offshore Rigs are megastructures floating in the oceans, extracting Oil from under the sea-beds.',
@@ -397,6 +445,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   oilT5: {
+    id: 'oilT5',
+    tier: 5,
     name: 'Fossilator 9000',
     desc:
       'Much better than the 8000 version, this fossilator reverses the fossil fuel cycle. Instead of burning, it creates them from carbon in the air.',
@@ -416,6 +466,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Metal //
   ///////////
   metalT1: {
+    id: 'metalT1',
+    tier: 1,
     name: 'Miner',
     desc: 'Build a pickaxe for your miner.',
     resource: 'metal',
@@ -451,6 +503,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   metalT2: {
+    id: 'metalT2',
+    tier: 2,
     name: 'Heavy Drill',
     desc: 'Heavy Drills mine Metal at mass.',
     resource: 'metal',
@@ -466,6 +520,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   metalT3: {
+    id: 'metalT3',
+    tier: 3,
     name: 'Giga Drill',
     desc: 'Giga Drills extract Metal at colossal speeds.',
     resource: 'metal',
@@ -481,6 +537,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   metalT4: {
+    id: 'metalT4',
+    tier: 4,
     name: 'Quantum Drill',
     desc:
       'Quantum Drills bend the space-time continuum to get metal faster than physically possible.',
@@ -497,6 +555,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   metalT5: {
+    id: 'metalT5',
+    tier: 5,
     name: 'Multiverse Drill',
     desc: 'Drills metal from alternate realities where metal is plentiful.',
     resource: 'metal',
@@ -515,6 +575,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Gem //
   /////////
   gemT1: {
+    id: 'gemT1',
+    tier: 1,
     name: 'Gem Miner',
     desc: 'Build an improved pickaxe to mine Gems.',
     resource: 'gem',
@@ -529,6 +591,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   gemT2: {
+    id: 'gemT2',
+    tier: 2,
     name: 'Advanced Drill',
     desc:
       'Advanced Drills mine gem at mass. Because of the toughness of the drill needed it is slower than the heavy drill.',
@@ -545,6 +609,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   gemT3: {
+    id: 'gemT3',
+    tier: 3,
     name: 'Diamond Encrusted Drill',
     desc:
       'The Diamond Encrusted Drill is one of the strongest drills in the solar system, and as such, can collect Gems faster than anything before it.',
@@ -561,6 +627,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   gemT4: {
+    id: 'gemT4',
+    tier: 4,
     name: 'Carbyne Drill',
     desc:
       'Carbyne Drills one of the strongest drills in the solar system, and as such, can collect Gems faster than anything before it.',
@@ -577,6 +645,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   gemT5: {
+    id: 'gemT5',
+    tier: 5,
     name: 'Diamond Accretion Chamber',
     desc:
       'This special container condenses carbon dioxide gas into diamonds, creating gems at a faster rate than any drill.',
@@ -596,6 +666,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Carbon //
   //////////////
   carbonT1: {
+    id: 'carbonT1',
+    tier: 1,
     name: 'Charred Wood Plant',
     desc:
       'All the wood that has been put to use is brought here to be cleaned of carbon traces and then repurposed',
@@ -611,6 +683,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   carbonT2: {
+    id: 'carbonT2',
+    tier: 2,
     name: 'Blast Furnace',
     desc:
       'Burns wood at very high temperatures to turn it into a finer type of carbon than Charred Wood Plants.',
@@ -628,6 +702,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   carbonT3: {
+    id: 'carbonT3',
+    tier: 3,
     name: 'Magmatic Incinerator',
     desc:
       'Uses lava to melt wood and then the mixture is cooled off, resulting in moderately pure carbon. The leftovers are re-used in the process',
@@ -646,6 +722,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   carbonT4: {
+    id: 'carbonT4',
+    tier: 4,
     name: 'Plasma Furnace',
     desc:
       'This plasma-fueled furnace burns so hot it turns wood into almost perfectly pure carbon, ready to be turned into high-purity carbon materials such as graphene.',
@@ -664,6 +742,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   carbonT5: {
+    id: 'carbonT5',
+    tier: 5,
     name: 'Super Massive Pencil Sharpener',
     desc: 'Who knew broken pencil tips would yield this much carbon?',
     resource: 'carbon',
@@ -683,6 +763,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Wood //
   //////////
   woodT1: {
+    id: 'woodT1',
+    tier: 1,
     name: 'Woodcutter',
     desc: 'Build an axe for your woodcutter.',
     resource: 'wood',
@@ -697,6 +779,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   woodT2: {
+    id: 'woodT2',
+    tier: 2,
     name: 'Laser Cutter',
     desc:
       'Laser Cutters slice trees (and fingers) quicker than axes and produce a lot more wood.',
@@ -713,6 +797,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   woodT3: {
+    id: 'woodT3',
+    tier: 3,
     name: 'Mass Deforester',
     desc:
       "This machine is the reason we're losing our rainforests. At least we get lots of wood!",
@@ -729,6 +815,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   woodT4: {
+    id: 'woodT4',
+    tier: 4,
     name: 'Biomass Infuser',
     desc:
       'Creates Wood using old, useless materials found everywhere on Earth by crushing them and packing what remains as densely as possible until it can be used as Wood again.',
@@ -745,6 +833,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   woodT5: {
+    id: 'woodT5',
+    tier: 5,
     name: 'Russian Forest',
     desc:
       'The great Russian forests span thousands of miles. More than enough for at least your lifetime. Let the younger generation deal with running out.',
@@ -764,6 +854,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Silicon //
   /////////////
   siliconT1: {
+    id: 'siliconT1',
+    tier: 1,
     name: 'Empowered Blowtorch',
     desc:
       'This type of blowtorch instantly turns sand into Silicon, but only on a small scale. To make it, extraterrestrial resources are required.',
@@ -778,6 +870,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   siliconT2: {
+    id: 'siliconT2',
+    tier: 2,
     name: 'Seaside Scorcher',
     desc:
       'This tool almost melts parts of beaches to get silicon at a larger scale.',
@@ -794,6 +888,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   siliconT3: {
+    id: 'siliconT3',
+    tier: 3,
     name: 'Beach Annihilator',
     desc:
       'This weapon of mass destruction has been re-labelled and now hovers above coast-lines, or what is now left of them.',
@@ -810,6 +906,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   siliconT4: {
+    id: 'siliconT4',
+    tier: 4,
     name: 'Desert Destroyer',
     desc:
       'This large ship orbits around the planet, focused in the Sahara Desert, tearing up sand from Earth and turning it into Silicon under intense heat.',
@@ -826,6 +924,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   siliconT5: {
+    id: 'siliconT5',
+    tier: 5,
     name: 'Time And Relative Dimensions In Sand',
     desc:
       "The TARDIS, for short, harnesses the power of stars from far away in space-time to heat sand into Silicon at record speeds. Don't ask why it has a polished wooden interior.",
@@ -849,6 +949,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Lunarite //
   //////////////
   lunariteT1: {
+    id: 'lunariteT1',
+    tier: 1,
     name: 'Native Moon Worker',
     desc: 'Bribe local workers to mine your Lunarite.',
     resource: 'lunarite',
@@ -861,6 +963,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lunariteT2: {
+    id: 'lunariteT2',
+    tier: 2,
     name: 'Low-Gravity Drill',
     desc: 'These drills practically float!',
     resource: 'lunarite',
@@ -876,6 +980,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lunariteT3: {
+    id: 'lunariteT3',
+    tier: 3,
     name: 'Moon Quarry',
     desc:
       'This quarry tears up the surface of the moon so much that it can be seen from Earth.',
@@ -892,6 +998,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lunariteT4: {
+    id: 'lunariteT4',
+    tier: 4,
     name: 'Planetary Excavator',
     desc:
       'This large machine dives deep into the Earth to find large pools of Lunarite found near the core. This is originally where the metal on the Moon comes from.',
@@ -908,6 +1016,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   lunariteT5: {
+    id: 'lunariteT5',
+    tier: 5,
     name: 'Moon Cloner',
     desc: 'And you wondered why we have a hundred moons in the sky?',
     resource: 'lunarite',
@@ -926,6 +1036,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Methane //
   /////////////
   methaneT1: {
+    id: 'methaneT1',
+    tier: 1,
     name: 'Vacuum Cleaner',
     desc: 'Sucks in methane and cleans the planet at the same time!',
     resource: 'methane',
@@ -938,6 +1050,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   methaneT2: {
+    id: 'methaneT2',
+    tier: 2,
     name: 'Suction Excavator',
     desc: 'Sucks more than anything!',
     resource: 'methane',
@@ -953,6 +1067,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   methaneT3: {
+    id: 'methaneT3',
+    tier: 3,
     name: 'Space Cow Plantation',
     desc: 'These hold cows genetically moodified to produce methane constantly',
     resource: 'methane',
@@ -968,6 +1084,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   methaneT4: {
+    id: 'methaneT4',
+    tier: 4,
     name: 'Hydrothermal Vent',
     desc: 'Collect gas from deep sea vents on the ocean floor of Titan.',
     resource: 'methane',
@@ -983,6 +1101,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   methaneT5: {
+    id: 'methaneT5',
+    tier: 5,
     name: 'Interstellar Cow',
     desc: 'An interdimoonsional bovine.',
     resource: 'methane',
@@ -1001,6 +1121,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Titanium //
   //////////////
   titaniumT1: {
+    id: 'titaniumT1',
+    tier: 1,
     name: 'Explorer',
     desc:
       'Hire explorers to search for Titanium on the surface, uncovered by winds on Mars.',
@@ -1014,6 +1136,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   titaniumT2: {
+    id: 'titaniumT2',
+    tier: 2,
     name: 'Lunarite Drill',
     desc:
       "These Lunarite Drills are extremely powerful, needed to mine out Titanium from inside Mars' crust.",
@@ -1030,6 +1154,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   titaniumT3: {
+    id: 'titaniumT3',
+    tier: 3,
     name: 'Penta-Drill',
     desc:
       'This is a mining machine modified to have 5 drills on its face. This allows for a massive increase in resources gained per second.',
@@ -1046,6 +1172,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   titaniumT4: {
+    id: 'titaniumT4',
+    tier: 4,
     name: 'Drill of Titans',
     desc:
       'This mighty drill is said to have been wielded by Titans themselves, many milennia ago.',
@@ -1062,6 +1190,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   titaniumT5: {
+    id: 'titaniumT5',
+    tier: 5,
     name: "David Guetta's Club",
     desc: "You shoot me down, but I won't fall. I am Titanium.",
     resource: 'titanium',
@@ -1080,6 +1210,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Gold //
   //////////
   goldT1: {
+    id: 'goldT1',
+    tier: 1,
     name: 'Rocket Droid',
     desc:
       'Powered by Methane, this droid scouts the asteroids for gold deposits.',
@@ -1094,6 +1226,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   goldT2: {
+    id: 'goldT2',
+    tier: 2,
     name: 'Asteroid Destroyer',
     desc:
       'Mines through asteroids to find Gold. It is much more effective than the simple droid.',
@@ -1110,6 +1244,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   goldT3: {
+    id: 'goldT3',
+    tier: 3,
     name: 'Death Star Jr',
     desc:
       "That's no moon! That's a Space Station! This cuts through asteroids to expose all of the Gold in the centers.",
@@ -1126,6 +1262,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   goldT4: {
+    id: 'goldT4',
+    tier: 4,
     name: 'Chronal Actuator',
     desc:
       'Speeds up time through quantum physics in order to produce even more Gold.',
@@ -1142,6 +1280,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   goldT5: {
+    id: 'goldT5',
+    tier: 5,
     name: "Philospher's stone",
     desc:
       'Transmuation has progressed to being able to turn thin air into gold!',
@@ -1161,6 +1301,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Silver //
   ////////////
   silverT1: {
+    id: 'silverT1',
+    tier: 1,
     name: 'Scout Ship',
     desc:
       'The Scout Ship searches through the asteroid field for pieces of silver embedded in asteroids.',
@@ -1175,6 +1317,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   silverT2: {
+    id: 'silverT2',
+    tier: 2,
     name: 'Interplanetary Laser',
     desc: 'Cuts through asteroids to find silver deposits in their cores.',
     resource: 'silver',
@@ -1190,6 +1334,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   silverT3: {
+    id: 'silverT3',
+    tier: 3,
     name: 'Big Bertha',
     desc:
       'This large, space drill, named after the World War One Howitzer built almost a milienia ago, is a silver seeking machine specially designed for mining asteroids.',
@@ -1206,6 +1352,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   silverT4: {
+    id: 'silverT4',
+    tier: 4,
     name: 'Atomic Cannon',
     desc:
       'This powerful cannon orbits Neptune and can atomise the surface of asteroids, revealing the silver within.',
@@ -1222,6 +1370,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   silverT5: {
+    id: 'silverT5',
+    tier: 5,
     name: 'Dead Werewolf Finder',
     desc:
       'The Silver bullets used to kill werewolfs are made from silver that has been compressed well over 1000 times. Extracting them will prove beneficial for your production.',
@@ -1245,6 +1395,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Hydrogen //
   //////////////
   hydrogenT1: {
+    id: 'hydrogenT1',
+    tier: 1,
     name: 'Hydrogen Collector',
     desc:
       'This collector travels around Jupiter seeking Hydrogen to store to bring back to Earth.',
@@ -1259,6 +1411,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   hydrogenT2: {
+    id: 'hydrogenT2',
+    tier: 2,
     name: 'Gaseous Magnet',
     desc:
       'The magnet attracts the Hydrogen to it to increase the amount collected per second.',
@@ -1275,6 +1429,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   hydrogenT3: {
+    id: 'hydrogenT3',
+    tier: 3,
     name: 'Electrolytic Cell',
     desc:
       'These are made here on Earth and can turn water into hydrogen with a constant supply of Energy.',
@@ -1291,6 +1447,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   hydrogenT4: {
+    id: 'hydrogenT4',
+    tier: 4,
     name: 'Hindenburg Excavation',
     desc: 'Somehow, it works.',
     resource: 'hydrogen',
@@ -1306,6 +1464,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   hydrogenT5: {
+    id: 'hydrogenT5',
+    tier: 5,
     name: 'Star Harvester',
     desc:
       "'Stealing' is such a strong word. I prefer 'borrowing without return' when we harvest the outer regions of stars.",
@@ -1325,6 +1485,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Helium //
   ////////////
   heliumT1: {
+    id: 'heliumT1',
+    tier: 1,
     name: 'Helium Drone',
     desc:
       'The Helium Drone scouts out the area on Saturn and picks out spots high in Helium which are then mined slowly by it.',
@@ -1339,6 +1501,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   heliumT2: {
+    id: 'heliumT2',
+    tier: 2,
     name: 'Helium Tanker',
     desc:
       'This huge tanker holds large amounts of Helium and transports it from Saturn to Earth through the vacuum of space.',
@@ -1355,6 +1519,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   heliumT3: {
+    id: 'heliumT3',
+    tier: 3,
     name: 'Morphic Compressor',
     desc:
       'The Compressor packs helium densely into a small space so that it can be easily transported back to Earth.',
@@ -1371,6 +1537,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   heliumT4: {
+    id: 'heliumT4',
+    tier: 4,
     name: 'Gas Giant Skimmer',
     desc:
       "Flying into Gas Giants' atmospheres with a big bucket is the best plan we've had yet!",
@@ -1387,6 +1555,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   heliumT5: {
+    id: 'heliumT5',
+    tier: 5,
     name: 'Caged Star',
     desc:
       'A contained miniature version of the sun uses nuclear fusion to create massive amounts of helium.',
@@ -1406,6 +1576,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Ice //
   /////////
   iceT1: {
+    id: 'iceT1',
+    tier: 1,
     name: 'Ice Pickaxe',
     desc:
       'The Ice Pickaxe is the simplest way of mining frozen water, and although it is the cheapest, it is the slowest.',
@@ -1420,6 +1592,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   iceT2: {
+    id: 'iceT2',
+    tier: 2,
     name: 'Ice Drill',
     desc:
       'The Ice Drill is more effective than the Pickaxe and gains much more Ice every second. However, it does use electricity.',
@@ -1436,6 +1610,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   iceT3: {
+    id: 'iceT3',
+    tier: 3,
     name: 'Ocean Freezer',
     desc:
       "With advanced technology, you are now able to turn Earth's water into high-quality Ice, previously only found on Pluto.",
@@ -1452,6 +1628,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   iceT4: {
+    id: 'iceT4',
+    tier: 4,
     name: 'Mr Freeze',
     desc: 'This robot is the coolest guy in the solar system.',
     resource: 'ice',
@@ -1467,6 +1645,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   iceT5: {
+    id: 'iceT5',
+    tier: 5,
     name: 'Overexchange Condenser',
     desc:
       "Drain heat out of the ingredients so fast that you're not sure how to process it safely, but you managed to do it properly anyway.",
@@ -1486,6 +1666,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Meteorite //
   ///////////////
   meteoriteT1: {
+    id: 'meteoriteT1',
+    tier: 1,
     name: 'Meteorite Printer',
     desc:
       'Contruct an automated way of producing meteorite without you having to do anything.',
@@ -1501,6 +1683,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   meteoriteT2: {
+    id: 'meteoriteT2',
+    tier: 2,
     name: 'Meteorite Web',
     desc:
       'The Meteorite Web uses nano-fibres made while submerged in highly radioactive liquids to become strong enough to physically catch meteors from the Asteroid Belt. Plasma is required to refine the asteroids into Meteorite Ore, which can be usable.',
@@ -1517,6 +1701,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   meteoriteT3: {
+    id: 'meteoriteT3',
+    tier: 3,
     name: 'Planet Smasher',
     desc:
       'Get meteorites the old-fashioned way: demolishing uninhabited exoplanets by firing high-energy particle beams at them, then collect the debris.',
@@ -1533,6 +1719,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   meteoriteT4: {
+    id: 'meteoriteT4',
+    tier: 4,
     name: 'Nebulous Synthesizer',
     desc:
       'Bypass the need for demolishing planets entirely by building your own nebula to create meteorites instead!',
@@ -1552,6 +1740,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Research //
   //////////////
   scienceT1: {
+    id: 'scienceT1',
+    tier: 1,
     name: 'Home Science Kit',
     desc:
       'Build a small laboratory of your very own to start producing science. Each one produces 0.1 science per second.',
@@ -1567,6 +1757,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   scienceT2: {
+    id: 'scienceT2',
+    tier: 2,
     name: 'High School Science',
     desc:
       'Build a more effective laboratory to continue your quest into the realm of science at a significantly faster speed. Each one produces 1 science per second.',
@@ -1582,6 +1774,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   scienceT3: {
+    id: 'scienceT3',
+    tier: 3,
     name: 'University Laboratory',
     desc:
       'Build an even better version of the old laboratory to further your exploration of the realm of science. Each one produces 10 science per second.',
@@ -1597,6 +1791,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   scienceT4: {
+    id: 'scienceT4',
+    tier: 4,
     name: 'Scientific Observatory',
     desc:
       'Create an observatory to gaze upon the stars and acquire knowledge from them.',
@@ -1612,6 +1808,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   scienceT5: {
+    id: 'scienceT5',
+    tier: 5,
     name: 'Space Scientific Satellite Station',
     desc:
       "From outside Earth's orbit, the universe can be understood much more efficiently without an atmosphere obstructing the lab's view.",
@@ -1630,6 +1828,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   // Solar System //
   //////////////////
   rocketFuelT1: {
+    id: 'rocketFuelT1',
+    tier: 1,
     name: 'Chemical Plant',
     desc: 'Chemical plants are used to make rocket fuel automatically.',
     resource: 'rocketFuel',
@@ -1646,6 +1846,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   rocketFuelT2: {
+    id: 'rocketFuelT2',
+    tier: 2,
     name: 'Oxidisation Chamber',
     desc:
       'Oxidisation Chambers make rocket fuel faster and more efficiently than chemical plants.',
@@ -1663,6 +1865,8 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   rocketFuelT3: {
+    id: 'rocketFuelT3',
+    tier: 3,
     name: 'Hydrazine Catalyst',
     desc:
       'These speed up the chemical reactions needed to make rocket fuel by using greenhouse gases such as methane.',
@@ -1679,16 +1883,17 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   rocketT1: {
+    id: 'rocketT1',
+    tier: 1,
     name: 'Rocket',
     desc: 'To launch the rocket into space, it must first be built.',
-    category: 'rocket',
     resource: 'rocket',
     cost: {
       metal: 1200,
       gem: 900,
       oil: 1000,
     },
-    order: 2,
+    resourcePerSecond: {},
     unlocked: true,
     // onApply: function () {
     //   Game.resources.entries.rocket.current = 1;
@@ -1699,16 +1904,17 @@ export const machinesData: {[x in MachineType]: Machine} = {
   },
 
   rocketT2: {
+    id: 'rocketT2',
+    tier: 2,
     name: 'Launch Rocket',
     desc:
       'Launching the rocket into space will unlock space mining, exploration and other planets. This requires a satellite for navigation.',
-    category: 'rocket',
     resource: 'rocket',
     cost: {
       rocket: 1,
       rocketFuel: 20,
     },
-    order: 3,
+    resourcePerSecond: {},
     unlocked: false,
     // onApply: function () {
     //   Game.buildings.entries.rocketT2.current = 1;
@@ -1840,6 +2046,7 @@ export enum MachineType {
 
 export const storageData = {
   plasmaStorageT1: {
+    tier: 1,
     name: 'Plasma Storage Unit',
     desc:
       'PSUs can hold plasma in a specially controlled casing that retains its intense heat.',

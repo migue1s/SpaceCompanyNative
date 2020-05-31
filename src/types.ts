@@ -1,4 +1,5 @@
 import {ResearchId} from './data/researchData';
+import {MachineType} from './data/machinesData';
 
 export type TextVariant = 'heading' | 'title' | 'body' | 'caption';
 export type ThemeVariant = 'dark' | 'light';
@@ -25,6 +26,8 @@ export interface ResourceCategory {
 }
 
 export interface Machine {
+  id: string;
+  tier: number;
   name: string;
   desc: string;
   resource: string;
@@ -33,8 +36,10 @@ export interface Machine {
   unlocked?: boolean;
 }
 export interface MachineState {
+  id: MachineType;
   current: number;
   unlocked: boolean;
+  multiplier: number;
 }
 
 export enum ResourceType {
@@ -96,7 +101,6 @@ export interface ResourceState {
   capacity: number;
   category: string;
   unlocked: boolean;
-  multiplier: number;
 }
 
 export interface Research {

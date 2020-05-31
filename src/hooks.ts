@@ -2,8 +2,10 @@ import {useSelector} from 'react-redux';
 import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
 import {ResourceType, MachineType} from './types';
-import {useContext} from 'react';
+import {useContext, useMemo} from 'react';
 import {ThemeContext} from './';
+import {GameState} from './redux/gameSlice';
+import {machinesData} from './data/machinesData';
 
 export const useTheme = () => {
   return useContext(ThemeContext);
@@ -36,6 +38,13 @@ export const useResources = () => {
   });
 };
 
-export const useMachine = (machineId: MachineType) => {
-  return useSelector((state: ReduxState) => state.game.machines[machineId]);
+export const useMachines = (resourceId: ResourceType) => {
+  const machines = useSelector((state: ReduxState) => state.game.machines);
+  return Object.values(machines)
+    .filter(
+      (machine) =>
+        machine.unlocked && machinesData[machine.id].resource === resourceId,
+    )
+    .sort((a, b) => machinesData[a.id].tier - machinesData[b.id].tier)
+    .map((machine) => machine.id);
 };
