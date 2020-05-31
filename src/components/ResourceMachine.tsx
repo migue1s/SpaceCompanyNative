@@ -24,22 +24,28 @@ const styles = StyleSheet.create({
   },
 });
 
+const Cost = ({
+  resourceType,
+  cost,
+}: {
+  resourceType: ResourceType;
+  cost: number | undefined;
+}) => {
+  const data = useResource(resourceType);
+  const count = useResourceCount(resourceType);
+
+  return (
+    <ResourceCost
+      name={data.name}
+      dps={count.perSecond}
+      cost={cost ? cost : 0}
+      current={count.current}
+      storage={count.capacity}
+    />
+  );
+};
+
 const ResourceMachine = ({machine}: {machine: Machine}) => {
-  const renderCost = (resourceType: ResourceType, cost: number | undefined) => {
-    const data = useResource(resourceType);
-    const count = useResourceCount(resourceType);
-
-    return (
-      <ResourceCost
-        name={data.name}
-        dps={count.perSecond}
-        cost={cost ? cost : 0}
-        current={count.current}
-        storage={count.capacity}
-      />
-    );
-  };
-
   return (
     <ThemedView style={styles.machineCard}>
       <ThemedView>
@@ -49,12 +55,12 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
       <ThemedView style={styles.valueContainer}>
         <ThemedView style={styles.valueBox}>
           <ThemedText variant={'title'}>Cost:</ThemedText>
-          {Object.keys(machine.cost).map((resourceCost) =>
-            renderCost(
-              resourceCost as ResourceType,
-              machine.cost[resourceCost as ResourceType],
-            ),
-          )}
+          {Object.keys(machine.cost).map((resourceCost) => (
+            <Cost
+              cost={machine.cost[resourceCost as ResourceType]}
+              resourceType={resourceCost as ResourceType}
+            />
+          ))}
         </ThemedView>
         <ThemedView style={styles.valueBox}>
           <ThemedText variant={'title'}>Input:</ThemedText>
@@ -62,7 +68,7 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
         </ThemedView>
       </ThemedView>
       <ThemedView>
-        <ThemedButton onPress={}>Get 1</ThemedButton>
+        <ThemedButton onPress={() => {}}>Get 1</ThemedButton>
       </ThemedView>
     </ThemedView>
   );

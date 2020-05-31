@@ -21,10 +21,12 @@ import {useColorScheme} from 'react-native';
 
 import * as Sentry from '@sentry/react-native';
 
-Sentry.init({
-  dsn:
-    'https://4878489069e8449ca2f6c0ee6e444f25@o400529.ingest.sentry.io/5259048',
-});
+if (!__DEV__) {
+  Sentry.init({
+    dsn:
+      'https://4878489069e8449ca2f6c0ee6e444f25@o400529.ingest.sentry.io/5259048',
+  });
+}
 
 const Drawer = createDrawerNavigator();
 
@@ -59,7 +61,7 @@ const MainNavigation = () => {
         <Drawer.Navigator initialRouteName="Resources">
           <Drawer.Screen name="Resources" component={ResourceWrapper} />
           <Drawer.Screen name="Research" component={Research} />
-          <Drawer.Screen name="Storybooks" component={storybook} />
+          {__DEV__ && <Drawer.Screen name="Storybooks" component={storybook} />}
         </Drawer.Navigator>
       </Provider>
     </NavigationContainer>

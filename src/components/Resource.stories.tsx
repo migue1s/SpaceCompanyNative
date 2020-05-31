@@ -35,7 +35,9 @@ storiesOf('Resources', module).add('Bullet', () => (
     <ResourceBullet cost={10} current={10} dps={0} name="Metal" storage={10} />
   </View>
 ));
-storiesOf('Resources', module).add('Summary', () => <ResourceSummary />);
+storiesOf('Resources', module).add('Summary', () => (
+  <ResourceSummary type={ResourceType.metal} />
+));
 storiesOf('Resources', module).add('Tile', () => (
-  <ResourceRow type={ResourceType.metal} />
+  <ResourceRow type={ResourceType.metal} onPress={() => {}} />
 ));

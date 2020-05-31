@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {ResourceDetailScreenRouteProp} from '..';
 import {useResource} from '../hooks';
+import ThemedView from '../components/ThemedView';
+import ResourceSummary from '../components/ResourceSummary';
 
 const ResourceDetail = () => {
   const navigation = useNavigation();
@@ -16,9 +17,9 @@ const ResourceDetail = () => {
   }, [navigation, resource.name]);
 
   return (
-    <View>
-      <Text>{JSON.stringify(resource, null, 2)}</Text>
-    </View>
+    <ThemedView style={{padding: 8}}>
+      <ResourceSummary type={resource.id} />
+    </ThemedView>
   );
 };
 
