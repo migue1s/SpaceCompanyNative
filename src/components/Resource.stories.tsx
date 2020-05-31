@@ -20,5 +20,5 @@ storiesOf('Resources', module).add('Summary', () => (
   <ResourceSummary type={ResourceType.metal} />
 ));
 storiesOf('Resources', module).add('Tile', () => (
-  <ResourceRow type={ResourceType.metal} />
+  <ResourceRow type={ResourceType.metal} onPress={() => {}} />
 ));
