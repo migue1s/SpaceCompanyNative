@@ -1,12 +1,12 @@
-var baseProducerBuilding = {
-  type: BUILDING_TYPE.PRODUCER,
-  unlocked: false,
-  destroyable: true,
-  maxCount: Number.MAX_VALUE,
-  costType: COST_TYPE.FIXED,
-};
+// var baseProducerBuilding = {
+//   type: BUILDING_TYPE.PRODUCER,
+//   unlocked: false,
+//   destroyable: true,
+//   maxCount: Number.MAX_VALUE,
+//   costType: COST_TYPE.FIXED,
+// };
 
-const machines = {
+export const machinesData = {
   energyT1: {
     name: 'Carbon Engine',
     desc: 'Burns Carbon to produce a steady source of Energy.',
@@ -1722,12 +1722,12 @@ const machines = {
   },
 };
 
-var baseStorage = {
-  type: BUILDING_TYPE.PRODUCER,
-  unlocked: false,
-  maxCount: Number.MAX_VALUE,
-  costType: COST_TYPE.FIXED,
-};
+// var baseStorage = {
+//   type: BUILDING_TYPE.PRODUCER,
+//   unlocked: false,
+//   maxCount: Number.MAX_VALUE,
+//   costType: COST_TYPE.FIXED,
+// };
 
 const storage = {
   plasmaStorageT1: {
