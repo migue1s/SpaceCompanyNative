@@ -6,7 +6,9 @@
 //   costType: COST_TYPE.FIXED,
 // };
 
-export const machinesData = {
+import {Machine} from '../types';
+
+export const machinesData: {[x in MachineType]: Machine} = {
   energyT1: {
     name: 'Carbon Engine',
     desc: 'Burns Carbon to produce a steady source of Energy.',

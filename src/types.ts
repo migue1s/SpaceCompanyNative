@@ -25,7 +25,16 @@ export interface ResourceCategory {
 }
 
 export interface Machine {
+  name: string;
+  desc: string;
+  resource: string;
+  resourcePerSecond: ResourceAmount;
+  cost: ResourceAmount;
+  unlocked?: boolean;
+}
+export interface MachineState {
   current: number;
+  unlocked: boolean;
 }
 
 export enum MachineType {
@@ -77,9 +86,6 @@ export interface ResourceData {
   page: string;
   desc: string;
   emc?: number;
-  // icon: 'gemIcon';
-  // iconExtension: 'png';
-  // iconPath: 'Icons/';
   gainCost?: ResourceAmount;
   manualGain: boolean;
   toggleable: boolean;
@@ -87,6 +93,7 @@ export interface ResourceData {
 }
 
 export interface ResourceState {
+  id: ResourceType;
   perSecond: number;
   perSecondDisplay: number;
   current: number;

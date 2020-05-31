@@ -1,7 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
 import researchData, {ResearchId} from '../data/researchData';
-import {ResourceType, ResourceData, ResourceState, MachineType} from '../types';
+import {
+  ResourceType,
+  ResourceState,
+  MachineType,
+  MachineState,
+  Machine,
+} from '../types';
 import {machinesData} from '../data/machinesData';
 
 const gain = 1;
@@ -14,19 +20,19 @@ const storageGrowthMultiplier = 2;
 
 export const initialState = {
   research: researchData,
-  resources: resourcesData as {[x in ResourceType]: ResourceData},
-  resourceCount: Object.keys(ResourceType).reduce((result, current) => {
+  resources: Object.keys(ResourceType).reduce((result, current) => {
     const key = current as ResourceType;
-    const resource = resourcesData[key] as ResourceData;
+    const resource = resourcesData[key];
 
     result[key] = {
       perSecond: 0,
       perSecondDisplay: 0,
       current: 0,
+      multiplier: 1,
+      id: resource.id,
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,
       category: resource.category,
-      multiplier: 1,
     } as ResourceState;
     return result;
   }, {} as any) as {
@@ -34,10 +40,13 @@ export const initialState = {
   },
   machines: Object.keys(machinesData).reduce((result, current) => {
     const key = current as MachineType;
-    result[key] = 0;
+    result[key] = {
+      current: 0,
+      unlocked: ((machinesData as any)[key] as Machine).unlocked || false,
+    };
     return result;
   }, {} as any) as {
-    [x in MachineType]: number;
+    [x in MachineType]: MachineState;
   },
 };
 
@@ -50,43 +59,40 @@ const gameSlice = createSlice({
     tick: (state, action: PayloadAction<number>) => {
       Object.keys(state.resources).forEach((key: string) => {
         const id = key as ResourceType;
-        state.resourceCount[id].current = Math.min(
-          state.resourceCount[id].capacity,
-          state.resourceCount[id].current +
-            state.resourceCount[id].perSecond * action.payload,
+        state.resources[id].current = Math.min(
+          state.resources[id].capacity,
+          state.resources[id].current +
+            state.resources[id].perSecond * action.payload,
         );
       });
       return state;
     },
     manualGain: (state, action: PayloadAction<ResourceType>) => {
-      state.resourceCount[action.payload].current = Math.min(
-        state.resourceCount[action.payload].capacity,
-        state.resourceCount[action.payload].current + gain,
+      state.resources[action.payload].current = Math.min(
+        state.resources[action.payload].capacity,
+        state.resources[action.payload].current + gain,
       );
     },
     developmentSetResource: (
       state,
       action: PayloadAction<{resource: ResourceType; amount: number}>,
     ) => {
-      state.resourceCount[action.payload.resource].current =
-        action.payload.amount;
+      state.resources[action.payload.resource].current = action.payload.amount;
     },
     upgradeStorage: (state, action: PayloadAction<ResourceType>) => {
       if (
-        state.resourceCount[action.payload].current ===
-        state.resourceCount[action.payload].capacity
+        state.resources[action.payload].current ===
+        state.resources[action.payload].capacity
       ) {
-        state.resourceCount[
-          action.payload
-        ].current *= storageEfficiencyMultiplier;
-        state.resourceCount[action.payload].capacity *= storageGrowthMultiplier;
+        state.resources[action.payload].current *= storageEfficiencyMultiplier;
+        state.resources[action.payload].capacity *= storageGrowthMultiplier;
       }
     },
     buyResearch: (state, action: PayloadAction<ResearchId>) => {
       const target = state.research[action.payload];
 
       if (
-        state.resourceCount.science.current >= target.science &&
+        state.resources.science.current >= target.science &&
         (target.maxLevel ||
           target.maxLevel === -1 ||
           target.currentLevel < target.maxLevel)
@@ -97,7 +103,7 @@ const gameSlice = createSlice({
         target.currentLevel += 1;
 
         // Decrease science
-        state.resourceCount.science.current -= target.science;
+        state.resources.science.current -= target.science;
 
         // Unlock dependent techs
         if (target.newTechs) {
@@ -111,7 +117,7 @@ const gameSlice = createSlice({
           target.effects.unlock.forEach((unlockId) => {
             if (state.resources[unlockId as ResourceType]) {
               state.resources[unlockId as ResourceType].unlocked = true;
-              state.resourceCount[unlockId as ResourceType].unlocked = true;
+              state.resources[unlockId as ResourceType].unlocked = true;
             }
             // TODO: handle the generic "resource"
           });
@@ -120,35 +126,35 @@ const gameSlice = createSlice({
         // Double a resource/machine
         if (target.effects.double) {
           target.effects.double.forEach((doubleId) => {
-            if (state.resourceCount[doubleId as ResourceType]) {
-              state.resourceCount[doubleId as ResourceType].multiplier *= 2;
+            if (state.resources[doubleId as ResourceType]) {
+              state.resources[doubleId as ResourceType].multiplier *= 2;
             }
             // TODO: handle a machine
           });
         }
       }
     },
-    buildMachine: (state, action: PayloadAction<MachineType>) => {
-      const target = state.machines[action.payload];
-
-      if (
-        Object.keys(target.cost).map((type) => {
-          return (
-            target.cost[type as ResourceType]! >=
-            state.resourceCount[type as ResourceType].current
-          );
-        })
-      ) {
-        // Pay all costs
-        Object.keys(target.cost).map((type) => {
-          state.resourceCount[type as ResourceType].current -= target.cost[
-            type as ResourceType
-          ]!;
-        });
-        // Add a machine
-        target.current += 1;
-      }
-    },
+    // buildMachine: (state, action: PayloadAction<MachineType>) => {
+    //   const machineMeta = machinesData[action.payload];
+    //   const target = state.machines[action.payload];
+    //   if (
+    //     Object.keys(target.cost).map((type) => {
+    //       return (
+    //         target.cost[type as ResourceType]! >=
+    //         state.resources[type as ResourceType].current
+    //       );
+    //     })
+    //   ) {
+    //     // Pay all costs
+    //     Object.keys(target.cost).map((type) => {
+    //       state.resources[type as ResourceType].current -= target.cost[
+    //         type as ResourceType
+    //       ]!;
+    //     });
+    //     // Add a machine
+    //     target.current += 1;
+    //   }
+    // },
   },
 });
 

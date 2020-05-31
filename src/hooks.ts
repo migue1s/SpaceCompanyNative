@@ -13,12 +13,6 @@ export const useResource = (resourceId: ResourceType) => {
   return useSelector((state: ReduxState) => state.game.resources[resourceId]);
 };
 
-export const useResourceCount = (resourceId: ResourceType) => {
-  return useSelector(
-    (state: ReduxState) => state.game.resourceCount[resourceId],
-  );
-};
-
 export const useResources = () => {
   const resources = useSelector((state: ReduxState) => state.game.resources);
 

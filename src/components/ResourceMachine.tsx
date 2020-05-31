@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Machine, ResourceType} from '../types';
-import {useResource, useResourceCount} from '../hooks';
+import {useResource} from '../hooks';
 import ThemedButton from './ThemedButton';
 import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
 import ResourceCost from './ResourceBullet';
+import {resourcesData} from '../data/resourcesData';
 
 const styles = StyleSheet.create({
   machineCard: {
@@ -31,16 +32,16 @@ const Cost = ({
   resourceType: ResourceType;
   cost: number | undefined;
 }) => {
+  const meta = resourcesData[resourceType];
   const data = useResource(resourceType);
-  const count = useResourceCount(resourceType);
 
   return (
     <ResourceCost
-      name={data.name}
-      dps={count.perSecond}
+      name={meta.name}
+      dps={data.perSecond}
       cost={cost ? cost : 0}
-      current={count.current}
-      storage={count.capacity}
+      current={data.current}
+      storage={data.capacity}
     />
   );
 };
