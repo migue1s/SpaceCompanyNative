@@ -1,8 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
 import researchData, {ResearchId} from '../data/researchData';
-import {ResourceType, ResourceState, MachineState} from '../types';
+import {
+  ResourceType,
+  ResourceState,
+  MachineState,
+  ResourceAmount,
+} from '../types';
 import {machinesData, MachineType} from '../data/machinesData';
+import CostCalculator from '../utils/CostCalculator';
 
 const gain = 1;
 
@@ -45,6 +51,20 @@ export const initialState = {
 };
 
 export type GameState = typeof initialState;
+
+const canAfford = (cost: ResourceAmount, state: GameState) => {
+  return Object.keys(cost).reduce((result, current) => {
+    const key = current as ResourceType;
+    return cost[key]! >= state.resources[key].current && result;
+  }, true);
+};
+
+const applyCost = (cost: ResourceAmount, state: GameState) => {
+  Object.keys(cost).forEach((costType) => {
+    const key = costType as ResourceType;
+    state.resources[key].current -= cost[key]!;
+  });
+};
 
 const gameSlice = createSlice({
   name: 'game',
@@ -131,22 +151,14 @@ const gameSlice = createSlice({
     buildMachine: (state, action: PayloadAction<MachineType>) => {
       const machineMeta = machinesData[action.payload];
       const target = state.machines[action.payload];
-      if (
-        Object.keys(target.cost).map((type) => {
-          return (
-            target.cost[type as ResourceType]! >=
-            state.resources[type as ResourceType].current
-          );
-        })
-      ) {
-        // Pay all costs
-        Object.keys(target.cost).map((type) => {
-          state.resources[type as ResourceType].current -= target.cost[
-            type as ResourceType
-          ]!;
-        });
-        // Add a machine
+      const cost = CostCalculator(target.current, machineMeta.cost);
+      if (canAfford(cost, state)) {
+        applyCost(cost, state);
         target.current += 1;
+        Object.keys(machineMeta.resourcePerSecond).forEach((resourceType) => {
+          const key = resourceType as ResourceType;
+          state.resources[key].perSecond += machineMeta.resourcePerSecond[key]!;
+        });
       }
     },
   },
