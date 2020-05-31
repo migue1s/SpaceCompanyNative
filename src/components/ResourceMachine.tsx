@@ -1,9 +1,11 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Machine} from '../types';
+import {Machine, ResourceType} from '../types';
+import {useResource, useResourceCount} from '../hooks';
 import ThemedButton from './ThemedButton';
 import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
+import ResourceCost from './ResourceBullet';
 
 const styles = StyleSheet.create({
   machineCard: {
@@ -22,6 +24,21 @@ const styles = StyleSheet.create({
   },
 });
 
+const renderCost = (resourceType: ResourceType, cost: number | undefined) => {
+  const data = useResource(resourceType);
+  const count = useResourceCount(resourceType);
+
+  return (
+    <ResourceCost
+      name={data.name}
+      dps={count.perSecond}
+      cost={cost ? cost : 2}
+      current={count.current}
+      storage={count.capacity}
+    />
+  );
+};
+
 const ResourceMachine = ({machine}: {machine: Machine}) => {
   return (
     <ThemedView style={styles.machineCard}>
@@ -32,6 +49,12 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
       <ThemedView style={styles.valueContainer}>
         <ThemedView style={styles.valueBox}>
           <ThemedText variant={'title'}>Cost:</ThemedText>
+          {Object.keys(machine.cost).map((resourceCost) =>
+            renderCost(
+              resourceCost as ResourceType,
+              machine.cost[resourceCost as ResourceType],
+            ),
+          )}
         </ThemedView>
         <ThemedView style={styles.valueBox}>
           <ThemedText variant={'title'}>Input:</ThemedText>

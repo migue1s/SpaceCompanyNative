@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {durationFormatter} from '../utils/TimeFormatter';
+import ThemedText from './ThemedText';
 
 interface ResourceCostProps {
   name: string;
@@ -30,9 +30,9 @@ const ResourceCost = ({
     info = durationFormatter(seconds);
   }
   return (
-    <Text>
-      {name}: {current} ({info})
-    </Text>
+    <ThemedText variant={'body'}>
+      {name}: {cost} ({info})
+    </ThemedText>
   );
 };
 
