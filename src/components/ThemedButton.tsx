@@ -4,18 +4,21 @@ import {
   TouchableOpacityProps,
   StyleSheet,
   TextStyle,
+  View,
 } from 'react-native';
 import ThemedText from './ThemedText';
 import {ThemeVariant} from '../types';
 import {useTheme} from '../hooks';
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+  },
   button: {
     borderWidth: 1,
     borderRadius: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    padding: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
 });
 
@@ -32,22 +35,24 @@ const themeStyles = StyleSheet.create<{[x in ThemeVariant]: TextStyle}>({
 
 const ThemedButton = ({
   style = {},
-  children,
+  text,
   onPress,
   ...rest
 }: TouchableOpacityProps & {
-  children: React.ReactNode | React.ReactNode[];
+  text: string;
   onPress: () => void;
 }) => {
   const theme = useTheme();
 
   return (
-    <TouchableOpacity
-      style={[style, styles.button, themeStyles[theme]]}
-      onPress={onPress}
-      {...rest}>
-      <ThemedText variant="caption">{children}</ThemedText>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={[style, themeStyles[theme], styles.button]}
+        onPress={onPress}
+        {...rest}>
+        <ThemedText variant="caption">{text}</ThemedText>
+      </TouchableOpacity>
+    </View>
   );
 };
 

@@ -67,9 +67,7 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
           <ThemedText variant="title">Output:</ThemedText>
         </ThemedView>
       </ThemedView>
-      <ThemedView>
-        <ThemedButton onPress={() => {}}>Get 1</ThemedButton>
-      </ThemedView>
+      <ThemedButton onPress={() => {}} text="Get 1" />
     </ThemedView>
   );
 };

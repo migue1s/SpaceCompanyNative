@@ -1,5 +1,4 @@
 import React, {useCallback} from 'react';
-import {TouchableOpacity} from 'react-native';
 import {ResourceType} from '../types';
 import {useResource, useResourceCount} from '../hooks';
 import ThemedView from './ThemedView';
@@ -7,6 +6,7 @@ import ThemedText from './ThemedText';
 import {useDispatch} from 'react-redux';
 import {manualGain} from '../redux/gameSlice';
 import {durationFormatter} from '../utils/TimeFormatter';
+import ThemedButton from './ThemedButton';
 
 const ResourceSummary = ({type}: {type: ResourceType}) => {
   const dispatch = useDispatch();
@@ -30,9 +30,7 @@ const ResourceSummary = ({type}: {type: ResourceType}) => {
       <ThemedText variant="body" style={{paddingVertical: 20}}>
         {`Time remaining until full storage: ${secondsUntilFull}`}
       </ThemedText>
-      <TouchableOpacity onPress={onGainPress}>
-        <ThemedText variant="body">Gain 1</ThemedText>
-      </TouchableOpacity>
+      <ThemedButton onPress={onGainPress} text="Gain 1" />
     </ThemedView>
   );
 };
