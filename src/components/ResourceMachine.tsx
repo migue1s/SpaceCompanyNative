@@ -24,22 +24,22 @@ const styles = StyleSheet.create({
   },
 });
 
-const renderCost = (resourceType: ResourceType, cost: number | undefined) => {
-  const data = useResource(resourceType);
-  const count = useResourceCount(resourceType);
-
-  return (
-    <ResourceCost
-      name={data.name}
-      dps={count.perSecond}
-      cost={cost ? cost : 2}
-      current={count.current}
-      storage={count.capacity}
-    />
-  );
-};
-
 const ResourceMachine = ({machine}: {machine: Machine}) => {
+  const renderCost = (resourceType: ResourceType, cost: number | undefined) => {
+    const data = useResource(resourceType);
+    const count = useResourceCount(resourceType);
+
+    return (
+      <ResourceCost
+        name={data.name}
+        dps={count.perSecond}
+        cost={cost ? cost : 0}
+        current={count.current}
+        storage={count.capacity}
+      />
+    );
+  };
+
   return (
     <ThemedView style={styles.machineCard}>
       <ThemedView>
@@ -62,7 +62,7 @@ const ResourceMachine = ({machine}: {machine: Machine}) => {
         </ThemedView>
       </ThemedView>
       <ThemedView>
-        <ThemedButton>Get 1</ThemedButton>
+        <ThemedButton onPress={}>Get 1</ThemedButton>
       </ThemedView>
     </ThemedView>
   );

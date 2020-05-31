@@ -38,6 +38,10 @@ export interface Machine {
   tier: number;
 }
 
+export enum MachineType {
+  miner = 'miner',
+}
+
 export enum ResourceType {
   energy = 'energy',
   plasma = 'plasma',

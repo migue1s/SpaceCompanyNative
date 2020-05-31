@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
-import {ResourceType} from './types';
+import {ResourceType, MachineType} from './types';
 import {useContext} from 'react';
 import {ThemeContext} from './';
 
@@ -40,4 +40,8 @@ export const useResources = () => {
       data: resourceGroups[key],
     };
   });
+};
+
+export const useMachine = (machineId: MachineType) => {
+  return useSelector((state: ReduxState) => state.game.machines[machineId]);
 };

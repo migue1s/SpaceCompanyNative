@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   TouchableOpacity,
   TouchableOpacityProps,
@@ -33,15 +33,21 @@ const themeStyles = StyleSheet.create<{[x in ThemeVariant]: TextStyle}>({
 const ThemedButton = ({
   style = {},
   children,
+  onPress,
   ...rest
 }: TouchableOpacityProps & {
   children: React.ReactNode | React.ReactNode[];
+  onPress: () => void;
 }) => {
   const theme = useTheme();
+  const onButtonPress = useCallback(() => {
+    onPress;
+  }, [onPress]);
 
   return (
     <TouchableOpacity
       style={[style, styles.button, themeStyles[theme]]}
+      onPress={onButtonPress}
       {...rest}>
       <ThemedText variant={'caption'}>{children}</ThemedText>
     </TouchableOpacity>
