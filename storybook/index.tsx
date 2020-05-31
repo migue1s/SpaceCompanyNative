@@ -5,20 +5,28 @@ import {getStorybookUI, configure} from '@storybook/react-native';
 import {addDecorator} from '@storybook/react';
 
 import './rn-addons';
+import {configureStore} from '@reduxjs/toolkit';
+import {Provider} from 'react-redux';
+import rootReducer from '../src/redux/rootReducer';
 
 // import stories
 configure(() => {
   require('../src/components/Resource.stories');
 }, module);
 
+const reduxStore = configureStore(rootReducer);
+
 addDecorator((fn) => (
-  <View
-    style={{
-      padding: 20,
-      width: '100%',
-    }}>
-    {fn()}
-  </View>
+  <Provider store={reduxStore}>
+    <View
+      style={{
+        paddingTop: 40,
+        padding: 20,
+        width: '100%',
+      }}>
+      {fn()}
+    </View>
+  </Provider>
 ));
 
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters

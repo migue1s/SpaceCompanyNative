@@ -1,0 +1,76 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: CI/CD
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - uses: actions/checkout@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
+      - name: Code Climate Coverage Action
+        uses: paambaati/codeclimate-action@v2.6.0
+        with:
+          coverageCommand: yarn coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
+  # Temporarily commentd, there are issues with match cloning other github repos in actions
+  # deploy:
+  #   runs-on: macos-latest
+  #   needs: [test]
+  #   steps:
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "10.x"
+  #     - uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: 2.6
+  #     - uses: actions/checkout@v2
+  #     - name: Get yarn cache directory path
+  #       id: yarn-cache-dir-path
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - uses: actions/cache@v1
+  #       id: yarn-cache
+  #       with:
+  #         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - run: yarn install
+  #     - name: Bundle install
+  #       working-directory: ios
+  #       run: |
+  #         gem install bundler
+  #         bundle install
+  #     - name: Pod install
+  #       working-directory: ios
+  #       run: bundle exec pod install
+  #     - name: Deploy
+  #       working-directory: ios
+  #       run: bundle exec fastlane beta
+  #       env:
+  #         MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}

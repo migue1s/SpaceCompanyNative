@@ -1,7 +1,13 @@
-import game, {initialState, manualGain} from './gameSlice';
+import game, {
+  initialState,
+  manualGain,
+  developmentSetResource,
+  buyResearch,
+  upgradeStorage,
+} from './gameSlice';
 import {ResourceType} from '../types';
 
-describe('game reducer', () => {
+describe('The game', () => {
   let gameState = game(initialState, {type: 'test'});
 
   beforeEach(() => {
@@ -12,11 +18,94 @@ describe('game reducer', () => {
     expect(initialState).toEqual(initialState);
   });
 
-  it('should increase resources by one', () => {
+  describe('resources', () => {
+    it('should increate by one', () => {
+      expect(gameState.resourceCount.metal.current).toEqual(0);
+      gameState = game(gameState, manualGain(ResourceType.metal));
+      expect(gameState.resourceCount.metal.current).toEqual(1);
+      gameState = game(gameState, manualGain(ResourceType.metal));
+      expect(gameState.resourceCount.metal.current).toEqual(2);
+    });
+
+    it('should get set', () => {
+      expect(gameState.resourceCount.metal.current).toEqual(0);
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.metal, amount: 20}),
+      );
+      expect(gameState.resourceCount.metal.current).toEqual(20);
+    });
+  });
+
+  describe('research', () => {
+    it('should be bought', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.science, amount: 20}),
+      );
+
+      expect(gameState.resourceCount.science.current).toEqual(20);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
+      expect(gameState.research.unlockOil.unlocked).toEqual(false);
+
+      gameState = game(gameState, buyResearch('unlockStorage'));
+
+      expect(gameState.resourceCount.science.current).toEqual(15);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(1);
+      expect(gameState.research.unlockOil.unlocked).toEqual(true);
+    });
+
+    it('should unlock other resources', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.science, amount: 30}),
+      );
+
+      expect(gameState.resourceCount.oil.unlocked).toEqual(false);
+
+      gameState = game(gameState, buyResearch('unlockOil'));
+
+      expect(gameState.research.unlockOil.currentLevel).toEqual(1);
+      expect(gameState.resourceCount.oil.unlocked).toEqual(true);
+    });
+
+    it('should be a noop when buying research and no science', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.science, amount: 4}),
+      );
+
+      expect(gameState.resourceCount.science.current).toEqual(4);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
+      expect(gameState.research.unlockOil.unlocked).toEqual(false);
+
+      gameState = game(gameState, buyResearch('unlockStorage'));
+
+      expect(gameState.resourceCount.science.current).toEqual(4);
+      expect(gameState.research.unlockStorage.currentLevel).toEqual(0);
+      expect(gameState.research.unlockOil.unlocked).toEqual(false);
+    });
+  });
+
+  it('should buy storage', () => {
+    gameState = game(
+      gameState,
+      developmentSetResource({resource: ResourceType.metal, amount: 50}),
+    );
+    expect(gameState.resourceCount.metal.current).toEqual(50);
+    expect(gameState.resourceCount.metal.capacity).toEqual(50);
+
+    gameState = game(gameState, upgradeStorage(ResourceType.metal));
+
     expect(gameState.resourceCount.metal.current).toEqual(0);
-    gameState = game(gameState, manualGain(ResourceType.metal));
-    expect(gameState.resourceCount.metal.current).toEqual(1);
-    gameState = game(gameState, manualGain(ResourceType.metal));
-    expect(gameState.resourceCount.metal.current).toEqual(2);
+    expect(gameState.resourceCount.metal.capacity).toEqual(100);
+  });
+
+  it('should fail buying storage without resources', () => {
+    expect(gameState.resourceCount.metal.capacity).toEqual(50);
+
+    gameState = game(gameState, upgradeStorage(ResourceType.metal));
+
+    expect(gameState.resourceCount.metal.capacity).toEqual(50);
   });
 });

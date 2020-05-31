@@ -2,6 +2,12 @@ import {useSelector} from 'react-redux';
 import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
 import {ResourceType} from './types';
+import {useContext} from 'react';
+import {ThemeContext} from './';
+
+export const useTheme = () => {
+  return useContext(ThemeContext);
+};
 
 export const useResource = (resourceId: ResourceType) => {
   return useSelector((state: ReduxState) => state.game.resources[resourceId]);
