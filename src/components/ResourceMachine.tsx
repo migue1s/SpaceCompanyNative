@@ -1,51 +1,48 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  TouchableOpacityProps,
-  StyleSheet,
-  TextStyle,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {Machine} from '../types';
+import ThemedButton from './ThemedButton';
+import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
-import {ThemeVariant} from '../types';
-import {useTheme} from '../hooks';
 
 const styles = StyleSheet.create({
-  button: {
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    padding: 10,
+  machineCard: {
+    alignSelf: 'center',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+  },
+  valueContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+  },
+  valueBox: {
+    width: '50%',
   },
 });
 
-const themeStyles = StyleSheet.create<{[x in ThemeVariant]: TextStyle}>({
-  dark: {
-    borderColor: 'white',
-    backgroundColor: 'black',
-  },
-  light: {
-    borderColor: 'black',
-    backgroundColor: 'white',
-  },
-});
-
-const ThemedButton = ({
-  style = {},
-  children,
-  ...rest
-}: TouchableOpacityProps & {
-  children: React.ReactNode | React.ReactNode[];
-}) => {
-  const theme = useTheme();
-
+const ResourceMachine = ({machine}: {machine: Machine}) => {
   return (
-    <TouchableOpacity
-      style={[style, styles.button, themeStyles[theme]]}
-      {...rest}>
-      <ThemedText variant={'caption'}>{children}</ThemedText>
-    </TouchableOpacity>
+    <ThemedView style={styles.machineCard}>
+      <ThemedView>
+        <ThemedText variant={'heading'}>{machine.name}</ThemedText>
+        <ThemedText variant={'body'}>{machine.desc}</ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.valueContainer}>
+        <ThemedView style={styles.valueBox}>
+          <ThemedText variant={'title'}>Cost:</ThemedText>
+        </ThemedView>
+        <ThemedView style={styles.valueBox}>
+          <ThemedText variant={'title'}>Input:</ThemedText>
+          <ThemedText variant={'title'}>Output:</ThemedText>
+        </ThemedView>
+      </ThemedView>
+      <ThemedView>
+        <ThemedButton>Get 1</ThemedButton>
+      </ThemedView>
+    </ThemedView>
   );
 };
 
-export default ThemedButton;
+export default ResourceMachine;
