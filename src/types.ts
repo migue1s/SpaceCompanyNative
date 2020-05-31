@@ -25,15 +25,7 @@ export interface ResourceCategory {
 }
 
 export interface Machine {
-  category: string;
-  cost: ResourceAmount;
   current: number;
-  desc: string;
-  destroyable: true;
-  id: string;
-  name: string;
-  resource: string;
-  tier: number;
 }
 
 export enum MachineType {

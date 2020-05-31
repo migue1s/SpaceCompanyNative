@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {resourcesData} from '../data/resourcesData';
 import researchData, {ResearchId} from '../data/researchData';
-import {machinesData} from '../data/machinesData';
 import {ResourceType, ResourceData, ResourceState, MachineType} from '../types';
+import {machinesData} from '../data/machinesData';
 
 const gain = 1;
 
@@ -32,7 +32,13 @@ export const initialState = {
   }, {} as any) as {
     [x in ResourceType]: ResourceState;
   },
-  machines: machinesData,
+  machines: Object.keys(machinesData).reduce((result, current) => {
+    const key = current as MachineType;
+    result[key] = 0;
+    return result;
+  }, {} as any) as {
+    [x in MachineType]: number;
+  },
 };
 
 export type GameState = typeof initialState;
