@@ -425,27 +425,27 @@ export const machinesData = {
       metal: 10,
       wood: 5,
     },
-    onApply: function () {
-      if (!Game.tech.tabUnlocked) {
-        Game.buildings.unlock('scienceT1');
-        Game.tech.unlockTech('unlockStorage');
-        Game.tech.unlockTech('unlockBasicEnergy');
-        // Unlock the science resourceCategory
-        Game.resourceCategoryData.science.unlocked = true;
-        // Unlock the science resource
-        Game.resources.entries.science.unlocked = true;
-        // Unlock scienceT1
-        Game.buildings.entries.scienceT1.unlocked = true;
-        // Unlock the research category
-        Game.techCategoryData.unlocked = true;
-        Game.techCategoryData.research.unlocked = true;
-        // Unlock the technology type of research items
-        Game.techCategoryData.research.items.technology.unlocked = true;
-        newUnlock('tech');
-        Game.notifySuccess('New Tab!', "You've unlocked the Research Tab!");
-        Game.tech.tabUnlocked = true;
-      }
-    },
+    // onApply: function () {
+    //   if (!Game.tech.tabUnlocked) {
+    //     Game.buildings.unlock('scienceT1');
+    //     Game.tech.unlockTech('unlockStorage');
+    //     Game.tech.unlockTech('unlockBasicEnergy');
+    //     // Unlock the science resourceCategory
+    //     Game.resourceCategoryData.science.unlocked = true;
+    //     // Unlock the science resource
+    //     Game.resources.entries.science.unlocked = true;
+    //     // Unlock scienceT1
+    //     Game.buildings.entries.scienceT1.unlocked = true;
+    //     // Unlock the research category
+    //     Game.techCategoryData.unlocked = true;
+    //     Game.techCategoryData.research.unlocked = true;
+    //     // Unlock the technology type of research items
+    //     Game.techCategoryData.research.items.technology.unlocked = true;
+    //     newUnlock('tech');
+    //     Game.notifySuccess('New Tab!', "You've unlocked the Research Tab!");
+    //     Game.tech.tabUnlocked = true;
+    //   }
+    // },
   },
 
   metalT2: {
@@ -1688,12 +1688,12 @@ export const machinesData = {
     },
     order: 2,
     unlocked: true,
-    onApply: function () {
-      Game.resources.entries.rocket.current = 1;
-      Game.buildings.entries.rocketT1.current = 1;
-      Templates.uiFunctions.unlock('rocketT2');
-      Templates.uiFunctions.hide('rocketT1');
-    },
+    // onApply: function () {
+    //   Game.resources.entries.rocket.current = 1;
+    //   Game.buildings.entries.rocketT1.current = 1;
+    //   Templates.uiFunctions.unlock('rocketT2');
+    //   Templates.uiFunctions.hide('rocketT1');
+    // },
   },
 
   rocketT2: {
@@ -1708,17 +1708,17 @@ export const machinesData = {
     },
     order: 3,
     unlocked: false,
-    onApply: function () {
-      Game.buildings.entries.rocketT2.current = 1;
-      Templates.uiFunctions.hide('rocketT2');
-      Templates.uiFunctions.hideCategory('spacecraft', 'solarTab');
-      Templates.uiFunctions.unlock('moon');
-      Templates.uiFunctions.unlock('mercury');
-      Templates.uiFunctions.unlock('venus');
-      Templates.uiFunctions.unlock('mars');
-      Templates.uiFunctions.unlock('asteroidBelt');
-      // Unlock moon
-    },
+    // onApply: function () {
+    //   Game.buildings.entries.rocketT2.current = 1;
+    //   Templates.uiFunctions.hide('rocketT2');
+    //   Templates.uiFunctions.hideCategory('spacecraft', 'solarTab');
+    //   Templates.uiFunctions.unlock('moon');
+    //   Templates.uiFunctions.unlock('mercury');
+    //   Templates.uiFunctions.unlock('venus');
+    //   Templates.uiFunctions.unlock('mars');
+    //   Templates.uiFunctions.unlock('asteroidBelt');
+    //   // Unlock moon
+    // },
   },
 };
 
@@ -1836,7 +1836,7 @@ export enum MachineType {
 //   costType: COST_TYPE.FIXED,
 // };
 
-const storage = {
+export const storageData = {
   plasmaStorageT1: {
     name: 'Plasma Storage Unit',
     desc:
