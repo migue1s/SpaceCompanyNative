@@ -4,8 +4,10 @@ import game, {
   developmentSetResource,
   buyResearch,
   upgradeStorage,
+  buildMachine,
 } from './gameSlice';
 import {ResourceType} from '../types';
+import {MachineType} from '../data/machinesData';
 
 describe('The game', () => {
   let gameState = game(initialState, {type: 'test'});
@@ -107,5 +109,29 @@ describe('The game', () => {
     gameState = game(gameState, upgradeStorage(ResourceType.metal));
 
     expect(gameState.resources.metal.capacity).toEqual(50);
+  });
+
+  describe('machines', () => {
+    it('should fail without resources', () => {
+      gameState = game(gameState, buildMachine(MachineType.metalT1));
+      expect(gameState.resources.metal.current).toEqual(0);
+      expect(gameState.resources.gem.current).toEqual(0);
+      expect(gameState.machines.metalT1.current).toEqual(0);
+    });
+
+    it('should buy correctly', () => {
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.metal, amount: 20}),
+      );
+      gameState = game(
+        gameState,
+        developmentSetResource({resource: ResourceType.wood, amount: 20}),
+      );
+      gameState = game(gameState, buildMachine(MachineType.metalT1));
+      expect(gameState.resources.metal.current).toEqual(10);
+      expect(gameState.resources.wood.current).toEqual(15);
+      expect(gameState.machines.metalT1.current).toEqual(1);
+    });
   });
 });

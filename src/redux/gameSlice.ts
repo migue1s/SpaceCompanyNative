@@ -56,15 +56,9 @@ export type GameState = typeof initialState;
 const canAfford = (cost: ResourceAmount, state: GameState) => {
   return Object.keys(cost).reduce((result, current) => {
     const key = current as ResourceType;
-    return cost[key]! >= state.resources[key].current && result;
+    const canAffordCost = cost[key]! >= state.resources[key].current;
+    return canAffordCost && result;
   }, true);
-};
-
-const applyCost = (cost: ResourceAmount, state: GameState) => {
-  Object.keys(cost).forEach((costType) => {
-    const key = costType as ResourceType;
-    state.resources[key].current -= cost[key]!;
-  });
 };
 
 const gameSlice = createSlice({
@@ -139,14 +133,14 @@ const gameSlice = createSlice({
         }
 
         // Double a resource/machine
-        if (target.effects.double) {
-          target.effects.double.forEach((doubleId) => {
-            if (state.resources[doubleId as ResourceType]) {
-              state.resources[doubleId as ResourceType].multiplier *= 2;
-            }
-            // TODO: handle a machine
-          });
-        }
+        // if (target.effects.double) {
+        //   target.effects.double.forEach((doubleId) => {
+        //     if (state.resources[doubleId as ResourceType]) {
+        //       state.resources[doubleId as ResourceType].multiplier *= 2;
+        //     }
+        //     // TODO: handle a machine
+        //   });
+        // }
       }
     },
     buildMachine: (state, action: PayloadAction<MachineType>) => {
@@ -154,7 +148,13 @@ const gameSlice = createSlice({
       const target = state.machines[action.payload];
       const cost = CostCalculator(target.current, machineMeta.cost);
       if (canAfford(cost, state)) {
-        applyCost(cost, state);
+        // Remove cost
+        Object.keys(cost).forEach((costType) => {
+          const key = costType as ResourceType;
+          console.log('remove: ', {key, cost: cost[key]});
+          state.resources[key].current -= cost[key]!;
+        });
+
         target.current += 1;
         Object.keys(machineMeta.resourcePerSecond).forEach((resourceType) => {
           const key = resourceType as ResourceType;
