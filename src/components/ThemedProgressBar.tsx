@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ViewProps, ViewStyle, Text} from 'react-native';
+import {StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
 import {useTheme} from '../hooks';
 import {ThemeVariant} from '../types';
 
