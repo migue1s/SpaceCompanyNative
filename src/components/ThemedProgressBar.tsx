@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+import {StyleSheet, View, ViewProps, ViewStyle, Text} from 'react-native';
 import {useTheme} from '../hooks';
 import {ThemeVariant} from '../types';
+import {round} from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
   progressBarContainer: {
@@ -50,7 +51,8 @@ const ThemedProgressBar = ({
 }: ViewProps & {current: number; total: number}) => {
   const theme = useTheme();
   const progress = (current: number, total: number): string => {
-    return ((current / total) * 100).toString() + '%';
+    let prog = (current / total) * 100;
+    return prog.toString() + '%';
   };
 
   return (
@@ -66,6 +68,7 @@ const ThemedProgressBar = ({
           {width: progress(current, total)},
         ]}
       />
+      <Text>{progress(current, total)}</Text>
     </View>
   );
 };
