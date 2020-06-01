@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, View, ViewProps, ViewStyle, Text} from 'react-native';
 import {useTheme} from '../hooks';
 import {ThemeVariant} from '../types';
-import {round} from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
   progressBarContainer: {
