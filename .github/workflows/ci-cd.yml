@@ -77,3 +77,4 @@ jobs:
           MATCH_S3_REGION: ${{ secrets.MATCH_S3_REGION }}
           MATCH_S3_SECRET_ACCESS_KEY: ${{ secrets.MATCH_S3_SECRET_ACCESS_KEY }}
           MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
