@@ -39,7 +39,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
   deploy:
     # Only while on master and only if it doesn't contain "ci skip" in the message
-    if: github.ref == 'refs/heads/master' && "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+    if: github.ref == 'refs/heads/master' && ! contains(toJSON(github.event.commits.*.message), '[skip-ci]')
     runs-on: macos-latest
     needs: [test]
     steps:
