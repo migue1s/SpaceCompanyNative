@@ -38,6 +38,7 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
   deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: macos-latest
     needs: [test]
     steps:
