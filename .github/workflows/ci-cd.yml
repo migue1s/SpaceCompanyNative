@@ -16,7 +16,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: '10.x'
       - uses: actions/checkout@v2
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -38,14 +38,15 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_KEY }}
   deploy:
-    if: github.ref == 'refs/heads/master'
+    # Only while on master and only if it doesn't contain "ci skip" in the message
+    if: github.ref == 'refs/heads/master' && "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     runs-on: macos-latest
     needs: [test]
     steps:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: '10.x'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
@@ -83,6 +84,10 @@ jobs:
           MATCH_S3_BUCKET: ${{ secrets.MATCH_S3_BUCKET }}
           MATCH_S3_REGION: ${{ secrets.MATCH_S3_REGION }}
           MATCH_S3_SECRET_ACCESS_KEY: ${{ secrets.MATCH_S3_SECRET_ACCESS_KEY }}
+          FASTLANE_USER: ${{ secrets.MATCH_USERNAME }}
           MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           FL_SETUP_CI_FORCE: true
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Commit build bump [skip-ci]
