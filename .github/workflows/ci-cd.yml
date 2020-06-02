@@ -65,6 +65,12 @@ jobs:
         run: |
           gem install bundler
           bundle install
+      - uses: actions/cache@v2
+        with:
+          path: ./ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
       - name: Pod install
         working-directory: ios
         run: bundle exec pod install
