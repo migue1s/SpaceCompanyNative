@@ -71,7 +71,7 @@ const gameSlice = createSlice({
         state.resources[id].current = Math.min(
           state.resources[id].capacity,
           state.resources[id].current +
-            state.resources[id].perSecond * action.payload,
+            state.resources[id].perSecond * (action.payload / 1000),
         );
       });
       return state;

@@ -5,6 +5,7 @@ import game, {
   buyResearch,
   upgradeStorage,
   buildMachine,
+  tick,
 } from './gameSlice';
 import {ResourceType} from '../types';
 import {MachineType} from '../data/machinesData';
@@ -18,6 +19,26 @@ describe('The game', () => {
 
   it('should handle the initial state', () => {
     expect(initialState).toEqual(initialState);
+  });
+
+  it('ticks', () => {
+    gameState = game(
+      gameState,
+      developmentSetResource({resource: ResourceType.metal, amount: 10}),
+    );
+    gameState = game(
+      gameState,
+      developmentSetResource({resource: ResourceType.wood, amount: 5}),
+    );
+    gameState = game(gameState, buildMachine(MachineType.metalT1));
+
+    expect(gameState.resources.metal.current).toEqual(0);
+    gameState = game(gameState, tick(1000));
+    expect(gameState.resources.metal.current).toEqual(1);
+    gameState = game(gameState, tick(1000));
+    expect(gameState.resources.metal.current).toEqual(2);
+    gameState = game(gameState, tick(18000));
+    expect(gameState.resources.metal.current).toEqual(20);
   });
 
   describe('resources', () => {
@@ -129,6 +150,7 @@ describe('The game', () => {
         developmentSetResource({resource: ResourceType.wood, amount: 20}),
       );
       gameState = game(gameState, buildMachine(MachineType.metalT1));
+      expect(gameState.resources.metal.perSecond).toEqual(1);
       expect(gameState.resources.metal.current).toEqual(10);
       expect(gameState.resources.wood.current).toEqual(15);
       expect(gameState.machines.metalT1.current).toEqual(1);
