@@ -3,9 +3,16 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    setup_ci
     match(type: 'appstore', readonly: true)
-    increment_build_number(xcodeproj: "SpaceCompany.xcodeproj")
+    increment_build_number(
+      build_number: Time.now.strftime("%Y%m%d.%H%M.%S")
+    )
     gym(workspace: "SpaceCompany.xcworkspace", scheme: "SpaceCompany", export_method: "app-store", export_xcargs: "-allowProvisioningUpdates")
-    upload_to_testflight
+    testflight(
+      changelog: 'Auto-distributed build, github integration pending', 
+      distribute_external: true, 
+      groups:['discord'],
+    )
   end
 end

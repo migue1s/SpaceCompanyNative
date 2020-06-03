@@ -1,6 +1,4 @@
-git_url("git@github.com:migue1s/spacecompany-fastlane.git")
-
-storage_mode("git")
+storage_mode("s3")
 
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
 

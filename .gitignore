@@ -1,3 +1,6 @@
+# Private env vars
+ios/fastlane/.env
+
 # OSX
 #
 .DS_Store

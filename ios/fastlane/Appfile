@@ -1,4 +1,4 @@
-app_identifier("com.saizes.spacecompany") # The bundle identifier of your app
+app_identifier("com.saizes.SpaceCompany") # The bundle identifier of your app
 
 itc_team_id("2200267") # App Store Connect Team ID
 team_id("XYZ9TSFRN2") # Developer Portal Team ID
