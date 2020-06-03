@@ -18,9 +18,9 @@ const ResourceSummary = ({type}: {type: ResourceType}) => {
   }, [dispatch, type]);
 
   const secondsUntilFull =
-    resource.perSecondDisplay !== 0
+    resource.perSecond !== 0
       ? durationFormatter(
-          (resource.capacity - resource.current) / resource.perSecondDisplay,
+          (resource.capacity - resource.current) / resource.perSecond,
         )
       : 'N/A';
 
