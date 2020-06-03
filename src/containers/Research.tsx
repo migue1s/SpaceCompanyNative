@@ -1,11 +1,26 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useCallback} from 'react';
+import {FlatList, View} from 'react-native';
+import {ResourceType} from '../types';
+import ResourceRow from '../components/ResourceRow';
+import {useNavigation} from '@react-navigation/native';
 
 const Resources = () => {
+  const navigation = useNavigation();
+  const onResourcePress = useCallback(
+    (resource: ResourceType) => {
+      navigation.navigate('ResourceDetail', {resource});
+    },
+    [navigation],
+  );
+
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Research screen</Text>
-    </View>
+    <FlatList
+      ListHeaderComponent={
+        <ResourceRow type={ResourceType.science} onPress={onResourcePress} />
+      }
+      data={[]}
+      renderItem={({}) => <View />}
+    />
   );
 };
 

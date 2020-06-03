@@ -68,17 +68,24 @@ const gameSlice = createSlice({
     tick: (state, action: PayloadAction<number>) => {
       Object.keys(state.resources).forEach((key: string) => {
         const id = key as ResourceType;
-        state.resources[id].current = Math.min(
-          state.resources[id].capacity,
-          state.resources[id].current +
-            state.resources[id].perSecond * (action.payload / 1000),
+        state.resources[id].current = Math.max(
+          0,
+          Math.min(
+            state.resources[id].capacity === -1
+              ? Number.POSITIVE_INFINITY
+              : state.resources[id].capacity,
+            state.resources[id].current +
+              state.resources[id].perSecond * (action.payload / 1000),
+          ),
         );
       });
       return state;
     },
     manualGain: (state, action: PayloadAction<ResourceType>) => {
       state.resources[action.payload].current = Math.min(
-        state.resources[action.payload].capacity,
+        state.resources[action.payload].capacity === -1
+          ? Number.POSITIVE_INFINITY
+          : state.resources[action.payload].capacity,
         state.resources[action.payload].current + gain,
       );
     },
