@@ -1,6 +1,7 @@
 import React from 'react';
 import {durationFormatter} from '../utils/TimeFormatter';
 import ThemedText from './ThemedText';
+import {ViewStyle} from 'react-native';
 
 interface ResourceCostProps {
   name: string;
@@ -8,6 +9,7 @@ interface ResourceCostProps {
   cost: number;
   storage: number;
   current: number;
+  style: ViewStyle;
 }
 
 const ResourceCost = ({
@@ -16,6 +18,7 @@ const ResourceCost = ({
   cost,
   current,
   storage,
+  style,
 }: ResourceCostProps) => {
   let info = '';
   if (current >= cost) {
@@ -30,7 +33,7 @@ const ResourceCost = ({
     info = durationFormatter(seconds);
   }
   return (
-    <ThemedText variant={'body'}>
+    <ThemedText variant={'body'} style={style}>
       {name}: {cost} ({info})
     </ThemedText>
   );

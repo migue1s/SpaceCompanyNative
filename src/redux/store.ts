@@ -8,12 +8,14 @@ export interface ReduxState {
 
 const store = configureStore(rootReducer);
 
+// Slow down FPS in develop to minimize impact on development only tools
+const FPS = __DEV__ ? 1 / 2 : 1 / 10;
 startLoop(
   (delta: number) => {
     store.dispatch(tick(delta));
   },
   undefined,
-  10000,
+  FPS * 1000,
 );
 
 export default store;

@@ -1,4 +1,5 @@
 import {ResearchId} from './data/researchData';
+import {MachineType} from './data/machinesData';
 
 export type TextVariant = 'heading' | 'title' | 'body' | 'caption';
 export type ThemeVariant = 'dark' | 'light';
@@ -25,19 +26,20 @@ export interface ResourceCategory {
 }
 
 export interface Machine {
-  category: string;
-  cost: ResourceAmount;
-  current: number;
-  desc: string;
-  destroyable: true;
   id: string;
-  name: string;
-  resource: string;
   tier: number;
+  name: string;
+  desc: string;
+  resource: string;
+  resourcePerSecond: ResourceAmount;
+  cost: ResourceAmount;
+  unlocked?: boolean;
 }
-
-export enum MachineType {
-  miner = 'miner',
+export interface MachineState {
+  id: MachineType;
+  current: number;
+  unlocked: boolean;
+  multiplier: number;
 }
 
 export enum ResourceType {
@@ -85,9 +87,6 @@ export interface ResourceData {
   page: string;
   desc: string;
   emc?: number;
-  // icon: 'gemIcon';
-  // iconExtension: 'png';
-  // iconPath: 'Icons/';
   gainCost?: ResourceAmount;
   manualGain: boolean;
   toggleable: boolean;
@@ -95,13 +94,13 @@ export interface ResourceData {
 }
 
 export interface ResourceState {
+  id: ResourceType;
   perSecond: number;
   perSecondDisplay: number;
   current: number;
   capacity: number;
   category: string;
   unlocked: boolean;
-  multiplier: number;
 }
 
 export interface Research {

@@ -1,10 +1,11 @@
 import React, {useCallback} from 'react';
 import {TouchableOpacity, Image} from 'react-native';
 import {ResourceType} from '../types';
-import {useResourceCount, useResource} from '../hooks';
+import {useResource} from '../hooks';
 import ThemedText from './ThemedText';
 import ThemedView from './ThemedView';
 import {resourceIcons} from '../assets';
+import {resourcesData} from '../data/resourcesData';
 
 const ResourceRow = ({
   type,
@@ -13,8 +14,8 @@ const ResourceRow = ({
   type: ResourceType;
   onPress: (type: ResourceType) => void;
 }) => {
+  const meta = resourcesData[type];
   const data = useResource(type);
-  const count = useResourceCount(type);
   const onButtonPress = useCallback(() => {
     onPress(type);
   }, [onPress, type]);
@@ -27,13 +28,13 @@ const ResourceRow = ({
         <ThemedText
           variant="body"
           style={{flex: 2, textAlign: 'left', paddingLeft: 8}}>
-          {data.name}{' '}
+          {meta.name}
         </ThemedText>
         <ThemedText variant="body" style={{flex: 2, textAlign: 'center'}}>
-          {count.perSecond}/Sec
+          {data.perSecond}/Sec
         </ThemedText>
         <ThemedText variant="body" style={{flex: 2, textAlign: 'right'}}>
-          {count.current}/{count.capacity}
+          {Math.floor(data.current)}/{data.capacity}
         </ThemedText>
       </ThemedView>
     </TouchableOpacity>
