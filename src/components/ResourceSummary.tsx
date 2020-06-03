@@ -7,6 +7,7 @@ import ThemedText from './ThemedText';
 import {useDispatch} from 'react-redux';
 import {manualGain} from '../redux/gameSlice';
 import {durationFormatter} from '../utils/TimeFormatter';
+import ThemedProgressBar from '../components/ThemedProgressBar';
 
 const ResourceSummary = ({type}: {type: ResourceType}) => {
   const dispatch = useDispatch();
@@ -26,6 +27,10 @@ const ResourceSummary = ({type}: {type: ResourceType}) => {
 
   return (
     <ThemedView>
+      <ThemedProgressBar
+        current={resourceCount.current}
+        total={resourceCount.capacity}
+      />
       <ThemedText variant="body">{resource.desc}</ThemedText>
       <ThemedText variant="body" style={{paddingVertical: 20}}>
         {`Time remaining until full storage: ${secondsUntilFull}`}
