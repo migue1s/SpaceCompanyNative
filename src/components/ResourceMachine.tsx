@@ -87,6 +87,7 @@ const ResourceMachine = ({
       </ThemedText>
       {Object.keys(cost).map((resourceCost) => (
         <Cost
+          key={resourceCost}
           style={styles.spaceLeft}
           cost={cost[resourceCost as ResourceType]}
           resourceType={resourceCost as ResourceType}
@@ -97,7 +98,7 @@ const ResourceMachine = ({
       </ThemedText>
       {inputs.length > 0 ? (
         inputs.map((id) => (
-          <ThemedText variant="body" style={styles.spaceLeft}>
+          <ThemedText key={id} variant="body" style={styles.spaceLeft}>
             {resourcesData[id].name}:{' '}
             {machineMeta.resourcePerSecond[id]! * machine.multiplier}
           </ThemedText>
@@ -110,7 +111,7 @@ const ResourceMachine = ({
       <ThemedText variant="body">Output:</ThemedText>
       {outputs.length > 0 ? (
         outputs.map((id) => (
-          <ThemedText variant="body" style={styles.spaceLeft}>
+          <ThemedText key={id} variant="body" style={styles.spaceLeft}>
             {resourcesData[id].name}:{' '}
             {machineMeta.resourcePerSecond[id]! * machine.multiplier}
           </ThemedText>

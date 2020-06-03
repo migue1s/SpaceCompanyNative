@@ -28,6 +28,7 @@ const ResourceDetail = () => {
         renderItem={({item}) => (
           <ResourceMachine style={{paddingTop: 32}} type={item} />
         )}
+        keyExtractor={(item) => item}
       />
     </ThemedView>
   );
