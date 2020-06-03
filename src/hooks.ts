@@ -1,10 +1,9 @@
 import {useSelector} from 'react-redux';
 import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
-import {ResourceType, MachineType} from './types';
-import {useContext, useMemo} from 'react';
+import {ResourceType} from './types';
+import {useContext} from 'react';
 import {ThemeContext} from './';
-import {GameState} from './redux/gameSlice';
 import {machinesData} from './data/machinesData';
 
 export const useTheme = () => {
