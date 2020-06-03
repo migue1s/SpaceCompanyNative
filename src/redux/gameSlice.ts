@@ -56,7 +56,7 @@ export type GameState = typeof initialState;
 const canAfford = (cost: ResourceAmount, state: GameState) => {
   return Object.keys(cost).reduce((result, current) => {
     const key = current as ResourceType;
-    const canAffordCost = cost[key]! >= state.resources[key].current;
+    const canAffordCost = cost[key]! <= state.resources[key].current;
     return canAffordCost && result;
   }, true);
 };
@@ -151,7 +151,6 @@ const gameSlice = createSlice({
         // Remove cost
         Object.keys(cost).forEach((costType) => {
           const key = costType as ResourceType;
-          console.log('remove: ', {key, cost: cost[key]});
           state.resources[key].current -= cost[key]!;
         });
 
