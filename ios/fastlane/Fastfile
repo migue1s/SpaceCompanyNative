@@ -1,13 +1,17 @@
 default_platform(:ios)
 
 platform :ios do
+  lane :setBuildNumber do
+    increment_build_number(
+      build_number: Time.now.strftime("%Y.%m.%d.%H%M%S")
+    )
+  end
+
   desc "Push a new beta build to TestFlight"
   lane :beta do
     setup_ci
+    setBuildNumber
     match(type: 'appstore', readonly: true)
-    increment_build_number(
-      build_number: Time.now.strftime("%Y%m%d.%H%M.%S")
-    )
     gym(workspace: "SpaceCompany.xcworkspace", scheme: "SpaceCompany", export_method: "app-store", export_xcargs: "-allowProvisioningUpdates")
     testflight(
       changelog: 'Auto-distributed build, github integration pending', 
