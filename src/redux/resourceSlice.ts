@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ResourceType, ResourceState, ResourceAmount} from '../types';
 import {resourcesData} from '../data/resourcesData';
 import {buyResearch} from './researchSlice';
-import {machinesData, MachineType} from '../data/machinesData';
+import {machinesData} from '../data/machinesData';
 import {buyMachine} from './machineSlice';
 import researchData from '../data/researchData';
 

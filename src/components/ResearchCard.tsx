@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import researchData, {ResearchId} from '../data/researchData';
-import {useResearch, useResource} from '../hooks';
+import {useResource} from '../hooks';
 import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
 import ResourceBullet from './ResourceBullet';

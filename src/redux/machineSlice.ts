@@ -1,12 +1,6 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
-import researchData, {ResearchId} from '../data/researchData';
-import {
-  ResearchState,
-  ResourceAmount,
-  MachineState,
-  ResourceType,
-} from '../types';
-import {CanAffordPayload} from './resourceSlice';
+import researchData from '../data/researchData';
+import {ResourceAmount, MachineState} from '../types';
 import {canAfford, ReduxState} from './store';
 import {MachineType, machinesData} from '../data/machinesData';
 import CostCalculator from '../utils/CostCalculator';
