@@ -16,7 +16,7 @@ platform :ios do
     testflight(
       changelog: 'Auto-distributed build, github integration pending', 
       distribute_external: true, 
-      groups:['discord'],
+      groups:['Discord', 'Patreon'],
     )
   end
 end
