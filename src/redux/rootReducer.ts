@@ -1,7 +1,9 @@
-import gameSlice from './gameSlice';
+import resourceSlice from './resourceSlice';
+import researchSlice from './researchSlice';
 
 export default {
   reducer: {
-    game: gameSlice,
+    resources: resourceSlice,
+    research: researchSlice,
   },
 };

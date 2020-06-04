@@ -9,34 +9,8 @@ import {
 } from '../types';
 import {machinesData, MachineType} from '../data/machinesData';
 import CostCalculator from '../utils/CostCalculator';
-
-const gain = 1;
-
-// 0 = no storage carried over, 1 = all storage kept
-const storageEfficiencyMultiplier = 0;
-
-// 2 = multiply stoage by 2 when growing
-const storageGrowthMultiplier = 2;
-
 export const initialState = {
   research: researchData,
-  resources: Object.keys(ResourceType).reduce((result, current) => {
-    const key = current as ResourceType;
-    const resource = resourcesData[key];
-
-    result[key] = {
-      perSecond: 0,
-      perSecondDisplay: 0,
-      current: 0,
-      id: resource.id,
-      capacity: resource.baseCapacity,
-      unlocked: resource.unlocked,
-      category: resource.category,
-    } as ResourceState;
-    return result;
-  }, {} as any) as {
-    [x in ResourceType]: ResourceState;
-  },
   machines: Object.keys(machinesData).reduce((result, current) => {
     const key = current as MachineType;
     result[key] = {
@@ -53,57 +27,10 @@ export const initialState = {
 
 export type GameState = typeof initialState;
 
-const canAfford = (cost: ResourceAmount, state: GameState) => {
-  return Object.keys(cost).reduce((result, current) => {
-    const key = current as ResourceType;
-    const canAffordCost = cost[key]! <= state.resources[key].current;
-    return canAffordCost && result;
-  }, true);
-};
-
 const gameSlice = createSlice({
   name: 'game',
   initialState: initialState,
-  reducers: {
-    tick: (state, action: PayloadAction<number>) => {
-      Object.keys(state.resources).forEach((key: string) => {
-        const id = key as ResourceType;
-        state.resources[id].current = Math.max(
-          0,
-          Math.min(
-            state.resources[id].capacity === -1
-              ? Number.POSITIVE_INFINITY
-              : state.resources[id].capacity,
-            state.resources[id].current +
-              state.resources[id].perSecond * (action.payload / 1000),
-          ),
-        );
-      });
-      return state;
-    },
-    manualGain: (state, action: PayloadAction<ResourceType>) => {
-      state.resources[action.payload].current = Math.min(
-        state.resources[action.payload].capacity === -1
-          ? Number.POSITIVE_INFINITY
-          : state.resources[action.payload].capacity,
-        state.resources[action.payload].current + gain,
-      );
-    },
-    developmentSetResource: (
-      state,
-      action: PayloadAction<{resource: ResourceType; amount: number}>,
-    ) => {
-      state.resources[action.payload.resource].current = action.payload.amount;
-    },
-    upgradeStorage: (state, action: PayloadAction<ResourceType>) => {
-      if (
-        state.resources[action.payload].current ===
-        state.resources[action.payload].capacity
-      ) {
-        state.resources[action.payload].current *= storageEfficiencyMultiplier;
-        state.resources[action.payload].capacity *= storageGrowthMultiplier;
-      }
-    },
+  reducers: 
     buyResearch: (state, action: PayloadAction<ResearchId>) => {
       const target = state.research[action.payload];
 
@@ -181,3 +108,7 @@ export const {
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
+
+
+
+
