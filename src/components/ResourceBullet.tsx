@@ -3,7 +3,7 @@ import {durationFormatter} from '../utils/TimeFormatter';
 import ThemedText from './ThemedText';
 import {ViewStyle} from 'react-native';
 
-interface ResourceCostProps {
+interface ResourceBulletProps {
   name: string;
   dps: number;
   cost: number;
@@ -12,14 +12,14 @@ interface ResourceCostProps {
   style: ViewStyle;
 }
 
-const ResourceCost = ({
+const ResourceBullet = ({
   name,
   dps,
   cost,
   current,
   storage,
   style,
-}: ResourceCostProps) => {
+}: ResourceBulletProps) => {
   let info = '';
   if (current >= cost) {
     info = 'done!';
@@ -39,4 +39,4 @@ const ResourceCost = ({
   );
 };
 
-export default ResourceCost;
+export default ResourceBullet;

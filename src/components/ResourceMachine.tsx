@@ -14,9 +14,6 @@ import {ReduxState} from '../redux/store';
 import {buildMachine} from '../redux/gameSlice';
 
 const styles = StyleSheet.create({
-  machineCard: {
-    flexWrap: 'wrap',
-  },
   separateTop: {
     paddingTop: 16,
   },
@@ -66,10 +63,10 @@ const ResourceMachine = ({
 
   const rpsList = Object.keys(machineMeta.resourcePerSecond) as ResourceType[];
   const inputs = rpsList.filter(
-    (id) => machineMeta.cost[id as ResourceType]! < 0,
+    (id) => machineMeta.resourcePerSecond[id as ResourceType]! < 0,
   );
   const outputs = rpsList.filter(
-    (id) => machineMeta.cost[id as ResourceType]! > 0,
+    (id) => machineMeta.resourcePerSecond[id as ResourceType]! > 0,
   );
 
   const buyMachine = useCallback(() => {
@@ -77,7 +74,7 @@ const ResourceMachine = ({
   }, [dispatch, type]);
 
   return (
-    <ThemedView style={[styles.machineCard, style]}>
+    <ThemedView style={style}>
       <ThemedText variant="title">
         {machineMeta.name}: {machine.current}
       </ThemedText>

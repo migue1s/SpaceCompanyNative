@@ -38,6 +38,10 @@ export type ResourceProps = {
     resource: ResourceType;
   };
 };
+export type ResearchProps = {
+  Research: undefined;
+} & Pick<ResourceProps, 'ResourceDetail'>;
+const ResearchStack = createStackNavigator<ResearchProps>();
 const ResourceStack = createStackNavigator<ResourceProps>();
 export type ResourceDetailScreenRouteProp = RouteProp<
   ResourceProps,
@@ -53,6 +57,15 @@ const ResourceWrapper = () => {
   );
 };
 
+const ResearchWrapper = () => {
+  return (
+    <ResearchStack.Navigator>
+      <ResearchStack.Screen name="Research" component={Research} />
+      <ResearchStack.Screen name="ResourceDetail" component={ResourceDetail} />
+    </ResearchStack.Navigator>
+  );
+};
+
 const MainNavigation = () => {
   const theme = useTheme();
   return (
@@ -60,7 +73,7 @@ const MainNavigation = () => {
       <Provider store={store}>
         <Drawer.Navigator initialRouteName="Resources">
           <Drawer.Screen name="Resources" component={ResourceWrapper} />
-          <Drawer.Screen name="Research" component={Research} />
+          <Drawer.Screen name="Research" component={ResearchWrapper} />
           {__DEV__ && <Drawer.Screen name="Storybooks" component={storybook} />}
         </Drawer.Navigator>
       </Provider>

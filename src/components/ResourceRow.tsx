@@ -33,8 +33,10 @@ const ResourceRow = ({
         <ThemedText variant="body" style={{flex: 2, textAlign: 'center'}}>
           {data.perSecond}/Sec
         </ThemedText>
+        {}
         <ThemedText variant="body" style={{flex: 2, textAlign: 'right'}}>
-          {Math.floor(data.current)}/{data.capacity}
+          {Math.floor(data.current)}
+          {data.capacity !== -1 && `/${data.capacity}`}
         </ThemedText>
       </ThemedView>
     </TouchableOpacity>

@@ -1754,6 +1754,7 @@ export const machinesData: {[x in MachineType]: Machine} = {
       gem: 15,
       wood: 10,
     },
+    unlocked: true,
   },
 
   scienceT2: {

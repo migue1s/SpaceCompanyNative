@@ -1,10 +1,11 @@
+import {useContext, useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
 import {ResourceType} from './types';
-import {useContext} from 'react';
 import {ThemeContext} from './';
 import {machinesData} from './data/machinesData';
+import {ResearchId} from './data/researchData';
 
 export const useTheme = () => {
   return useContext(ThemeContext);
@@ -46,4 +47,16 @@ export const useMachines = (resourceId: ResourceType) => {
     )
     .sort((a, b) => machinesData[a.id].tier - machinesData[b.id].tier)
     .map((machine) => machine.id);
+};
+
+export const useResearches = () => {
+  const research = useSelector((state: ReduxState) => state.game.research);
+  return useMemo(() => {
+    const researchIds = Object.keys(research);
+    return researchIds.filter((id) => research[id as ResearchId].unlocked);
+  }, [research]);
+};
+
+export const useResearch = (type: ResearchId) => {
+  return useSelector((state: ReduxState) => state.game.research[type]);
 };
