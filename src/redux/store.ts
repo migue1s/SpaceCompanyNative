@@ -1,32 +1,47 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {startLoop} from '../utils/TickLoop';
-import {GameState, tick} from './gameSlice';
-import rootReducer from './rootReducer';
+import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {ResourceType, ResourceAmount} from '../types';
+import resourceSlice, {
+  ReduxResourceState,
+  initialState as resourceInitialState,
+} from './resourceSlice';
+import machineSlice, {
+  ReduxMachineState,
+  initialState as machineInitialState,
+} from './machineSlice';
+import researchSlice, {
+  ReduxResearchState,
+  initialState as researchInitialState,
+} from './researchSlice';
 
 export interface ReduxState {
-  game: GameState;
+  resource: ReduxResourceState;
+  machine: ReduxMachineState;
+  research: ReduxResearchState;
 }
 
-const store = configureStore(rootReducer);
+export const rootInitialState = {
+  resource: resourceInitialState,
+  machine: machineInitialState,
+  research: researchInitialState,
+};
 
-export const canAfford = (cost: ResourceAmount) => {
-  const state = store.getState() as ReduxState;
+export const rootReducer = combineReducers({
+  machine: machineSlice,
+  resource: resourceSlice,
+  research: researchSlice,
+});
+
+const store = configureStore({
+  preloadedState: rootInitialState,
+  reducer: rootReducer,
+});
+
+export const canAfford = (cost: ResourceAmount, state: ReduxState) => {
   return Object.keys(cost).reduce((result, current) => {
     const key = current as ResourceType;
-    const canAffordCost = cost[key]! <= state.resources[key].current;
+    const canAffordCost = cost[key]! <= state.resource[key].current;
     return canAffordCost && result;
   }, true);
 };
-
-// Slow down FPS in develop to minimize impact on development only tools
-const FPS = __DEV__ ? 1 / 2 : 1 / 10;
-startLoop(
-  (delta: number) => {
-    store.dispatch(tick(delta));
-  },
-  undefined,
-  FPS * 1000,
-);
 
 export default store;

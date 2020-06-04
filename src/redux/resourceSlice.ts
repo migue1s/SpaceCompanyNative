@@ -1,7 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ResourceType, ResourceState, ResourceAmount} from '../types';
 import {resourcesData} from '../data/resourcesData';
-import researchSlice from './researchSlice';
+import {buyResearch} from './researchSlice';
+import {machinesData, MachineType} from '../data/machinesData';
+import {buyMachine} from './machineSlice';
+import researchData from '../data/researchData';
 
 const gain = 1;
 
@@ -16,25 +19,36 @@ export type CanAffordPayload<T> = PayloadAction<
   string,
   {cost: ResourceAmount; canAfford: boolean}
 >;
-const initialState = Object.keys(ResourceType).reduce((result, current) => {
-  const key = current as ResourceType;
-  const resource = resourcesData[key];
 
-  result[key] = {
-    perSecond: 0,
-    perSecondDisplay: 0,
-    current: 0,
-    id: resource.id,
-    capacity: resource.baseCapacity,
-    unlocked: resource.unlocked,
-    category: resource.category,
-  } as ResourceState;
-  return result;
-}, {} as any) as {
+export const initialState = Object.keys(ResourceType).reduce(
+  (result, current) => {
+    const key = current as ResourceType;
+    const resource = resourcesData[key];
+
+    result[key] = {
+      perSecond: 0,
+      perSecondDisplay: 0,
+      current: 0,
+      id: resource.id,
+      capacity: resource.baseCapacity,
+      unlocked: resource.unlocked,
+      category: resource.category,
+    } as ResourceState;
+    return result;
+  },
+  {} as any,
+) as {
   [x in ResourceType]: ResourceState;
 };
 
 export type ReduxResourceState = typeof initialState;
+
+const applyCost = (state: ReduxResourceState, cost: ResourceAmount) => {
+  Object.keys(cost).forEach((element) => {
+    const key = element as ResourceType;
+    state[key].current -= cost[key]!;
+  });
+};
 
 const resourceSlice = createSlice({
   name: 'resource',
@@ -69,16 +83,42 @@ const resourceSlice = createSlice({
         state[action.payload].capacity *= storageGrowthMultiplier;
       }
     },
-    developmentSetResource: (
+    setResource: (
       state,
       action: PayloadAction<{resource: ResourceType; amount: number}>,
     ) => {
       state[action.payload.resource].current = action.payload.amount;
     },
   },
-  extraReducers: {
-    [researchSlice.actions.buyResearch]:
-  }
+  extraReducers: (builder) => {
+    builder.addCase(buyResearch, (state, action) => {
+      applyCost(state, action.payload.cost);
+      const research = researchData[action.payload.type];
+      if (research.effects.unlock) {
+        research.effects.unlock.forEach((key) => {
+          const unlockId = key as ResourceType;
+          if (state[unlockId]) {
+            state[unlockId].unlocked = true;
+          }
+        });
+      }
+    });
+    builder.addCase(buyMachine, (state, action) => {
+      applyCost(state, action.payload.cost);
+      const machine = machinesData[action.payload.type];
+      Object.keys(machine.resourcePerSecond).forEach((key) => {
+        const resource = key as ResourceType;
+        state[resource].perSecond += machine.resourcePerSecond[resource]!;
+      });
+    });
+  },
 });
 
-export default resourceSlice;
+export const {
+  manualGain,
+  setResource,
+  tick,
+  upgradeStorage,
+} = resourceSlice.actions;
+
+export default resourceSlice.reducer;
