@@ -63,10 +63,10 @@ const ResourceMachine = ({
 
   const rpsList = Object.keys(machineMeta.resourcePerSecond) as ResourceType[];
   const inputs = rpsList.filter(
-    (id) => machineMeta.cost[id as ResourceType]! < 0,
+    (id) => machineMeta.resourcePerSecond[id as ResourceType]! < 0,
   );
   const outputs = rpsList.filter(
-    (id) => machineMeta.cost[id as ResourceType]! > 0,
+    (id) => machineMeta.resourcePerSecond[id as ResourceType]! > 0,
   );
 
   const buyMachine = useCallback(() => {
