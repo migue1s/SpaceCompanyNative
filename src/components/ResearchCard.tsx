@@ -15,7 +15,7 @@ const ResearchCard = ({
   type: ResearchId;
   onPress: (id: ResearchId) => void;
 }) => {
-  const research = useResearch(type);
+  const meta = researchData[type];
   const science = useResource(ResourceType.science);
   const onBuyPress = useCallback(() => {
     onPress(type);
@@ -23,15 +23,15 @@ const ResearchCard = ({
 
   return (
     <ThemedView style={{paddingTop: 32, paddingHorizontal: 8}}>
-      <ThemedText variant="title">{research.name}</ThemedText>
+      <ThemedText variant="title">{meta.name}</ThemedText>
       <ThemedText variant="body" style={{paddingVertical: 8}}>
-        {research.desc}
+        {meta.desc}
       </ThemedText>
       <ThemedText variant="body">Cost:</ThemedText>
       <ResourceBullet
         style={{paddingLeft: 8}}
         current={science.current}
-        cost={research.science}
+        cost={meta.science}
         dps={science.perSecond}
         storage={Number.POSITIVE_INFINITY}
         name={resourcesData.science.name}

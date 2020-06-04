@@ -9,7 +9,7 @@ interface ResourceBulletProps {
   cost: number;
   storage: number;
   current: number;
-  style: ViewStyle;
+  style?: ViewStyle;
 }
 
 const ResourceBullet = ({

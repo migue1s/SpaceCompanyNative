@@ -26,11 +26,11 @@ export interface ResourceCategory {
 }
 
 export interface Machine {
-  id: MachineType;
+  id: string;
   tier: number;
   name: string;
   desc: string;
-  resource: ResourceType;
+  resource: string;
   resourcePerSecond: ResourceAmount;
   cost: ResourceAmount;
   unlocked?: boolean;

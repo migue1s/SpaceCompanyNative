@@ -7,14 +7,14 @@ import {addDecorator} from '@storybook/react';
 import './rn-addons';
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
-import rootReducer from '../src/redux/rootReducer';
+import {rootReducer} from '../src/redux/store';
 
 // import stories
 configure(() => {
   require('../src/components/Resource.stories');
 }, module);
 
-const reduxStore = configureStore(rootReducer);
+const reduxStore = configureStore({reducer: rootReducer});
 
 addDecorator((fn) => (
   <Provider store={reduxStore}>

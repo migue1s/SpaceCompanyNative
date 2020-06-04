@@ -11,7 +11,7 @@ import {MachineType, machinesData} from '../data/machinesData';
 import {useSelector, useDispatch} from 'react-redux';
 import CostCalculator from '../utils/CostCalculator';
 import {ReduxState} from '../redux/store';
-import {buildMachine} from '../redux/gameSlice';
+import {tryBuyMachine} from '../redux/machineSlice';
 
 const styles = StyleSheet.create({
   separateTop: {
@@ -54,10 +54,10 @@ const ResourceMachine = ({
   style,
 }: {
   type: MachineType;
-  style: ViewStyle;
+  style?: ViewStyle;
 }) => {
   const machineMeta = machinesData[type];
-  const machine = useSelector((state: ReduxState) => state.game.machines[type]);
+  const machine = useSelector((state: ReduxState) => state.machine[type]);
   const cost = CostCalculator(machine.current, machineMeta.cost);
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ const ResourceMachine = ({
   );
 
   const buyMachine = useCallback(() => {
-    dispatch(buildMachine(type));
+    dispatch(tryBuyMachine(type));
   }, [dispatch, type]);
 
   return (
