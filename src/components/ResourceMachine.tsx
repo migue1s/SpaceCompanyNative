@@ -14,9 +14,6 @@ import {ReduxState} from '../redux/store';
 import {buildMachine} from '../redux/gameSlice';
 
 const styles = StyleSheet.create({
-  machineCard: {
-    flexWrap: 'wrap',
-  },
   separateTop: {
     paddingTop: 16,
   },
@@ -77,7 +74,7 @@ const ResourceMachine = ({
   }, [dispatch, type]);
 
   return (
-    <ThemedView style={[styles.machineCard, style]}>
+    <ThemedView style={style}>
       <ThemedText variant="title">
         {machineMeta.name}: {machine.current}
       </ThemedText>
