@@ -18,7 +18,7 @@ const ResourceSummary = ({type}: {type: ResourceType}) => {
   }, [dispatch, type]);
 
   const secondsUntilFull =
-    resource.perSecond !== 0
+    resource.perSecond !== 0 && resource.capacity !== -1
       ? durationFormatter(
           (resource.capacity - resource.current) / resource.perSecond,
         )
@@ -27,10 +27,14 @@ const ResourceSummary = ({type}: {type: ResourceType}) => {
   return (
     <ThemedView>
       <ThemedText variant="body">{resourceMeta.desc}</ThemedText>
-      <ThemedText variant="body" style={{paddingVertical: 20}}>
-        {`Time remaining until full storage: ${secondsUntilFull}`}
-      </ThemedText>
-      <ThemedButton onPress={onGainPress} text="Gain 1" />
+      {resource.capacity !== -1 && (
+        <ThemedText variant="body" style={{paddingVertical: 20}}>
+          {`Time remaining until full storage: ${secondsUntilFull}`}
+        </ThemedText>
+      )}
+      {resourceMeta.manualGain && (
+        <ThemedButton onPress={onGainPress} text="Gain 1" />
+      )}
     </ThemedView>
   );
 };
