@@ -14,9 +14,12 @@ platform :ios do
     match(type: 'appstore', readonly: true)
     gym(workspace: "SpaceCompany.xcworkspace", scheme: "SpaceCompany", export_method: "app-store", export_xcargs: "-allowProvisioningUpdates")
     testflight(
-      changelog: 'Auto-distributed build, github integration pending', 
-      distribute_external: true, 
-      groups:['Discord', 'Patreon'],
+      skip_waiting_for_build_processing: true
+
+      # Stopped auto-distribution to externals due to fastlane 2fa bug
+      # changelog: 'Auto-distributed build, github integration pending', 
+      # distribute_external: true, 
+      # groups:['Discord', 'Patreon'],
     )
   end
 end
