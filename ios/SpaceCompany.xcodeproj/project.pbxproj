@@ -667,7 +667,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.saizes.SpaceCompany;
 				PRODUCT_NAME = SpaceCompany;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.saizes.spacecompany";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.saizes.SpaceCompany";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -694,7 +694,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.saizes.SpaceCompany;
 				PRODUCT_NAME = SpaceCompany;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.saizes.spacecompany";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.saizes.SpaceCompany";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
