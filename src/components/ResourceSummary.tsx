@@ -18,7 +18,11 @@ const ResourceSummary = ({type}: {type: ResourceType}) => {
     <ThemedView>
       <ThemedText variant="body">{resourceMeta.desc}</ThemedText>
       {resourceMeta.manualGain && (
-        <ThemedButton onPress={onGainPress} text="Gain 1" />
+        <ThemedButton
+          style={{marginTop: 8}}
+          onPress={onGainPress}
+          text="Gain 1"
+        />
       )}
     </ThemedView>
   );

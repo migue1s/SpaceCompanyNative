@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View} from 'react-native';
 import ThemedText from './ThemedText';
 import {useResource} from '../hooks';
@@ -6,7 +6,6 @@ import {ResourceType} from '../types';
 import {durationFormatter} from '../utils/TimeFormatter';
 import ResourceBullet from './ResourceBullet';
 import ThemedButton from './ThemedButton';
-import {useCallback} from '@storybook/addons';
 import {useDispatch} from 'react-redux';
 import {upgradeStorage} from '../redux/resourceSlice';
 import {resourcesData} from '../data/resourcesData';
@@ -51,11 +50,16 @@ const ResourceStorage = ({type}: {type: ResourceType}) => {
       <ThemedText variant="body">Cost:</ThemedText>
       {Object.keys(storage).map((key) => (
         <ResourceBullet
+          key={key}
           type={key as ResourceType}
           cost={storage[key as ResourceType]!}
         />
       ))}
-      <ThemedButton text="Upgrade Storage" onPress={onStorageUpgrade} />
+      <ThemedButton
+        style={{marginTop: 8}}
+        text="Upgrade Storage"
+        onPress={onStorageUpgrade}
+      />
     </View>
   );
 };

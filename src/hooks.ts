@@ -66,3 +66,11 @@ export const useResearches = () => {
 export const useResearch = (type: ResearchId) => {
   return useSelector((state: ReduxState) => state.research[type]);
 };
+
+export const useHasUnlockedResearch = (type: ResearchId) => {
+  const current = useSelector(
+    (state: ReduxState) => state.research[type].current,
+  );
+  const max = useSelector((state: ReduxState) => state.research[type].max);
+  return current === max;
+};

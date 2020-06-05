@@ -1,15 +1,13 @@
 import React, {useEffect} from 'react';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {ResourceDetailScreenRouteProp} from '..';
-import {useResource, useMachines} from '../hooks';
+import {useResource, useMachines, useHasUnlockedResearch} from '../hooks';
 import ThemedView from '../components/ThemedView';
 import ResourceSummary from '../components/ResourceSummary';
 import {resourcesData} from '../data/resourcesData';
 import {FlatList} from 'react-native-gesture-handler';
 import ResourceMachine from '../components/ResourceMachine';
 import {View} from 'react-native';
-import {useSelector} from 'react-redux';
-import {ReduxState} from '../redux/store';
 import ResourceStorage from '../components/ResourceStorage';
 
 const ResourceDetail = () => {
@@ -20,9 +18,8 @@ const ResourceDetail = () => {
   const resource = useResource(resourceId);
   const resourceMeta = resourcesData[resourceId];
   const machines = useMachines(resourceId);
-  const unlockedStorage = useSelector(
-    (state: ReduxState) => state.research.unlockStorage,
-  );
+
+  const unlockedStorage = useHasUnlockedResearch('unlockStorage');
   useEffect(() => {
     navigation.setOptions({title: resourceMeta.name});
   }, [navigation, resourceMeta.name]);
