@@ -2045,7 +2045,7 @@ export enum MachineType {
 //   costType: COST_TYPE.FIXED,
 // };
 
-export const storageData = {
+export const tieredStorageData = {
   plasmaStorageT1: {
     tier: 1,
     name: 'Plasma Storage Unit',

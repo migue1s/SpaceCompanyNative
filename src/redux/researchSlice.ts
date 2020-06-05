@@ -1,9 +1,8 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import researchData, {ResearchId} from '../data/researchData';
-import {ResearchState, ResourceAmount, ResourceType} from '../types';
+import {ResearchState, ResourceAmount} from '../types';
 import {canAfford, ReduxState} from './store';
 import CostCalculator from '../utils/CostCalculator';
-import {MachineType, machinesData} from '../data/machinesData';
 
 export const initialState = Object.keys(researchData).reduce(
   (result, current) => {
