@@ -29,12 +29,15 @@ const FPS = __DEV__ ? 1 / 2 : 1 / 10;
 
 export const {store, persistor} = configureStore();
 
-if (!__DEV__) {
-  Sentry.init({
-    dsn:
-      'https://4878489069e8449ca2f6c0ee6e444f25@o400529.ingest.sentry.io/5259048',
-  });
-}
+const startedSentry = false;
+const startSentry = () => {
+  if (!__DEV__ && !startedSentry) {
+    Sentry.init({
+      dsn:
+        'https://4878489069e8449ca2f6c0ee6e444f25@o400529.ingest.sentry.io/5259048',
+    });
+  }
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -89,6 +92,10 @@ const MainNavigation = () => {
 
 export default function App() {
   const systemTheme = useColorScheme() as ThemeVariant;
+
+  useEffect(() => {
+    startSentry();
+  });
 
   useEffect(() => {
     startLoop(

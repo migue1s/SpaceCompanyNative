@@ -1,5 +1,4 @@
-import {createStore} from 'redux';
-import {combineReducers} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {ResourceType, ResourceAmount} from '../types';
 import resourceSlice, {
   ReduxResourceState,
@@ -16,6 +15,7 @@ import researchSlice, {
 
 import {persistStore, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
+import thunk from 'redux-thunk';
 
 export interface ReduxState {
   resource: ReduxResourceState;
@@ -51,7 +51,11 @@ export const canAfford = (cost: ResourceAmount, state: ReduxState) => {
 };
 
 export default () => {
-  const store = createStore(persistedReducer, rootInitialState);
+  const store = configureStore({
+    reducer: persistedReducer,
+    preloadedState: rootInitialState,
+    middleware: [thunk],
+  });
   let persistor = persistStore(store);
   return {store, persistor};
 };
