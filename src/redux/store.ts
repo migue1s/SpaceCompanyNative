@@ -42,10 +42,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(persistedReducer, rootInitialState);
-
-export const persistor = persistStore(store);
-
 export const canAfford = (cost: ResourceAmount, state: ReduxState) => {
   return Object.keys(cost).reduce((result, current) => {
     const key = current as ResourceType;
@@ -54,4 +50,8 @@ export const canAfford = (cost: ResourceAmount, state: ReduxState) => {
   }, true);
 };
 
-export default store;
+export default () => {
+  const store = createStore(persistedReducer, rootInitialState);
+  let persistor = persistStore(store);
+  return {store, persistor};
+};
