@@ -10,7 +10,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import storybook from '../storybook';
 import {Provider} from 'react-redux';
-import store from './redux/store';
+import configureStore from './redux/store';
 
 import Resources from './containers/Resources';
 import ResourceDetail from './containers/ResourceDetail';
@@ -22,9 +22,12 @@ import {useColorScheme} from 'react-native';
 import * as Sentry from '@sentry/react-native';
 import {stopLoop, startLoop} from './utils/TickLoop';
 import {tick} from './redux/resourceSlice';
+import {PersistGate} from 'redux-persist/integration/react';
 
 // Slow down FPS in develop to minimize impact on development only tools
 const FPS = __DEV__ ? 1 / 2 : 1 / 10;
+
+export const {store, persistor} = configureStore();
 
 if (!__DEV__) {
   Sentry.init({
@@ -75,13 +78,11 @@ const MainNavigation = () => {
   const theme = useTheme();
   return (
     <NavigationContainer theme={theme === 'light' ? DefaultTheme : DarkTheme}>
-      <Provider store={store}>
-        <Drawer.Navigator initialRouteName="Resources">
-          <Drawer.Screen name="Resources" component={ResourceWrapper} />
-          <Drawer.Screen name="Research" component={ResearchWrapper} />
-          {__DEV__ && <Drawer.Screen name="Storybooks" component={storybook} />}
-        </Drawer.Navigator>
-      </Provider>
+      <Drawer.Navigator initialRouteName="Resources">
+        <Drawer.Screen name="Resources" component={ResourceWrapper} />
+        <Drawer.Screen name="Research" component={ResearchWrapper} />
+        {__DEV__ && <Drawer.Screen name="Storybooks" component={storybook} />}
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
@@ -104,7 +105,11 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={systemTheme}>
-      <MainNavigation />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MainNavigation />
+        </PersistGate>
+      </Provider>
     </ThemeContext.Provider>
   );
 }
