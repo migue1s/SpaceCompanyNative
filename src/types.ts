@@ -108,7 +108,6 @@ export interface Research {
   desc: string;
   buttonText: string;
   unlocked: boolean;
-  currentLevel: number;
   maxLevel: number;
   science: number;
   newTechs?: ResearchId[];
@@ -118,4 +117,11 @@ export interface Research {
     double?: string[];
     efficiency?: string;
   };
+}
+
+export interface ResearchState {
+  id: string;
+  unlocked: boolean;
+  current: number;
+  max: number;
 }

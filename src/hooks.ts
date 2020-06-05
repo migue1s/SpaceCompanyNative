@@ -12,11 +12,11 @@ export const useTheme = () => {
 };
 
 export const useResource = (resourceId: ResourceType) => {
-  return useSelector((state: ReduxState) => state.game.resources[resourceId]);
+  return useSelector((state: ReduxState) => state.resource[resourceId]);
 };
 
 export const useResources = () => {
-  const resources = useSelector((state: ReduxState) => state.game.resources);
+  const resources = useSelector((state: ReduxState) => state.resource);
 
   const resourceGroups = chain(Object.values(resources))
     .pickBy((r) => r.unlocked)
@@ -39,7 +39,7 @@ export const useResources = () => {
 };
 
 export const useMachines = (resourceId: ResourceType) => {
-  const machines = useSelector((state: ReduxState) => state.game.machines);
+  const machines = useSelector((state: ReduxState) => state.machine);
   return Object.values(machines)
     .filter(
       (machine) =>
@@ -50,7 +50,7 @@ export const useMachines = (resourceId: ResourceType) => {
 };
 
 export const useResearches = () => {
-  const research = useSelector((state: ReduxState) => state.game.research);
+  const research = useSelector((state: ReduxState) => state.research);
   return useMemo(() => {
     const researchIds = Object.keys(research);
     return researchIds.filter((id) => research[id as ResearchId].unlocked);
@@ -58,5 +58,5 @@ export const useResearches = () => {
 };
 
 export const useResearch = (type: ResearchId) => {
-  return useSelector((state: ReduxState) => state.game.research[type]);
+  return useSelector((state: ReduxState) => state.research[type]);
 };

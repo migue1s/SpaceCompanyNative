@@ -432,7 +432,6 @@ export type ResearchId = keyof typeof researchData;
 const researchWithDefaults = Object.keys(researchData).reduce(
   (result, current) => {
     result[current] = {
-      currentLevel: 0,
       unlocked: false,
       maxLevel: 1,
       ...researchData[current as ResearchId],

@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   NavigationContainer,
   RouteProp,
@@ -20,6 +20,11 @@ import {useTheme} from './hooks';
 import {useColorScheme} from 'react-native';
 
 import * as Sentry from '@sentry/react-native';
+import {stopLoop, startLoop} from './utils/TickLoop';
+import {tick} from './redux/resourceSlice';
+
+// Slow down FPS in develop to minimize impact on development only tools
+const FPS = __DEV__ ? 1 / 2 : 1 / 10;
 
 if (!__DEV__) {
   Sentry.init({
@@ -83,6 +88,19 @@ const MainNavigation = () => {
 
 export default function App() {
   const systemTheme = useColorScheme() as ThemeVariant;
+
+  useEffect(() => {
+    startLoop(
+      (delta: number) => {
+        store.dispatch(tick(delta));
+      },
+      undefined,
+      FPS * 1000,
+    );
+    return () => {
+      stopLoop();
+    };
+  }, []);
 
   return (
     <ThemeContext.Provider value={systemTheme}>

@@ -4,7 +4,7 @@ import {useResource} from '../hooks';
 import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
 import {useDispatch} from 'react-redux';
-import {manualGain} from '../redux/gameSlice';
+import {manualGain} from '../redux/resourceSlice';
 import {durationFormatter} from '../utils/TimeFormatter';
 import ThemedButton from './ThemedButton';
 import {resourcesData} from '../data/resourcesData';
