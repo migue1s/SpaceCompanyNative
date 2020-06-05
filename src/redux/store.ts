@@ -1,5 +1,5 @@
 import {createStore} from 'redux';
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import {combineReducers} from '@reduxjs/toolkit';
 import {ResourceType, ResourceAmount} from '../types';
 import resourceSlice, {
   ReduxResourceState,
