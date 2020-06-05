@@ -1,3 +1,4 @@
+import {createStore} from 'redux';
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {ResourceType, ResourceAmount} from '../types';
 import resourceSlice, {
@@ -12,6 +13,9 @@ import researchSlice, {
   ReduxResearchState,
   initialState as researchInitialState,
 } from './researchSlice';
+
+import {persistStore, persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export interface ReduxState {
   resource: ReduxResourceState;
@@ -31,10 +35,16 @@ export const rootReducer = combineReducers({
   research: researchSlice,
 });
 
-const store = configureStore({
-  preloadedState: rootInitialState,
-  reducer: rootReducer,
-});
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(persistedReducer, rootInitialState);
+
+export const persistor = persistStore(store);
 
 export const canAfford = (cost: ResourceAmount, state: ReduxState) => {
   return Object.keys(cost).reduce((result, current) => {
