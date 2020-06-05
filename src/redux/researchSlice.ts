@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import researchData, {ResearchId} from '../data/researchData';
-import {ResearchState, ResourceAmount} from '../types';
+import {ResearchState, ResourceAmount, ResourceType} from '../types';
 import {canAfford, ReduxState} from './store';
 import CostCalculator from '../utils/CostCalculator';
+import {MachineType, machinesData} from '../data/machinesData';
 
 export const initialState = Object.keys(researchData).reduce(
   (result, current) => {
@@ -40,16 +41,6 @@ const researchSlice = createSlice({
           state[tech].unlocked = true;
         });
       }
-
-      // Double a resource/machine
-      // if (target.effects.double) {
-      //   target.effects.double.forEach((doubleId) => {
-      //     if (state.resources[doubleId as ResourceType]) {
-      //       state.resources[doubleId as ResourceType].multiplier *= 2;
-      //     }
-      //     // TODO: handle a machine
-      //   });
-      // }
     },
   },
 });

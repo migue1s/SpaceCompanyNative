@@ -7,6 +7,10 @@ import ResourceSummary from '../components/ResourceSummary';
 import {resourcesData} from '../data/resourcesData';
 import {FlatList} from 'react-native-gesture-handler';
 import ResourceMachine from '../components/ResourceMachine';
+import {View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {ReduxState} from '../redux/store';
+import ResourceStorage from '../components/ResourceStorage';
 
 const ResourceDetail = () => {
   const navigation = useNavigation();
@@ -16,6 +20,9 @@ const ResourceDetail = () => {
   const resource = useResource(resourceId);
   const resourceMeta = resourcesData[resourceId];
   const machines = useMachines(resourceId);
+  const unlockedStorage = useSelector(
+    (state: ReduxState) => state.research.unlockStorage,
+  );
   useEffect(() => {
     navigation.setOptions({title: resourceMeta.name});
   }, [navigation, resourceMeta.name]);
@@ -23,7 +30,12 @@ const ResourceDetail = () => {
   return (
     <ThemedView style={{padding: 8, flex: 1}}>
       <FlatList
-        ListHeaderComponent={<ResourceSummary type={resource.id} />}
+        ListHeaderComponent={
+          <View>
+            <ResourceSummary type={resource.id} />
+            {unlockedStorage && <ResourceStorage type={resource.id} />}
+          </View>
+        }
         data={machines}
         renderItem={({item}) => (
           <ResourceMachine style={{paddingTop: 32}} type={item} />

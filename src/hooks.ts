@@ -53,7 +53,13 @@ export const useResearches = () => {
   const research = useSelector((state: ReduxState) => state.research);
   return useMemo(() => {
     const researchIds = Object.keys(research);
-    return researchIds.filter((id) => research[id as ResearchId].unlocked);
+    return researchIds.filter((id) => {
+      const currentResearch = research[id as ResearchId];
+      return (
+        currentResearch.unlocked &&
+        currentResearch.current < currentResearch.max
+      );
+    });
   }, [research]);
 };
 

@@ -28,7 +28,7 @@ export const initialState = Object.keys(ResourceType).reduce(
     result[key] = {
       perSecond: 0,
       perSecondDisplay: 0,
-      current: 0,
+      current: 30,
       id: resource.id,
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,

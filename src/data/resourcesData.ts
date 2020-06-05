@@ -3,6 +3,7 @@ import {
   ResourceData,
   ResourceCategory,
   ResourceCategoryType,
+  ResourceAmount,
 } from '../types';
 
 export const categoriesData: {[x in ResourceCategoryType]: ResourceCategory} = {
@@ -419,57 +420,23 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
   },
 };
 
-export const storageData = {
-  // Storage Upgrades
-  // var baseUpgradeData: {
-  //     name: 'Storage Upgrade:',
-  //     unlocked: true,
-  //     costType: COST_TYPE.FIXED,
-  //     current: 0,
-  //     maxLevel: -1,
-  //     resource: undefined,
-  //     displayNeedsUpdate: true,
-  //     entries: {},
-
-  //     apply: function (self) {
-  //         if (typeof self.resource === 'undefined') {
-  //             return;
-  //         }
-  //         var res = Game.resources.getResourceData(self.resource);
-  //         res.capacity *= 2;
-  //         res.displayNeedsUpdate = true;
-  //         self.displayNeedsUpdate = true;
-  //     },
-  // },
-
+export const storageData: Partial<{[x in ResourceType]: ResourceAmount}> = {
   /*********************
    * Energy Resources  *
    *********************/
 
   plasma: {
-    desc: 'Upgrade your Plasma storage size to ',
-    resource: 'plasma',
-    cost: {
-      plasma: 50,
-    },
+    plasma: 50,
   },
 
   uranium: {
-    desc: 'Upgrade your Uranium storage size to ',
-    resource: 'uranium',
-    cost: {
-      uranium: 50,
-      lunarite: 20,
-    },
+    uranium: 50,
+    lunarite: 20,
   },
 
   lava: {
-    desc: 'Upgrade your Lava storage size to ',
-    resource: 'lava',
-    cost: {
-      lava: 50,
-      lunarite: 20,
-    },
+    lava: 50,
+    lunarite: 20,
   },
 
   /********************
@@ -477,56 +444,32 @@ export const storageData = {
    ********************/
 
   oil: {
-    desc: 'Upgrade your Oil storage size to ',
-    resource: 'oil',
-    cost: {
-      oil: 50,
-      metal: 20,
-    },
+    oil: 50,
+    metal: 20,
   },
 
   metal: {
-    desc: 'Upgrade your Metal storage size to ',
-    resource: 'metal',
-    cost: {
-      metal: 50,
-    },
+    metal: 50,
   },
 
   gem: {
-    desc: 'Upgrade your Gem storage size to ',
-    resource: 'gem',
-    cost: {
-      gem: 50,
-      metal: 20,
-    },
+    gem: 50,
+    metal: 20,
   },
 
   carbon: {
-    desc: 'Upgrade your Carbon storage size to ',
-    resource: 'carbon',
-    cost: {
-      carbon: 50,
-      metal: 20,
-    },
+    carbon: 50,
+    metal: 20,
   },
 
   wood: {
-    desc: 'Upgrade your Wood storage size to ',
-    resource: 'wood',
-    cost: {
-      wood: 50,
-      metal: 20,
-    },
+    wood: 50,
+    metal: 20,
   },
 
   silicon: {
-    desc: 'Upgrade your Silicon storage size to ',
-    resource: 'silicon',
-    cost: {
-      silicon: 50,
-      lunarite: 20,
-    },
+    silicon: 50,
+    lunarite: 20,
   },
 
   /******************************
@@ -534,48 +477,28 @@ export const storageData = {
    ******************************/
 
   lunarite: {
-    desc: 'Upgrade your Lunarite storage size to ',
-    resource: 'lunarite',
-    cost: {
-      lunarite: 50,
-      metal: 400,
-    },
+    lunarite: 50,
+    metal: 400,
   },
 
   methane: {
-    desc: 'Upgrade your Methane storage size to ',
-    resource: 'methane',
-    cost: {
-      methane: 50,
-      lunarite: 20,
-    },
+    methane: 50,
+    lunarite: 20,
   },
 
   titanium: {
-    desc: 'Upgrade your Titanium storage size to ',
-    resource: 'titanium',
-    cost: {
-      titanium: 50,
-      lunarite: 20,
-    },
+    titanium: 50,
+    lunarite: 20,
   },
 
   gold: {
-    desc: 'Upgrade your Gold storage size to ',
-    resource: 'gold',
-    cost: {
-      gold: 50,
-      lunarite: 20,
-    },
+    gold: 50,
+    lunarite: 20,
   },
 
   silver: {
-    desc: 'Upgrade your Silver storage size to ',
-    resource: 'silver',
-    cost: {
-      silver: 50,
-      lunarite: 20,
-    },
+    silver: 50,
+    lunarite: 20,
   },
 
   /******************************
@@ -583,38 +506,22 @@ export const storageData = {
    ******************************/
 
   hydrogen: {
-    desc: 'Upgrade your Hydrogen storage size to ',
-    resource: 'hydrogen',
-    cost: {
-      hydrogen: 50,
-      lunarite: 20,
-    },
+    hydrogen: 50,
+    lunarite: 20,
   },
 
   helium: {
-    desc: 'Upgrade your Helium storage size to ',
-    resource: 'helium',
-    cost: {
-      helium: 50,
-      lunarite: 20,
-    },
+    helium: 50,
+    lunarite: 20,
   },
 
   ice: {
-    desc: 'Upgrade your Ice storage size to ',
-    resource: 'ice',
-    cost: {
-      ice: 50,
-      lunarite: 20,
-    },
+    ice: 50,
+    lunarite: 20,
   },
 
   meteorite: {
-    desc: 'Upgrade your Meteorite storage size to ',
-    resource: 'meteorite',
-    cost: {
-      meteorite: 50,
-      lunarite: 4,
-    },
+    meteorite: 50,
+    lunarite: 4,
   },
 };
