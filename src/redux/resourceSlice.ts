@@ -1,10 +1,11 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {ResourceType, ResourceState, ResourceAmount} from '../types';
-import {resourcesData} from '../data/resourcesData';
+import {resourcesData, storageData} from '../data/resourcesData';
 import {buyResearch} from './researchSlice';
 import {machinesData} from '../data/machinesData';
 import {buyMachine} from './machineSlice';
 import researchData from '../data/researchData';
+import {ReduxState, canAfford} from './store';
 
 const gain = 1;
 
@@ -33,6 +34,7 @@ export const initialState = Object.keys(ResourceType).reduce(
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,
       category: resource.category,
+      storageCost: storageData[key],
     } as ResourceState;
     return result;
   },
@@ -77,11 +79,12 @@ const resourceSlice = createSlice({
         state[action.payload].current + gain,
       );
     },
-    upgradeStorage: (state, action: PayloadAction<ResourceType>) => {
-      if (state[action.payload].current === state[action.payload].capacity) {
-        state[action.payload].current *= storageEfficiencyMultiplier;
-        state[action.payload].capacity *= storageGrowthMultiplier;
-      }
+    upgradeStorage: (
+      state,
+      action: PayloadAction<{type: ResourceType; cost: ResourceAmount}>,
+    ) => {
+      applyCost(state, action.payload.cost);
+      state[action.payload.type].capacity *= storageGrowthMultiplier;
     },
     setResource: (
       state,
@@ -113,6 +116,23 @@ const resourceSlice = createSlice({
     });
   },
 });
+
+export const tryUpgradeStorage = createAsyncThunk(
+  'resource',
+  (type: ResourceType, {getState, dispatch}) => {
+    const state = getState() as ReduxState;
+    const baseCost = state.resource[type].storageCost;
+    const cost = Object.keys(baseCost).reduce((result, current) => {
+      const key = current as ResourceType;
+      result[key]! *= 2;
+      return result;
+    }, {} as ResourceAmount);
+
+    if (canAfford(cost, state)) {
+      dispatch(upgradeStorage({type, cost}));
+    }
+  },
+);
 
 export const {
   manualGain,

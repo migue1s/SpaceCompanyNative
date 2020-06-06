@@ -101,6 +101,7 @@ export interface ResourceState {
   capacity: number;
   category: string;
   unlocked: boolean;
+  storageCost: ResourceAmount;
 }
 
 export interface Research {

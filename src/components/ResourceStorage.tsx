@@ -7,7 +7,7 @@ import {durationFormatter} from '../utils/TimeFormatter';
 import ResourceBullet from './ResourceBullet';
 import ThemedButton from './ThemedButton';
 import {useDispatch} from 'react-redux';
-import {upgradeStorage} from '../redux/resourceSlice';
+import {tryUpgradeStorage} from '../redux/resourceSlice';
 import {resourcesData} from '../data/resourcesData';
 import {storageData} from '../data/resourcesData';
 
@@ -17,7 +17,7 @@ const ResourceStorage = ({type}: {type: ResourceType}) => {
   const resourceMeta = resourcesData[type];
   const storage = storageData[type];
   const onStorageUpgrade = useCallback(() => {
-    dispatch(upgradeStorage(type));
+    dispatch(tryUpgradeStorage(type));
   }, [dispatch, type]);
 
   if (resource.capacity === -1 || !storage) {
