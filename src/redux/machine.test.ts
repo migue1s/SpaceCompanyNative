@@ -23,9 +23,9 @@ describe('machines', () => {
       buyMachine({type: MachineType.metalT1, cost: machinesData.metalT1.cost}),
     );
 
-    expect(reducer.resource.metal.perSecond).toEqual(1);
-    expect(reducer.resource.metal.current).toEqual(10);
-    expect(reducer.resource.wood.current).toEqual(15);
+    expect(reducer.resource.values.metal.perSecond).toEqual(1);
+    expect(reducer.resource.values.metal.current).toEqual(10);
+    expect(reducer.resource.values.wood.current).toEqual(15);
     expect(reducer.machine.metalT1.current).toEqual(1);
   });
 });

@@ -45,7 +45,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const canAfford = (cost: ResourceAmount, state: ReduxState) => {
   return Object.keys(cost).reduce((result, current) => {
     const key = current as ResourceType;
-    const canAffordCost = cost[key]! <= state.resource[key].current;
+    const canAffordCost = cost[key]! <= state.resource.values[key].current;
     return canAffordCost && result;
   }, true);
 };

@@ -21,7 +21,7 @@ import {useColorScheme} from 'react-native';
 
 import * as Sentry from '@sentry/react-native';
 import {stopLoop, startLoop} from './utils/TickLoop';
-import {tick} from './redux/resourceSlice';
+import {applyTick} from './redux/resourceSlice';
 import {PersistGate} from 'redux-persist/integration/react';
 
 // Slow down FPS in develop to minimize impact on development only tools
@@ -100,7 +100,7 @@ export default function App() {
   useEffect(() => {
     startLoop(
       (delta: number) => {
-        store.dispatch(tick(delta));
+        store.dispatch(applyTick(delta) as any);
       },
       undefined,
       FPS * 1000,

@@ -12,11 +12,11 @@ export const useTheme = () => {
 };
 
 export const useResource = (resourceId: ResourceType) => {
-  return useSelector((state: ReduxState) => state.resource[resourceId]);
+  return useSelector((state: ReduxState) => state.resource.values[resourceId]);
 };
 
 export const useResources = () => {
-  const resources = useSelector((state: ReduxState) => state.resource);
+  const resources = useSelector((state: ReduxState) => state.resource.values);
 
   const resourceGroups = chain(Object.values(resources))
     .pickBy((r) => r.unlocked)

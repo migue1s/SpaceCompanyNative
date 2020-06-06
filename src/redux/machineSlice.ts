@@ -5,6 +5,7 @@ import {canAfford, ReduxState} from './store';
 import {MachineType, machinesData} from '../data/machinesData';
 import CostCalculator from '../utils/CostCalculator';
 import {buyResearch} from './researchSlice';
+import {calcResourcePerSecond} from './utils';
 
 export const initialState = Object.keys(machinesData).reduce(
   (result, current) => {
@@ -68,6 +69,8 @@ export const tryBuyMachine = createAsyncThunk(
     if (canAfford(cost, state)) {
       dispatch(machineSlice.actions.buyMachine({type, cost}));
     }
+
+    // recalculate RPS
   },
 );
 
