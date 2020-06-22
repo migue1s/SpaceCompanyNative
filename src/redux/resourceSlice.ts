@@ -28,7 +28,7 @@ export const initialState = {
     result[key] = {
       perSecond: 0,
       perSecondDisplay: 0,
-      current: 20,
+      current: 0,
       id: resource.id,
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,
