@@ -24,31 +24,31 @@ describe('resources', () => {
       buyMachine({type: MachineType.metalT1, cost: machinesData.metalT1.cost}),
     );
 
-    expect(reducer.resource.metal.current).toEqual(0);
+    expect(reducer.resource.values.metal.current).toEqual(0);
     reducer = rootReducer(reducer, tick(1000));
-    expect(reducer.resource.metal.current).toEqual(1);
+    expect(reducer.resource.values.metal.current).toEqual(1);
     reducer = rootReducer(reducer, tick(1000));
-    expect(reducer.resource.metal.current).toEqual(2);
+    expect(reducer.resource.values.metal.current).toEqual(2);
     reducer = rootReducer(reducer, tick(18000));
-    expect(reducer.resource.metal.current).toEqual(20);
+    expect(reducer.resource.values.metal.current).toEqual(20);
   });
 
   describe('resources', () => {
     it('should increate by one', () => {
-      expect(reducer.resource.metal.current).toEqual(0);
+      expect(reducer.resource.values.metal.current).toEqual(0);
       reducer = rootReducer(reducer, manualGain(ResourceType.metal));
-      expect(reducer.resource.metal.current).toEqual(1);
+      expect(reducer.resource.values.metal.current).toEqual(1);
       reducer = rootReducer(reducer, manualGain(ResourceType.metal));
-      expect(reducer.resource.metal.current).toEqual(2);
+      expect(reducer.resource.values.metal.current).toEqual(2);
     });
 
     it('should get set', () => {
-      expect(reducer.resource.metal.current).toEqual(0);
+      expect(reducer.resource.values.metal.current).toEqual(0);
       reducer = rootReducer(
         reducer,
         setResource({resource: ResourceType.metal, amount: 20}),
       );
-      expect(reducer.resource.metal.current).toEqual(20);
+      expect(reducer.resource.values.metal.current).toEqual(20);
     });
   });
 });

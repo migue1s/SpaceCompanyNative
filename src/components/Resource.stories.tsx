@@ -13,10 +13,8 @@ storiesOf('Resources', module).add('Machine', () => (
 ));
 storiesOf('Resources', module).add('Bullet', () => (
   <View>
-    <ResourceBullet cost={10} current={1} dps={3} name="Metal" storage={50} />
-    <ResourceBullet cost={10} current={1} dps={0} name="Metal" storage={20} />
-    <ResourceBullet cost={10} current={1} dps={0} name="Metal" storage={5} />
-    <ResourceBullet cost={10} current={10} dps={0} name="Metal" storage={10} />
+    <ResourceBullet cost={10} type={ResourceType.metal} />
+    <ResourceBullet cost={60} type={ResourceType.metal} />
   </View>
 ));
 storiesOf('Resources', module).add('Summary', () => (

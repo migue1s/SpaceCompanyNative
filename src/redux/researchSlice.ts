@@ -40,16 +40,6 @@ const researchSlice = createSlice({
           state[tech].unlocked = true;
         });
       }
-
-      // Double a resource/machine
-      // if (target.effects.double) {
-      //   target.effects.double.forEach((doubleId) => {
-      //     if (state.resources[doubleId as ResourceType]) {
-      //       state.resources[doubleId as ResourceType].multiplier *= 2;
-      //     }
-      //     // TODO: handle a machine
-      //   });
-      // }
     },
   },
 });

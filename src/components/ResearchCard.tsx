@@ -1,11 +1,9 @@
 import React, {useCallback} from 'react';
 import researchData, {ResearchId} from '../data/researchData';
-import {useResource} from '../hooks';
 import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
 import ResourceBullet from './ResourceBullet';
 import {ResourceType} from '../types';
-import {resourcesData} from '../data/resourcesData';
 import ThemedButton from './ThemedButton';
 
 const ResearchCard = ({
@@ -16,7 +14,6 @@ const ResearchCard = ({
   onPress: (id: ResearchId) => void;
 }) => {
   const meta = researchData[type];
-  const science = useResource(ResourceType.science);
   const onBuyPress = useCallback(() => {
     onPress(type);
   }, [onPress, type]);
@@ -30,11 +27,8 @@ const ResearchCard = ({
       <ThemedText variant="body">Cost:</ThemedText>
       <ResourceBullet
         style={{paddingLeft: 8}}
-        current={science.current}
         cost={meta.science}
-        dps={science.perSecond}
-        storage={Number.POSITIVE_INFINITY}
-        name={resourcesData.science.name}
+        type={ResourceType.science}
       />
       <ThemedButton
         style={{marginTop: 8}}

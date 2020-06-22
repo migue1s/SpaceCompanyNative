@@ -7,8 +7,11 @@ import {useResearches} from '../hooks';
 import ResearchCard from '../components/ResearchCard';
 import {ResearchId} from '../data/researchData';
 import ThemedView from '../components/ThemedView';
+import {useDispatch} from 'react-redux';
+import {tryBuyResearch} from '../redux/researchSlice';
 
 const Research = () => {
+  const dispatch = useDispatch();
   const research = useResearches();
   const navigation = useNavigation();
   const onResourcePress = useCallback(
@@ -16,6 +19,13 @@ const Research = () => {
       navigation.navigate('ResourceDetail', {resource});
     },
     [navigation],
+  );
+
+  const onResearchPress = useCallback(
+    (id: ResearchId) => {
+      dispatch(tryBuyResearch(id));
+    },
+    [dispatch],
   );
 
   return (
@@ -26,12 +36,7 @@ const Research = () => {
         }
         data={research}
         renderItem={({item}) => (
-          <ResearchCard
-            type={item as ResearchId}
-            onPress={(id) => {
-              console.log(id);
-            }}
-          />
+          <ResearchCard type={item as ResearchId} onPress={onResearchPress} />
         )}
         keyExtractor={(id) => id}
       />

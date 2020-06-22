@@ -12,11 +12,11 @@ export const useTheme = () => {
 };
 
 export const useResource = (resourceId: ResourceType) => {
-  return useSelector((state: ReduxState) => state.resource[resourceId]);
+  return useSelector((state: ReduxState) => state.resource.values[resourceId]);
 };
 
 export const useResources = () => {
-  const resources = useSelector((state: ReduxState) => state.resource);
+  const resources = useSelector((state: ReduxState) => state.resource.values);
 
   const resourceGroups = chain(Object.values(resources))
     .pickBy((r) => r.unlocked)
@@ -53,10 +53,24 @@ export const useResearches = () => {
   const research = useSelector((state: ReduxState) => state.research);
   return useMemo(() => {
     const researchIds = Object.keys(research);
-    return researchIds.filter((id) => research[id as ResearchId].unlocked);
+    return researchIds.filter((id) => {
+      const currentResearch = research[id as ResearchId];
+      return (
+        currentResearch.unlocked &&
+        currentResearch.current < currentResearch.max
+      );
+    });
   }, [research]);
 };
 
 export const useResearch = (type: ResearchId) => {
   return useSelector((state: ReduxState) => state.research[type]);
+};
+
+export const useHasUnlockedResearch = (type: ResearchId) => {
+  const current = useSelector(
+    (state: ReduxState) => state.research[type].current,
+  );
+  const max = useSelector((state: ReduxState) => state.research[type].max);
+  return current === max;
 };

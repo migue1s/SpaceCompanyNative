@@ -1,7 +1,6 @@
 import React, {useCallback} from 'react';
 import {StyleSheet, ViewStyle} from 'react-native';
 import {ResourceType} from '../types';
-import {useResource} from '../hooks';
 import ThemedButton from './ThemedButton';
 import ThemedView from './ThemedView';
 import ThemedText from './ThemedText';
@@ -34,18 +33,8 @@ const Cost = ({
   cost: number | undefined;
   style: ViewStyle;
 }) => {
-  const meta = resourcesData[resourceType];
-  const data = useResource(resourceType);
-
   return (
-    <ResourceCost
-      style={style}
-      name={meta.name}
-      dps={data.perSecond}
-      cost={cost ? cost : 0}
-      current={data.current}
-      storage={data.capacity}
-    />
+    <ResourceCost style={style} type={resourceType} cost={cost ? cost : 0} />
   );
 };
 

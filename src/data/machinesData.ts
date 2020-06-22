@@ -680,6 +680,7 @@ export const machinesData: {[x in MachineType]: Machine} = {
       metal: 10,
       wood: 5,
     },
+    unlocked: true,
   },
 
   carbonT2: {
@@ -2045,7 +2046,7 @@ export enum MachineType {
 //   costType: COST_TYPE.FIXED,
 // };
 
-export const storageData = {
+export const tieredStorageData = {
   plasmaStorageT1: {
     tier: 1,
     name: 'Plasma Storage Unit',
