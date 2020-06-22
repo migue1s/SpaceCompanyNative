@@ -1,7 +1,7 @@
 import {rootReducer, rootInitialState} from './store';
 import {calcResourcePerSecond, calcRPS} from './utils';
 import {buyMachine} from './machineSlice';
-import {MachineType, machinesData} from '../data/machinesData';
+import {MachineType} from '../data/machinesData';
 import {setResource} from './resourceSlice';
 import {ResourceType} from '../types';
 

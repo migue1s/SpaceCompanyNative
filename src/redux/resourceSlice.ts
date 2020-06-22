@@ -7,10 +7,7 @@ import {buyMachine} from './machineSlice';
 import researchData from '../data/researchData';
 import {ReduxState, canAfford} from './store';
 import {calcResourcePerSecond, extractAmountFromState} from './utils';
-import {
-  resourceAmountKeys,
-  resourceAmountsGainsAndLosses,
-} from '../utils/ResourceOperations';
+import {resourceAmountKeys} from '../utils/ResourceOperations';
 
 const gain = 1;
 

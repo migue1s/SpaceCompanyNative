@@ -1,5 +1,6 @@
 # Private env vars
 ios/fastlane/.env
+.vscode/.react/
 
 # OSX
 #
