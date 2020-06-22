@@ -100,7 +100,7 @@ export default function App() {
   useEffect(() => {
     startLoop(
       (delta: number) => {
-        store.dispatch(applyTick(delta) as any);
+        applyTick(delta)(store.dispatch, store.getState, undefined);
       },
       undefined,
       FPS * 1000,

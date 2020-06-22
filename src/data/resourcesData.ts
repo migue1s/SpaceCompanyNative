@@ -127,7 +127,7 @@ export const resourcesData: {[x in ResourceType]: ResourceData} = {
     gainCost: {wood: 2},
     toggleable: true,
     manualGain: true,
-    unlocked: false,
+    unlocked: true,
   },
 
   /********************

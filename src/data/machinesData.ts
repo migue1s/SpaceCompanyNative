@@ -680,6 +680,7 @@ export const machinesData: {[x in MachineType]: Machine} = {
       metal: 10,
       wood: 5,
     },
+    unlocked: true,
   },
 
   carbonT2: {

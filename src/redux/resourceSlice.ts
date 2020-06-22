@@ -6,8 +6,11 @@ import {machinesData} from '../data/machinesData';
 import {buyMachine} from './machineSlice';
 import researchData from '../data/researchData';
 import {ReduxState, canAfford} from './store';
-import {calcResourcePerSecond} from './utils';
-import {resourceAmountKeys} from '../utils/ResourceOperations';
+import {calcResourcePerSecond, extractAmountFromState} from './utils';
+import {
+  resourceAmountKeys,
+  resourceAmountsGainsAndLosses,
+} from '../utils/ResourceOperations';
 
 const gain = 1;
 
@@ -28,7 +31,7 @@ export const initialState = {
     result[key] = {
       perSecond: 0,
       perSecondDisplay: 0,
-      current: 0,
+      current: 20,
       id: resource.id,
       capacity: resource.baseCapacity,
       unlocked: resource.unlocked,
@@ -56,7 +59,7 @@ const resourceSlice = createSlice({
   initialState,
   reducers: {
     tick: (state, action: PayloadAction<number>) => {
-      Object.keys(state).forEach((key: string) => {
+      Object.keys(state.values).forEach((key: string) => {
         const id = key as ResourceType;
         const value = Math.min(
           state.values[id].capacity === -1
@@ -75,6 +78,7 @@ const resourceSlice = createSlice({
       return state;
     },
     manualGain: (state, action: PayloadAction<ResourceType>) => {
+      state.recalculateRPS = true;
       state.values[action.payload].current = Math.min(
         state.values[action.payload].capacity === -1
           ? Number.POSITIVE_INFINITY
@@ -95,15 +99,10 @@ const resourceSlice = createSlice({
     ) => {
       state.values[action.payload.resource].current = action.payload.amount;
     },
-    applyRPS: (
-      state,
-      action: PayloadAction<{rps: ResourceAmount; zeroOut: ResourceType[]}>,
-    ) => {
-      resourceAmountKeys(action.payload.rps).forEach((resource) => {
-        state.values[resource].perSecond = action.payload.rps[resource]!;
-      });
-      action.payload.zeroOut.forEach((resource) => {
-        state.values[resource].current = 0;
+    applyRPS: (state, action: PayloadAction<ResourceAmount>) => {
+      state.recalculateRPS = false;
+      resourceAmountKeys(action.payload).forEach((resource) => {
+        state.values[resource].perSecond = action.payload[resource]!;
       });
     },
   },
@@ -134,17 +133,25 @@ const resourceSlice = createSlice({
 });
 
 export const applyTick = createAsyncThunk(
-  'global',
+  'global/applyTick',
   (delta: number, {getState, dispatch}) => {
     const state = getState() as ReduxState;
     dispatch(tick(delta));
-    if (state.resource.recalculateRPS) {
+
+    const amount = extractAmountFromState(state.resource);
+    const deficit = resourceAmountKeys(amount).filter(
+      (key) =>
+        state.resource.values[key].current <= 0 &&
+        state.resource.values[key].perSecond < 0,
+    );
+
+    if (state.resource.recalculateRPS || deficit) {
       dispatch(recalculateRPS(delta));
     }
   },
 );
 export const recalculateRPS = createAsyncThunk(
-  'global',
+  'global/recalculateRPS',
   (delta: number, {getState, dispatch}) => {
     const state = getState() as ReduxState;
     const rps = calcResourcePerSecond(state, delta);
@@ -153,7 +160,7 @@ export const recalculateRPS = createAsyncThunk(
 );
 
 export const tryUpgradeStorage = createAsyncThunk(
-  'resource',
+  'resource/tryUpgradeStorage',
   (type: ResourceType, {getState, dispatch}) => {
     const state = getState() as ReduxState;
     const baseCost = state.resource.values[type].storageCost;

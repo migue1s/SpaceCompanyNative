@@ -9,7 +9,7 @@ import {
   addResourceAmounts,
   resourceAmountKeys,
 } from '../utils/ResourceOperations';
-import {union} from 'lodash';
+import {union, reduce} from 'lodash';
 
 const forEachMachine = (
   state: ReduxMachineState,
@@ -21,8 +21,8 @@ const forEachMachine = (
   });
 };
 
-const extractAmountFromState = (state: ReduxResourceState) => {
-  return Object.keys(state).reduce((result, current) => {
+export const extractAmountFromState = (state: ReduxResourceState) => {
+  return Object.keys(state.values).reduce((result, current) => {
     const key = current as ResourceType;
     result[key] = state.values[key]!.current;
     return result;
@@ -35,19 +35,40 @@ export const calcRPS = (
   state: ReduxState,
   unavailableResources: ResourceType[],
 ) => {
-  let rps: ResourceAmount = {...amount};
+  let rps: ResourceAmount = resourceAmountKeys(amount).reduce((result, key) => {
+    result[key] = 0;
+    return result;
+  }, {} as ResourceAmount);
+  let currentAmount = reduce(
+    state.resource.values,
+    (result, curr) => {
+      result[curr.id] = curr.current;
+      return result;
+    },
+    {} as ResourceAmount,
+  );
 
   forEachMachine(state.machine, (machineType, machine, meta) => {
-    const losses = resourceAmountKeys(
-      resourceAmountsGainsAndLosses(meta.cost).negative,
+    const machineValue = multiResourceAmount(
+      meta.resourcePerSecond,
+      (delta / 1000) * machine.current * machine.multiplier,
     );
-    const hasDeficit = union(losses, unavailableResources).length > 0;
+    const newAmount = addResourceAmounts(machineValue, currentAmount);
+    const losses = resourceAmountsGainsAndLosses(newAmount).negative;
+    const hasDeficit =
+      union(resourceAmountKeys(losses), unavailableResources).length > 0;
     if (!hasDeficit) {
       const machineRPS = multiResourceAmount(
         meta.resourcePerSecond,
-        (delta / 1000) * machine.current * machine.multiplier,
+        machine.current * machine.multiplier,
       );
+      currentAmount = newAmount;
       rps = addResourceAmounts(machineRPS, rps);
+    } else {
+      rps = addResourceAmounts(
+        multiResourceAmount(meta.resourcePerSecond, 0),
+        rps,
+      );
     }
   });
 
@@ -57,17 +78,6 @@ export const calcRPS = (
 export const calcResourcePerSecond = (state: ReduxState, delta: number) => {
   const currentAmount = extractAmountFromState(state.resource);
   let futureAmount = calcRPS(currentAmount, delta, state, []);
-  let resourcesInDeficit = resourceAmountsGainsAndLosses(futureAmount).negative;
-  let unavailableResources = resourceAmountKeys(resourcesInDeficit);
 
-  while (Object.keys(resourcesInDeficit).length > 0) {
-    futureAmount = calcRPS(currentAmount, delta, state, unavailableResources);
-    resourcesInDeficit = resourceAmountsGainsAndLosses(futureAmount).negative;
-    unavailableResources = union(
-      unavailableResources,
-      resourceAmountKeys(resourcesInDeficit),
-    );
-  }
-
-  return {rps: futureAmount, zeroOut: unavailableResources};
+  return futureAmount;
 };

@@ -18,11 +18,11 @@ export const addResourceAmounts = (a: ResourceAmount, b: ResourceAmount) => {
   const totalKeys = union(keysInA, keysInB);
   const result: ResourceAmount = {};
   totalKeys.forEach((type) => {
-    if (a[type] && b[type]) {
+    if (a[type] !== undefined && b[type] !== undefined) {
       result[type] = a[type]! + b[type]!;
-    } else if (a[type]) {
+    } else if (a[type] !== undefined) {
       result[type] = a[type]!;
-    } else if (b[type]) {
+    } else if (b[type] !== undefined) {
       result[type] = b[type]!;
     }
   });
@@ -32,7 +32,7 @@ export const addResourceAmounts = (a: ResourceAmount, b: ResourceAmount) => {
 export const resourceAmountsGainsAndLosses = (amount: ResourceAmount) => {
   return resourceAmountKeys(amount).reduce(
     (result, current) => {
-      if (amount[current]! > 0) {
+      if (amount[current]! >= 0) {
         result.positive[current] = amount[current];
       } else {
         result.negative[current] = amount[current];
