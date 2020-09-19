@@ -88,7 +88,17 @@ const resourceSlice = createSlice({
       action: PayloadAction<{type: ResourceType; cost: ResourceAmount}>,
     ) => {
       applyCost(state, action.payload.cost);
+
       state.values[action.payload.type].capacity *= storageGrowthMultiplier;
+
+      // increment price of storage for next time
+      Object.keys(state.values[action.payload.type].storageCost).forEach(
+        (storageCostKey) => {
+          (state.values[action.payload.type].storageCost as any)[
+            storageCostKey
+          ] *= 2;
+        },
+      );
     },
     setResource: (
       state,
@@ -160,12 +170,7 @@ export const tryUpgradeStorage = createAsyncThunk(
   'resource/tryUpgradeStorage',
   (type: ResourceType, {getState, dispatch}) => {
     const state = getState() as ReduxState;
-    const baseCost = state.resource.values[type].storageCost;
-    const cost = Object.keys(baseCost).reduce((result, current) => {
-      const key = current as ResourceType;
-      result[key]! *= 2;
-      return result;
-    }, {} as ResourceAmount);
+    const cost = state.resource.values[type].storageCost;
 
     if (canAfford(cost, state)) {
       dispatch(upgradeStorage({type, cost}));
