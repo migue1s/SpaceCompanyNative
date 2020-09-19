@@ -1,4 +1,4 @@
-import {useContext, useMemo} from 'react';
+import {useCallback, useContext, useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {chain} from 'lodash';
 import {ReduxState} from './redux/store';
@@ -6,6 +6,7 @@ import {ResourceType} from './types';
 import {ThemeContext} from './';
 import {machinesData} from './data/machinesData';
 import {ResearchId} from './data/researchData';
+import {useNavigation} from '@react-navigation/native';
 
 export const useTheme = () => {
   return useContext(ThemeContext);
@@ -73,4 +74,14 @@ export const useHasUnlockedResearch = (type: ResearchId) => {
   );
   const max = useSelector((state: ReduxState) => state.research[type].max);
   return current === max;
+};
+
+export const useResourceHandler = () => {
+  const navigation = useNavigation();
+  return useCallback(
+    (resource: ResourceType) => {
+      navigation.navigate('ResourceDetail', {resource});
+    },
+    [navigation],
+  );
 };

@@ -9,8 +9,8 @@ import {
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import storybook from '../storybook';
-import {Provider} from 'react-redux';
-import configureStore from './redux/store';
+import {Provider, useSelector} from 'react-redux';
+import configureStore, {ReduxState} from './redux/store';
 
 import Resources from './containers/Resources';
 import ResourceDetail from './containers/ResourceDetail';
@@ -23,6 +23,7 @@ import * as Sentry from '@sentry/react-native';
 import {stopLoop, startLoop} from './utils/TickLoop';
 import {applyTick} from './redux/resourceSlice';
 import {PersistGate} from 'redux-persist/integration/react';
+import Space from './containers/Space';
 
 // Slow down FPS in develop to minimize impact on development only tools
 const FPS = __DEV__ ? 1 / 2 : 1 / 10;
@@ -52,8 +53,17 @@ export type ResourceProps = {
 export type ResearchProps = {
   Research: undefined;
 } & Pick<ResourceProps, 'ResourceDetail'>;
+export type SpaceProps = {
+  Space: undefined;
+  ResourceDetail: {
+    resource: ResourceType;
+  };
+};
+
 const ResearchStack = createStackNavigator<ResearchProps>();
 const ResourceStack = createStackNavigator<ResourceProps>();
+const SpaceStack = createStackNavigator<SpaceProps>();
+
 export type ResourceDetailScreenRouteProp = RouteProp<
   ResourceProps,
   'ResourceDetail'
@@ -77,13 +87,27 @@ const ResearchWrapper = () => {
   );
 };
 
+const SpaceWrapper = () => {
+  return (
+    <SpaceStack.Navigator>
+      <SpaceStack.Screen name="Space" component={Space} />
+      <SpaceStack.Screen name="ResourceDetail" component={ResourceDetail} />
+    </SpaceStack.Navigator>
+  );
+};
+
 const MainNavigation = () => {
   const theme = useTheme();
+  const showSpace = useSelector(
+    (state: ReduxState) => state.machine.rocketFuelT1.unlocked,
+  );
+
   return (
     <NavigationContainer theme={theme === 'light' ? DefaultTheme : DarkTheme}>
       <Drawer.Navigator initialRouteName="Resources">
         <Drawer.Screen name="Resources" component={ResourceWrapper} />
         <Drawer.Screen name="Research" component={ResearchWrapper} />
+        {showSpace && <Drawer.Screen name="Space" component={SpaceWrapper} />}
         {__DEV__ && <Drawer.Screen name="Storybooks" component={storybook} />}
       </Drawer.Navigator>
     </NavigationContainer>
