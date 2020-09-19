@@ -31,7 +31,7 @@ const ResourceRow = ({
           {meta.name}
         </ThemedText>
         <ThemedText variant="body" style={{flex: 2, textAlign: 'center'}}>
-          {Math.floor(data.perSecond * 10) / 10}/Sec
+          {data.perSecond.toPrecision(1)}/Sec
         </ThemedText>
         {}
         <ThemedText variant="body" style={{flex: 2, textAlign: 'right'}}>
