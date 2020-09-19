@@ -36,7 +36,7 @@ const ResourceRow = ({
         {}
         <ThemedText variant="body" style={{flex: 2, textAlign: 'right'}}>
           {Math.floor(data.current)}
-          {data.capacity !== -1 && `/${data.capacity}`}
+          {data.capacity !== -1 && ` / ${data.capacity}`}
         </ThemedText>
       </ThemedView>
     </TouchableOpacity>
